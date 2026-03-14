@@ -1,12 +1,15 @@
 {
   "name": "@cellarnode/beverage-utils",
-  "version": "0.1.1",
+  "version": "0.3.0",
   "description": "Beverage classification utilities — label mapping, formatting, and display helpers for the CellarNode industry-standard beverage classification system.",
   "license": "MIT",
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cellarnode/beverage-utils.git"
+    "url": "git+https://github.com/cellarnode/beverage-utils.git"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "exports": {
     ".": {
@@ -16,14 +19,20 @@
     "./react": {
       "types": "./dist/react/index.d.ts",
       "default": "./dist/react/index.js"
+    },
+    "./vue": {
+      "types": "./dist/vue/index.d.ts",
+      "default": "./dist/vue/index.js"
+    },
+    "./angular": {
+      "types": "./dist/angular/index.d.ts",
+      "default": "./dist/angular/index.js"
     }
   },
+  "types": "./dist/index.d.ts",
+  "sideEffects": false,
   "files": [
-    "dist",
-    "src",
-    "README.md",
-    "CHANGELOG.md",
-    "LICENSE"
+    "dist"
   ],
   "keywords": [
     "cellarnode",
@@ -36,27 +45,51 @@
   ],
   "scripts": {
     "build": "tsc",
-    "prepare": "npm run build",
+    "prepublishOnly": "npm run build",
+    "check-exports": "npx publint && npx @arethetypeswrong/cli --pack .",
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
     "@tanstack/react-query": "^5.0.0",
-    "react": "^18.0.0 || ^19.0.0"
+    "@tanstack/vue-query": "^5.0.0",
+    "@tanstack/angular-query-experimental": "^5.0.0",
+    "@angular/core": "^17.0.0 || ^18.0.0 || ^19.0.0",
+    "react": "^18.0.0 || ^19.0.0",
+    "vue": "^3.3.0"
   },
   "peerDependenciesMeta": {
     "@tanstack/react-query": {
       "optional": true
     },
+    "@tanstack/vue-query": {
+      "optional": true
+    },
+    "@tanstack/angular-query-experimental": {
+      "optional": true
+    },
+    "@angular/core": {
+      "optional": true
+    },
     "react": {
+      "optional": true
+    },
+    "vue": {
       "optional": true
     }
   },
+  "engines": {
+    "node": ">=20.19.0"
+  },
   "devDependencies": {
+    "@angular/core": "^19.0.0",
+    "@tanstack/angular-query-experimental": "^5.75.0",
     "@tanstack/react-query": "^5.75.0",
+    "@tanstack/vue-query": "^5.75.0",
     "react": "^19.0.0",
     "typescript": "^5.7.0",
-    "vitest": "^3.0.0"
+    "vitest": "^3.0.0",
+    "vue": "^3.5.0"
   }
 }

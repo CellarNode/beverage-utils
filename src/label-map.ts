@@ -1,4 +1,4 @@
-import type { BeverageClassification } from "./types";
+import type { BeverageClassification } from "./types.js";
 
 export type LabelMap = Record<string, string>;
 

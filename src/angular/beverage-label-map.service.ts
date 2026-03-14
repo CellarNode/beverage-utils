@@ -1,4 +1,4 @@
-import { useQuery, queryOptions } from "@tanstack/react-query";
+import { injectQuery, queryOptions } from "@tanstack/angular-query-experimental";
 import { buildLabelMap } from "../label-map.js";
 import type { LabelMap } from "../label-map.js";
 import type { BeverageClassification } from "../types.js";
@@ -18,6 +18,6 @@ export function beverageLabelMapOptions(apiBaseUrl: string) {
   });
 }
 
-export function useBeverageLabelMap(apiBaseUrl: string) {
-  return useQuery(beverageLabelMapOptions(apiBaseUrl));
+export function injectBeverageLabelMap(apiBaseUrl: string) {
+  return injectQuery(() => beverageLabelMapOptions(apiBaseUrl));
 }

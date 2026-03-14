@@ -1,4 +1,4 @@
-import { useQuery, queryOptions } from "@tanstack/react-query";
+import { useQuery, queryOptions } from "@tanstack/vue-query";
 import { buildLabelMap } from "../label-map.js";
 import type { LabelMap } from "../label-map.js";
 import type { BeverageClassification } from "../types.js";

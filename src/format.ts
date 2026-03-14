@@ -1,4 +1,4 @@
-import type { LabelMap } from "./label-map";
+import type { LabelMap } from "./label-map.js";
 
 export function formatBeverageLabel(
   key: string | null | undefined,
