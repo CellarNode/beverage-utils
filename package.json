@@ -1,6 +1,6 @@
 {
   "name": "@cellarnode/beverage-utils",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Beverage classification utilities — label mapping, formatting, and display helpers for the CellarNode industry-standard beverage classification system.",
   "license": "MIT",
   "type": "module",
@@ -12,12 +12,34 @@
     "registry": "https://npm.pkg.github.com"
   },
   "exports": {
-    ".": "./src/index.ts",
-    "./react": "./src/react/index.ts"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./react": {
+      "types": "./dist/react/index.d.ts",
+      "default": "./dist/react/index.js"
+    }
   },
-  "files": ["src", "README.md", "CHANGELOG.md", "LICENSE"],
-  "keywords": ["cellarnode", "beverage", "classification", "wine", "spirits", "hs-codes", "oiv"],
+  "files": [
+    "dist",
+    "src",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "cellarnode",
+    "beverage",
+    "classification",
+    "wine",
+    "spirits",
+    "hs-codes",
+    "oiv"
+  ],
   "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit"
@@ -27,8 +49,12 @@
     "react": "^18.0.0 || ^19.0.0"
   },
   "peerDependenciesMeta": {
-    "@tanstack/react-query": { "optional": true },
-    "react": { "optional": true }
+    "@tanstack/react-query": {
+      "optional": true
+    },
+    "react": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@tanstack/react-query": "^5.75.0",
