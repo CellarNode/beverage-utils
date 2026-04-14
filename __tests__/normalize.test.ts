@@ -63,3 +63,38 @@ describe("resolveCountryCode", () => {
     expect(resolveCountryCode("")).toBeNull();
   });
 });
+
+import { parseVolumeToLiters } from "../src/normalize";
+
+describe("parseVolumeToLiters", () => {
+  it("parses liter formats", () => {
+    expect(parseVolumeToLiters("5000 L")).toBe(5000);
+    expect(parseVolumeToLiters("5000L")).toBe(5000);
+    expect(parseVolumeToLiters("5000 liters")).toBe(5000);
+    expect(parseVolumeToLiters("5000 litres")).toBe(5000);
+  });
+
+  it("parses kL/hL/mL", () => {
+    expect(parseVolumeToLiters("5 kL")).toBe(5000);
+    expect(parseVolumeToLiters("20 hl")).toBe(2000);
+    expect(parseVolumeToLiters("750 ml")).toBe(0.75);
+  });
+
+  it("parses bottle-count formats: 'bottles 750ml × 4000'", () => {
+    expect(parseVolumeToLiters("bottles 750ml × 4000")).toBe(3000);
+    expect(parseVolumeToLiters("bottles 750 ml x 4000")).toBe(3000);
+    expect(parseVolumeToLiters("4000 × 750ml")).toBe(3000);
+  });
+
+  it("parses bare numbers (assumed liters)", () => {
+    expect(parseVolumeToLiters("330")).toBe(330);
+    expect(parseVolumeToLiters(330)).toBe(330);
+  });
+
+  it("returns null on parse failure", () => {
+    expect(parseVolumeToLiters("about a lot")).toBeNull();
+    expect(parseVolumeToLiters("")).toBeNull();
+    expect(parseVolumeToLiters(null)).toBeNull();
+    expect(parseVolumeToLiters(undefined)).toBeNull();
+  });
+});
