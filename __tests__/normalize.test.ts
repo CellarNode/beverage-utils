@@ -1,5 +1,5 @@
-import { describe, it, expect } from "bun:test";
-import { normalizeToken, resolveCountryCode } from "../src/normalize";
+import { describe, it, expect } from "vitest";
+import { normalizeToken, resolveCountryCode, parseVolumeToLiters } from "../src/normalize";
 
 describe("normalizeToken", () => {
   it("returns empty string for null/undefined/empty", () => {
@@ -63,8 +63,6 @@ describe("resolveCountryCode", () => {
     expect(resolveCountryCode("")).toBeNull();
   });
 });
-
-import { parseVolumeToLiters } from "../src/normalize";
 
 describe("parseVolumeToLiters", () => {
   it("parses liter formats", () => {
