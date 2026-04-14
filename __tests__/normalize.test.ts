@@ -1,5 +1,5 @@
 import { describe, it, expect } from "bun:test";
-import { normalizeToken } from "./normalize";
+import { normalizeToken, resolveCountryCode } from "../src/normalize";
 
 describe("normalizeToken", () => {
   it("returns empty string for null/undefined/empty", () => {
@@ -29,5 +29,37 @@ describe("normalizeToken", () => {
   it("collapses multiple hyphens and strips leading/trailing", () => {
     expect(normalizeToken("--foo--bar--")).toBe("foo-bar");
     expect(normalizeToken("a---b")).toBe("a-b");
+  });
+});
+
+describe("resolveCountryCode", () => {
+  it("returns ISO alpha-2 for English names", () => {
+    expect(resolveCountryCode("Spain")).toBe("ES");
+    expect(resolveCountryCode("United States")).toBe("US");
+    expect(resolveCountryCode("Portugal")).toBe("PT");
+  });
+
+  it("accepts ISO alpha-2 input", () => {
+    expect(resolveCountryCode("ES")).toBe("ES");
+    expect(resolveCountryCode("es")).toBe("ES");
+  });
+
+  it("accepts ISO alpha-3 input", () => {
+    expect(resolveCountryCode("ESP")).toBe("ES");
+    expect(resolveCountryCode("PRT")).toBe("PT");
+  });
+
+  it("accepts non-English aliases (es locale)", () => {
+    expect(resolveCountryCode("España")).toBe("ES");
+  });
+
+  it("normalizes accents/whitespace before lookup", () => {
+    expect(resolveCountryCode("  ESPAÑA  ")).toBe("ES");
+  });
+
+  it("returns null for unknown input", () => {
+    expect(resolveCountryCode("Atlantis")).toBeNull();
+    expect(resolveCountryCode(null)).toBeNull();
+    expect(resolveCountryCode("")).toBeNull();
   });
 });
