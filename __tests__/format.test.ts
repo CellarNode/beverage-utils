@@ -1,5 +1,10 @@
 import { describe, test, expect } from "vitest";
-import { formatBeverageLabel, formatBeverageType } from "../src/format";
+import {
+  buildEnterpriseTypeLabelMap,
+  formatBeverageLabel,
+  formatBeverageType,
+  formatEnterpriseTypeLabel,
+} from "../src/format";
 import { buildLabelMap } from "../src/label-map";
 
 describe("formatBeverageLabel", () => {
@@ -45,5 +50,46 @@ describe("formatBeverageType", () => {
 
   test("falls back to humanized slug when no map", () => {
     expect(formatBeverageType("sparkling_wine", "red")).toBe("Sparkling Wine / Red");
+  });
+});
+
+describe("formatEnterpriseTypeLabel", () => {
+  test("formats canonical lowercase IDs", () => {
+    expect(formatEnterpriseTypeLabel("producer")).toBe("Producer");
+    expect(formatEnterpriseTypeLabel("importer")).toBe("Importer");
+    expect(formatEnterpriseTypeLabel("distributor")).toBe("Distributor");
+  });
+
+  test("returns fallback for null/undefined", () => {
+    expect(formatEnterpriseTypeLabel(null)).toBe("Unknown enterprise type");
+    expect(formatEnterpriseTypeLabel(undefined)).toBe("Unknown enterprise type");
+  });
+
+  test("returns fallback for empty string", () => {
+    expect(formatEnterpriseTypeLabel("")).toBe("Unknown enterprise type");
+  });
+
+  test("returns fallback for unknown ID", () => {
+    expect(formatEnterpriseTypeLabel("retailer")).toBe("Unknown enterprise type");
+    expect(formatEnterpriseTypeLabel("Producer")).toBe("Unknown enterprise type");
+    expect(formatEnterpriseTypeLabel("PRODUCER")).toBe("Unknown enterprise type");
+  });
+});
+
+describe("buildEnterpriseTypeLabelMap", () => {
+  test("returns all three canonical mappings", () => {
+    expect(buildEnterpriseTypeLabelMap()).toEqual({
+      producer: "Producer",
+      importer: "Importer",
+      distributor: "Distributor",
+    });
+  });
+
+  test("returns a fresh object on each call", () => {
+    const a = buildEnterpriseTypeLabelMap();
+    const b = buildEnterpriseTypeLabelMap();
+    expect(a).not.toBe(b);
+    a.producer = "mutated";
+    expect(buildEnterpriseTypeLabelMap().producer).toBe("Producer");
   });
 });
