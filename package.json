@@ -1,6 +1,6 @@
 {
   "name": "@cellarnode/beverage-utils",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "Beverage classification utilities — label mapping, formatting, and display helpers for the CellarNode industry-standard beverage classification system.",
   "license": "MIT",
   "type": "module",
