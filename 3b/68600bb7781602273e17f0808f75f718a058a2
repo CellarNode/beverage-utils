@@ -1,0 +1,26 @@
+src/index.ts
+  s_d9abb8aaf9da9b::t_d73e0e68d04d42 4-9
+src/format.ts
+  s_d9abb8aaf9da9b::t_eec5aeab556379 25-67
+__tests__/format.test.ts
+  s_d9abb8aaf9da9b::t_dba6a3c85ffe2e 2-7
+  s_d9abb8aaf9da9b::t_132e5e56007d55 55-95
+package.json
+  s_d9abb8aaf9da9b::t_92aac3cbf0b635 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.8",
+  "base_commit_sha": "3b68600bb7781602273e17f0808f75f718a058a2",
+  "prompts": {},
+  "sessions": {
+    "s_d9abb8aaf9da9b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0e3bb515-088b-47fa-aed8-7007c6c9ebdb",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "mjnong <marcusnagy@icloud.com>"
+    }
+  }
+}
