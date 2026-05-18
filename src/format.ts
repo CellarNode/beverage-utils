@@ -28,13 +28,11 @@ export function formatBeverageType(
  * `enterprise_types` reference-data rows and the Drizzle
  * `enterpriseType` pgEnum in cellarnode-backend-v2.
  */
-const ENTERPRISE_TYPE_LABELS: Record<string, string> = {
+const ENTERPRISE_TYPE_LABELS: LabelMap = {
   producer: "Producer",
   importer: "Importer",
   distributor: "Distributor",
 };
-
-const UNKNOWN_ENTERPRISE_TYPE_LABEL = "Unknown enterprise type";
 
 /**
  * Formats a canonical enterprise type ID into its display label.
@@ -44,15 +42,20 @@ const UNKNOWN_ENTERPRISE_TYPE_LABEL = "Unknown enterprise type";
  * everywhere a dashboard or email needs to render an enterprise type
  * — never inline TitleCase string literals.
  *
+ * Mirrors the {@link formatBeverageLabel} contract:
+ * - `null` / `undefined` / `""` → `""`
+ * - unrecognised IDs are echoed back unchanged so consumers can detect
+ *   non-canonical values at the call site and decide their own fallback.
+ *
  * @param id - canonical lowercase enterprise type ID
- * @returns the display label, or `"Unknown enterprise type"` for
- *   null / undefined / unrecognised IDs
+ * @returns the display label, the empty string for nullish input, or
+ *   the original `id` echoed back for unrecognised IDs.
  */
 export function formatEnterpriseTypeLabel(
   id: string | null | undefined,
 ): string {
-  if (!id) return UNKNOWN_ENTERPRISE_TYPE_LABEL;
-  return ENTERPRISE_TYPE_LABELS[id] ?? UNKNOWN_ENTERPRISE_TYPE_LABEL;
+  if (!id) return "";
+  return ENTERPRISE_TYPE_LABELS[id] ?? id;
 }
 
 /**
@@ -62,6 +65,6 @@ export function formatEnterpriseTypeLabel(
  * Returns a fresh object on each call so consumers cannot mutate the
  * shared constant.
  */
-export function buildEnterpriseTypeLabelMap(): Record<string, string> {
+export function buildEnterpriseTypeLabelMap(): LabelMap {
   return { ...ENTERPRISE_TYPE_LABELS };
 }

@@ -6,6 +6,7 @@ import {
   formatEnterpriseTypeLabel,
 } from "../src/format";
 import { buildLabelMap } from "../src/label-map";
+import type { EnterpriseType } from "../src/types";
 
 describe("formatBeverageLabel", () => {
   test("returns empty string for null/undefined", () => {
@@ -60,19 +61,43 @@ describe("formatEnterpriseTypeLabel", () => {
     expect(formatEnterpriseTypeLabel("distributor")).toBe("Distributor");
   });
 
-  test("returns fallback for null/undefined", () => {
-    expect(formatEnterpriseTypeLabel(null)).toBe("Unknown enterprise type");
-    expect(formatEnterpriseTypeLabel(undefined)).toBe("Unknown enterprise type");
+  test("returns empty string for null/undefined", () => {
+    expect(formatEnterpriseTypeLabel(null)).toBe("");
+    expect(formatEnterpriseTypeLabel(undefined)).toBe("");
   });
 
-  test("returns fallback for empty string", () => {
-    expect(formatEnterpriseTypeLabel("")).toBe("Unknown enterprise type");
+  test("returns empty string for empty input", () => {
+    expect(formatEnterpriseTypeLabel("")).toBe("");
   });
 
-  test("returns fallback for unknown ID", () => {
-    expect(formatEnterpriseTypeLabel("retailer")).toBe("Unknown enterprise type");
-    expect(formatEnterpriseTypeLabel("Producer")).toBe("Unknown enterprise type");
-    expect(formatEnterpriseTypeLabel("PRODUCER")).toBe("Unknown enterprise type");
+  test("echoes unknown IDs back unchanged so consumers can detect non-canonical values", () => {
+    expect(formatEnterpriseTypeLabel("not_real")).toBe("not_real");
+    expect(formatEnterpriseTypeLabel("retailer")).toBe("retailer");
+    expect(formatEnterpriseTypeLabel("Producer")).toBe("Producer");
+    expect(formatEnterpriseTypeLabel("PRODUCER")).toBe("PRODUCER");
+  });
+});
+
+describe("EnterpriseType union", () => {
+  test("compiles to the canonical lowercase union literal", () => {
+    // Type-level assertion: EnterpriseType must equal the documented union.
+    type _Check = EnterpriseType extends "producer" | "importer" | "distributor"
+      ? "producer" | "importer" | "distributor" extends EnterpriseType
+        ? true
+        : false
+      : false;
+    const _ok: _Check = true;
+    expect(_ok).toBe(true);
+
+    // Value-level sanity: each canonical literal is assignable.
+    const producer: EnterpriseType = "producer";
+    const importer: EnterpriseType = "importer";
+    const distributor: EnterpriseType = "distributor";
+    expect([producer, importer, distributor]).toEqual([
+      "producer",
+      "importer",
+      "distributor",
+    ]);
   });
 });
 
