@@ -5,7 +5,7 @@ export function formatBeverageLabel(
   map?: LabelMap,
 ): string {
   if (!key) return "";
-  if (map?.[key]) return map[key];
+  if (map && Object.hasOwn(map, key)) return map[key];
   return key.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
@@ -17,7 +17,7 @@ export function formatBeverageType(
   const cat = formatBeverageLabel(category, map);
   if (!subtype) return cat;
   const compositeKey = `${category}:${subtype}`;
-  const sub = map?.[compositeKey]
+  const sub = map && Object.hasOwn(map, compositeKey)
     ? map[compositeKey]
     : formatBeverageLabel(subtype, map);
   return `${cat} / ${sub}`;
@@ -55,7 +55,9 @@ export function formatEnterpriseTypeLabel(
   id: string | null | undefined,
 ): string {
   if (!id) return "";
-  return ENTERPRISE_TYPE_LABELS[id] ?? id;
+  return Object.hasOwn(ENTERPRISE_TYPE_LABELS, id)
+    ? ENTERPRISE_TYPE_LABELS[id]
+    : id;
 }
 
 /**
