@@ -1,5 +1,71 @@
 # Changelog
 
+## 0.6.0 (2026-05-21)
+
+Promote the canonical primitives from `@cellarnode/ui/src/lib/*` (CEL-348 / CEL-336).
+All six concerns landed in a single PR — zero-dep TypeScript only. Hooks and React
+components stay in `@cellarnode/ui`; this slice carries only tuples, typed unions,
+formatters, predicates (strict + lenient), label-map builders, registry-entry types,
+and static fallbacks.
+
+A follow-up PR will publish `@cellarnode/ui@0.70.0` to hard-remove the duplicates
+and re-export them from `@cellarnode/beverage-utils` to preserve backward compat.
+
+### Currency (CEL-341)
+
+- `ACTIVE_CURRENCIES`, `Currency`, `CurrencyRegistryEntry`
+- `STATIC_CURRENCY_FALLBACK`, `STATIC_CURRENCY_REGISTRY`, `STATIC_CURRENCY_LABEL_MAP`
+- `formatCurrencyLabel`, `buildCurrencyLabelMap`
+- `isCurrency`, `normalizeAndCheckCurrency`
+
+### Country (CEL-338)
+
+- `COUNTRY_CODES`, `CountryCode`, `CountryRegistryEntry`
+- `STATIC_COUNTRY_FALLBACK`, `STATIC_COUNTRY_LABEL_MAP`
+- `formatCountryLabel`, `buildCountryLabelMap`
+- `isCountryCode`, `normalizeAndCheckCountryCode`
+
+### Packaging (CEL-340)
+
+- `PACKAGING_OPTIONS`, `Packaging`, `PackagingRegistryEntry`
+- `STATIC_PACKAGING_FALLBACK`, `STATIC_PACKAGING_REGISTRY`, `STATIC_PACKAGING_LABEL_MAP`
+- `formatPackagingLabel`, `buildPackagingLabelMap`
+- `isPackaging`, `normalizeAndCheckPackaging`
+
+### Closure (CEL-340)
+
+- `CLOSURE_OPTIONS`, `Closure`, `ClosureRegistryEntry`
+- `STATIC_CLOSURE_FALLBACK`, `STATIC_CLOSURE_REGISTRY`, `STATIC_CLOSURE_LABEL_MAP`
+- `formatClosureLabel`, `buildClosureLabelMap`
+- `isClosure`, `normalizeAndCheckClosure`
+
+### Access models (CEL-343)
+
+- `ACCESS_MODELS`, `AccessModel`, `AccessModelRegistryEntry`
+- `STATIC_ACCESS_MODEL_FALLBACK`, `STATIC_ACCESS_MODEL_REGISTRY`,
+  `STATIC_ACCESS_MODEL_LABEL_MAP`
+- `formatAccessModelLabel`, `buildAccessModelLabelMap`
+- `isAccessModel`, `normalizeAndCheckAccessModel`, `getAccessModelEntry`
+
+### Procurement channels (CEL-343)
+
+- `PROCUREMENT_CHANNELS`, `ProcurementChannel`, `ProcurementChannelRegistryEntry`
+- `STATIC_PROCUREMENT_CHANNEL_FALLBACK`, `STATIC_PROCUREMENT_CHANNEL_REGISTRY`,
+  `STATIC_PROCUREMENT_CHANNEL_LABEL_MAP`
+- `formatProcurementChannelLabel`, `buildProcurementChannelLabelMap`
+- `isProcurementChannel`, `normalizeAndCheckProcurementChannel`,
+  `getProcurementChannelEntry`
+
+### Notes
+
+- `EnterpriseType` + `formatEnterpriseTypeLabel` already live in beverage-utils
+  from CEL-337 — no changes there.
+- Price types (`PRICE_TYPES`, `PriceType`) only live in `@cellarnode/ui` as a
+  React hook (`usePriceTypes`) and a component-bound `PriceTypeRegistryEntry`
+  type — no primitive surface exists to move yet.
+- `BASIS` / `Basis` live in `@cellarnode/finance` per the existing finance package
+  ownership (not duplicated in `@cellarnode/ui`).
+
 ## 0.3.1 (2026-03-14)
 
 - Fix repository URL casing for npm provenance verification
