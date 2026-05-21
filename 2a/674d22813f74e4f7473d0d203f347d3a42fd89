@@ -1,0 +1,47 @@
+src/currency.ts
+  s_d9abb8aaf9da9b::t_afde984d9cef6b 1-205
+src/country.ts
+  s_d9abb8aaf9da9b::t_c29257477dfd7f 1-211
+__tests__/access-models.test.ts
+  s_d9abb8aaf9da9b::t_10eea71b9fcbfb 1-231
+package.json
+  s_d9abb8aaf9da9b::t_31d14c43f84098 3
+__tests__/packaging.test.ts
+  s_d9abb8aaf9da9b::t_e719253a3df149 1-192
+__tests__/closure.test.ts
+  s_d9abb8aaf9da9b::t_ea6c60eae51098 1-163
+src/access-models.ts
+  s_d9abb8aaf9da9b::t_337e3ea573deaf 1-219
+src/procurement-channels.ts
+  s_d9abb8aaf9da9b::t_378a77a9ba3869 1-270
+__tests__/procurement-channels.test.ts
+  s_d9abb8aaf9da9b::t_f42c27f3c0fc92 1-267
+__tests__/country.test.ts
+  s_d9abb8aaf9da9b::t_44b051ab5580ca 1-183
+__tests__/currency.test.ts
+  s_d9abb8aaf9da9b::t_f6fef9365da356 1-210
+src/closure.ts
+  s_d9abb8aaf9da9b::t_bc2a28822904e5 1-143
+src/index.ts
+  s_d9abb8aaf9da9b::t_21f6aaa5b4358c 16-106
+CHANGELOG.md
+  s_d9abb8aaf9da9b::t_945b3719e2b57a 3-68
+src/packaging.ts
+  s_d9abb8aaf9da9b::t_f696652c453a09 1-184
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.11",
+  "base_commit_sha": "2a674d22813f74e4f7473d0d203f347d3a42fd89",
+  "prompts": {},
+  "sessions": {
+    "s_d9abb8aaf9da9b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0e3bb515-088b-47fa-aed8-7007c6c9ebdb",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "mjnong <marcusnagy@icloud.com>"
+    }
+  }
+}
