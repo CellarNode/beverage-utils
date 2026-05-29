@@ -1,0 +1,43 @@
+CHANGELOG.md
+  s_8a55c7e19874d2::t_7cfd3727e3fa11 3-27
+__tests__/freeze-hardening.test.ts
+  s_8a55c7e19874d2::t_9362fc27dec0e3 1-117
+src/access-models.ts
+  s_8a55c7e19874d2::t_c89a45148e8db0 51-52,57-58,63-64
+  s_8a55c7e19874d2::t_c5aebaff10a9cb 71,73
+src/country.ts
+  s_8a55c7e19874d2::t_447406e1ef2de5 166-169
+  s_8a55c7e19874d2::t_b09642eff3ad8f 88-94
+package-lock.json
+  ai_agent 3,9
+src/currency.ts
+  s_8a55c7e19874d2::t_6124d920366740 56,58
+  s_8a55c7e19874d2::t_a7cd2c0bc66761 82
+package.json
+  s_8a55c7e19874d2::t_591cefb042da00 3
+src/packaging.ts
+  s_8a55c7e19874d2::t_eb78f5f1f63958 43,45
+  s_8a55c7e19874d2::t_1d8abfa42999b1 64
+src/closure.ts
+  s_8a55c7e19874d2::t_a43d22997d3c41 33,35
+  s_8a55c7e19874d2::t_7d1297f9784a42 51
+src/procurement-channels.ts
+  s_8a55c7e19874d2::t_f574030503cc17 73-74,81-82,88-89,96-97
+  s_8a55c7e19874d2::t_9914e3279a91dc 105
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "b769c902931544524347fea0e5faaaeed1403080",
+  "prompts": {},
+  "sessions": {
+    "s_8a55c7e19874d2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "438b7db8-44c6-45b7-a485-f8c3a3beca21",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "mjnong <marcusnagy@icloud.com>"
+    }
+  }
+}
