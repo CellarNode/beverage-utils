@@ -48,29 +48,29 @@ export interface AccessModelRegistryEntry {
  * the static floor mirrors the canonical 2 rows verbatim.
  */
 export const STATIC_ACCESS_MODEL_REGISTRY: readonly AccessModelRegistryEntry[] =
-  [
-    {
+  Object.freeze([
+    Object.freeze({
       id: "directed",
       name: "Directed",
       description:
         "Offers routed through recommended or designated importer(s)",
-    },
-    {
+    }),
+    Object.freeze({
       id: "open",
       name: "Open",
       description:
         "Free competition — any eligible party can compete on price and terms",
-    },
-  ];
+    }),
+  ]);
 
 /**
  * Convenience tuple-typed list of just the canonical ids. Useful for
  * Zod `z.enum(ACCESS_MODELS)`, narrowing arguments, or as a cheaper
  * fallback when consumers don't need the metadata.
  */
-export const STATIC_ACCESS_MODEL_FALLBACK: readonly AccessModel[] = [
+export const STATIC_ACCESS_MODEL_FALLBACK: readonly AccessModel[] = Object.freeze([
   ...ACCESS_MODELS,
-];
+]);
 
 /**
  * `id → name` lookup map for the static fallback. Frozen so consumers

@@ -53,9 +53,9 @@ export type Currency = (typeof ACTIVE_CURRENCIES)[number];
  * new client with no React-Query cache) get a usable list immediately —
  * the static floor mirrors the canonical 12 rows verbatim.
  */
-export const STATIC_CURRENCY_FALLBACK: readonly Currency[] = [
+export const STATIC_CURRENCY_FALLBACK: readonly Currency[] = Object.freeze([
   ...ACTIVE_CURRENCIES,
-];
+]);
 
 /**
  * One canonical currency entry. `code` is always one of the canonical
@@ -79,7 +79,7 @@ export interface CurrencyRegistryEntry {
  * canonical backend row.
  */
 export const STATIC_CURRENCY_REGISTRY: readonly CurrencyRegistryEntry[] =
-  ACTIVE_CURRENCIES.map((code) => ({ code, label: code }));
+  Object.freeze(ACTIVE_CURRENCIES.map((code) => Object.freeze({ code, label: code })));
 
 /**
  * `code → label` lookup map for the static fallback. Frozen so consumers

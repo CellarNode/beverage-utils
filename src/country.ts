@@ -85,13 +85,13 @@ export type CountryCode = (typeof COUNTRY_CODES)[number];
 export const STATIC_COUNTRY_FALLBACK: ReadonlyArray<{
   code: CountryCode;
   name: string;
-}> = [
-  { code: "FR", name: "France" },
-  { code: "IT", name: "Italy" },
-  { code: "ES", name: "Spain" },
-  { code: "DE", name: "Germany" },
-  { code: "US", name: "United States" },
-];
+}> = Object.freeze([
+  Object.freeze({ code: "FR", name: "France" }),
+  Object.freeze({ code: "IT", name: "Italy" }),
+  Object.freeze({ code: "ES", name: "Spain" }),
+  Object.freeze({ code: "DE", name: "Germany" }),
+  Object.freeze({ code: "US", name: "United States" }),
+]);
 
 /**
  * Lookup-shaped projection of `STATIC_COUNTRY_FALLBACK`. Kept separate
@@ -163,7 +163,10 @@ export function buildCountryLabelMap(
     }
     const upper = entry.code.trim().toUpperCase();
     if (upper.length === 0) continue;
-    out[upper] = entry.name;
+    // CEL-406: trim the name + fall back to the canonical code when blank
+    // or whitespace-only, so a malformed row can't write an empty label.
+    const name = entry.name.trim();
+    out[upper] = name || upper;
   }
   // Defense-in-depth: if every row was malformed, fall back to the static
   // floor rather than returning `{}` and silently dropping the documented
