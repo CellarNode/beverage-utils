@@ -70,31 +70,31 @@ export interface ProcurementChannelRegistryEntry {
  * the static floor mirrors the canonical 3 rows verbatim.
  */
 export const STATIC_PROCUREMENT_CHANNEL_REGISTRY: readonly ProcurementChannelRegistryEntry[] =
-  [
-    {
+  Object.freeze([
+    Object.freeze({
       id: "monopoly",
       name: "State Monopoly",
       description:
         "Government-controlled retail (Systembolaget, Vinmonopolet, LCBO, SAQ)",
       defaultAccessModel: "directed",
       isMonopoly: true,
-    },
-    {
+    }),
+    Object.freeze({
       id: "importer",
       name: "Importer",
       description: "Direct importer request for specific beverages",
       defaultAccessModel: "directed",
       isMonopoly: false,
-    },
-    {
+    }),
+    Object.freeze({
       id: "direct",
       name: "Direct",
       description:
         "Open market request from restaurants, retailers, or other buyers",
       defaultAccessModel: "open",
       isMonopoly: false,
-    },
-  ];
+    }),
+  ]);
 
 /**
  * Convenience tuple-typed list of just the canonical ids. Useful for
@@ -102,7 +102,7 @@ export const STATIC_PROCUREMENT_CHANNEL_REGISTRY: readonly ProcurementChannelReg
  * cheaper fallback when consumers don't need the policy metadata.
  */
 export const STATIC_PROCUREMENT_CHANNEL_FALLBACK: readonly ProcurementChannel[] =
-  [...PROCUREMENT_CHANNELS];
+  Object.freeze([...PROCUREMENT_CHANNELS]);
 
 /**
  * `id → name` lookup map for the static fallback. Frozen so consumers

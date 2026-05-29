@@ -30,9 +30,9 @@ export type Closure = (typeof CLOSURE_OPTIONS)[number];
 /**
  * Static fallback used when the backend query hasn't resolved yet.
  */
-export const STATIC_CLOSURE_FALLBACK: readonly Closure[] = [
+export const STATIC_CLOSURE_FALLBACK: readonly Closure[] = Object.freeze([
   ...CLOSURE_OPTIONS,
-];
+]);
 
 /**
  * One canonical closure entry — see `PackagingRegistryEntry` for shape
@@ -48,7 +48,7 @@ export interface ClosureRegistryEntry {
  * canonical backend row.
  */
 export const STATIC_CLOSURE_REGISTRY: readonly ClosureRegistryEntry[] =
-  CLOSURE_OPTIONS.map((value) => ({ value, label: value }));
+  Object.freeze(CLOSURE_OPTIONS.map((value) => Object.freeze({ value, label: value })));
 
 /**
  * `value → label` lookup map for the static fallback. Frozen so consumers

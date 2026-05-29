@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.7.0 (2026-05-29)
+
+Harden the canonical static exports (CEL-406). Follow-up to the CEL-348 move —
+deferred out of that PR to keep its "1:1 code move, no behaviour changes"
+contract intact.
+
+- **`Object.freeze` on every `STATIC_*_REGISTRY` / `STATIC_*_FALLBACK`** across
+  all six canonical concerns (currency, country, packaging, closure,
+  procurement channels, access models) — top-level array **and** per-entry
+  objects for the object-bearing registries. The `readonly` types only guarded
+  TS-level mutation; the runtime arrays/objects were mutable, so a consumer
+  could corrupt a shared canonical singleton. They now throw in strict mode.
+  (The `STATIC_*_LABEL_MAP` exports were already frozen.)
+- **`buildCountryLabelMap` now trims the name + falls back to the canonical
+  code** when it's blank/whitespace-only (`out[upper] = entry.name.trim() ||
+  upper`), matching the trim+fallback the other five `build*LabelMap` helpers
+  already do. Prevents a malformed runtime row from writing an empty label.
+- New `__tests__/freeze-hardening.test.ts` (37 tests): every frozen export
+  rejects `push()` / entry mutation in strict mode, plus the blank-name
+  fallback. Suite: 184 → 221, no regressions.
+
+No API surface change; behaviour change is limited to the blank-name fallback
+above. Minor bump because freezing could surface a latent consumer bug that
+was relying on mutating a shared canonical array.
+
 ## 0.6.0 (2026-05-21)
 
 Promote the canonical primitives from `@cellarnode/ui/src/lib/*` (CEL-348 / CEL-336).

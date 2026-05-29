@@ -40,9 +40,9 @@ export type Packaging = (typeof PACKAGING_OPTIONS)[number];
  * new client with no React-Query cache) get a usable list immediately —
  * the static floor mirrors the canonical 5 rows verbatim.
  */
-export const STATIC_PACKAGING_FALLBACK: readonly Packaging[] = [
+export const STATIC_PACKAGING_FALLBACK: readonly Packaging[] = Object.freeze([
   ...PACKAGING_OPTIONS,
-];
+]);
 
 /**
  * One canonical packaging entry. `value` is always one of the canonical
@@ -61,7 +61,7 @@ export interface PackagingRegistryEntry {
  * canonical backend row.
  */
 export const STATIC_PACKAGING_REGISTRY: readonly PackagingRegistryEntry[] =
-  PACKAGING_OPTIONS.map((value) => ({ value, label: value }));
+  Object.freeze(PACKAGING_OPTIONS.map((value) => Object.freeze({ value, label: value })));
 
 /**
  * `value → label` lookup map for the static fallback. Frozen so consumers
