@@ -1,0 +1,19 @@
+AGENTS.md
+  s_b21c3a3a5cb996::t_ef659e89636749 1-58
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.8",
+  "base_commit_sha": "6b9cfc326c9b149d9a15950356349923f488ed14",
+  "prompts": {},
+  "sessions": {
+    "s_b21c3a3a5cb996": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "ses_12ade7e74ffeCrATJpsS1HnmuB",
+        "model": "unknown"
+      },
+      "human_author": "mjnong <marcusnagy@icloud.com>"
+    }
+  }
+}
