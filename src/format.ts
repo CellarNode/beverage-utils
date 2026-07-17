@@ -15,12 +15,32 @@ export function formatBeverageType(
   map?: LabelMap,
 ): string {
   const cat = formatBeverageLabel(category, map);
-  if (!subtype) return cat;
-  const compositeKey = `${category}:${subtype}`;
-  const sub = map && Object.hasOwn(map, compositeKey)
-    ? map[compositeKey]
-    : formatBeverageLabel(subtype, map);
-  return `${cat} / ${sub}`;
+  const sub = formatBeverageSubtype(category, subtype, map);
+  return sub ? `${cat} / ${sub}` : cat;
+}
+
+/**
+ * Formats a beverage subtype ID into its category-aware display label.
+ *
+ * Subtype IDs like `red` are reused across categories (`red` under `wine` vs
+ * `sparkling_wine`), so lookup prefers the composite `${categoryId}:${subtypeId}`
+ * key emitted by {@link buildLabelMap}, then the flat subtype key, then a
+ * humanized fallback. Nullish/empty `subtypeId` returns `""`.
+ *
+ * {@link formatBeverageType} reuses this so pair and subtype-only formatting
+ * cannot drift.
+ */
+export function formatBeverageSubtype(
+  categoryId: string | null | undefined,
+  subtypeId?: string | null,
+  map?: LabelMap,
+): string {
+  if (!subtypeId) return "";
+  if (categoryId && map) {
+    const compositeKey = `${categoryId}:${subtypeId}`;
+    if (Object.hasOwn(map, compositeKey)) return map[compositeKey];
+  }
+  return formatBeverageLabel(subtypeId, map);
 }
 
 /**

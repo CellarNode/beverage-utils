@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.8.0 (2026-07-17)
+
+Add the category-aware subtype-only formatter (CEL-1069).
+
+- **New `formatBeverageSubtype(categoryId, subtypeId?, map?)`** — resolves a
+  subtype ID to its display label via composite `${categoryId}:${subtypeId}`
+  lookup, falling back to the flat subtype key then a humanized slug; nullish
+  subtype returns `""`. The shared primitive dashboards use to render
+  category-aware subtype labels (`red` under wine vs sparkling_wine) instead of
+  raw IDs, replacing inline composite-key reimplementations in consumers.
+- **`formatBeverageType` refactored to reuse `formatBeverageSubtype`** so pair
+  and subtype-only formatting can never drift. No behaviour change — existing
+  tests unchanged; suite 221 → 228.
+
+Additive, backward-compatible. Minor bump.
+
 ## 0.7.0 (2026-05-29)
 
 Harden the canonical static exports (CEL-406). Follow-up to the CEL-348 move —
