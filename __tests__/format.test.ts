@@ -2,6 +2,7 @@ import { describe, test, expect } from "vitest";
 import {
   buildEnterpriseTypeLabelMap,
   formatBeverageLabel,
+  formatBeverageSubtype,
   formatBeverageType,
   formatEnterpriseTypeLabel,
 } from "../src/format";
@@ -51,6 +52,72 @@ describe("formatBeverageType", () => {
 
   test("falls back to humanized slug when no map", () => {
     expect(formatBeverageType("sparkling_wine", "red")).toBe("Sparkling Wine / Red");
+  });
+});
+
+describe("formatBeverageSubtype", () => {
+  test("returns empty string for nullish or empty subtype", () => {
+    expect(formatBeverageSubtype("wine", null)).toBe("");
+    expect(formatBeverageSubtype("wine", undefined)).toBe("");
+    expect(formatBeverageSubtype("wine", "")).toBe("");
+    expect(formatBeverageSubtype("wine")).toBe("");
+  });
+
+  test("prefers the composite category:subtype key over the flat subtype key", () => {
+    const map = { wine: "Still Wine", red: "Red", "wine:red": "Red Wine" };
+    expect(formatBeverageSubtype("wine", "red", map)).toBe("Red Wine");
+  });
+
+  test("disambiguates a reused subtype id across categories", () => {
+    const map = buildLabelMap({
+      categories: [
+        { id: "wine", name: "Still Wine", subtypes: [{ id: "red", name: "Red Wine" }] },
+        {
+          id: "sparkling_wine",
+          name: "Sparkling Wine",
+          subtypes: [{ id: "red", name: "Red Sparkling" }],
+        },
+      ],
+    });
+    expect(formatBeverageSubtype("wine", "red", map)).toBe("Red Wine");
+    expect(formatBeverageSubtype("sparkling_wine", "red", map)).toBe("Red Sparkling");
+  });
+
+  test("falls back to the flat subtype label when no composite key exists", () => {
+    expect(formatBeverageSubtype("wine", "red", { red: "Red" })).toBe("Red");
+  });
+
+  test("humanizes an unknown/orphan subtype id without underscores", () => {
+    expect(formatBeverageSubtype("wine", "experimental_style")).toBe("Experimental Style");
+    const map = buildLabelMap({
+      categories: [{ id: "wine", name: "Still Wine", subtypes: [] }],
+    });
+    expect(formatBeverageSubtype("wine", "experimental_style", map)).toBe("Experimental Style");
+  });
+
+  test("resolves the subtype when categoryId is nullish (flat lookup / humanized)", () => {
+    expect(formatBeverageSubtype(null, "red", { red: "Red" })).toBe("Red");
+    expect(formatBeverageSubtype(undefined, "sweet_vermouth")).toBe("Sweet Vermouth");
+  });
+
+  test("formatBeverageType reuses formatBeverageSubtype so pair and subtype-only cannot drift", () => {
+    const map = buildLabelMap({
+      categories: [
+        {
+          id: "vermouth",
+          name: "Vermouth",
+          subtypes: [
+            { id: "sweet_vermouth", name: "Sweet Vermouth" },
+            { id: "dry_vermouth", name: "Dry Vermouth" },
+          ],
+        },
+      ],
+    });
+    const subLabel = formatBeverageSubtype("vermouth", "sweet_vermouth", map);
+    expect(subLabel).toBe("Sweet Vermouth");
+    expect(formatBeverageType("vermouth", "sweet_vermouth", map)).toBe(
+      `${formatBeverageLabel("vermouth", map)} / ${subLabel}`,
+    );
   });
 });
 

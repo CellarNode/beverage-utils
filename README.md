@@ -71,6 +71,19 @@ formatBeverageType("wine", null, map);            // "Still Wine"
 formatBeverageType("sparkling_wine", "red");      // "Sparkling Wine / Red" (fallback)
 ```
 
+### `formatBeverageSubtype(categoryId, subtypeId?, map?)`
+
+Formats a subtype on its own into a category-aware label like `"Red Wine"`. Prefers the composite `categoryId:subtypeId` key, then the flat subtype key, then humanizes the slug. Returns `""` for a nullish/empty subtype. `formatBeverageType` reuses it so pair and subtype-only output cannot drift.
+
+```typescript
+import { formatBeverageSubtype } from "@cellarnode/beverage-utils";
+
+formatBeverageSubtype("wine", "red", map);           // "Red Wine"
+formatBeverageSubtype("sparkling_wine", "red", map); // "Red Sparkling"
+formatBeverageSubtype("wine", "experimental_style"); // "Experimental Style" (fallback)
+formatBeverageSubtype("wine", null);                 // ""
+```
+
 ## Framework Adapters
 
 All adapters use [TanStack Query](https://tanstack.com/query) to fetch and cache classification data from the CellarNode API. The data is cached with `staleTime: Infinity` (classifications rarely change).

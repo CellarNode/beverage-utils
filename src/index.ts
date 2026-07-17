@@ -9,6 +9,7 @@ export { buildLabelMap } from "./label-map.js";
 export {
   buildEnterpriseTypeLabelMap,
   formatBeverageLabel,
+  formatBeverageSubtype,
   formatBeverageType,
   formatEnterpriseTypeLabel,
 } from "./format.js";
