@@ -1,0 +1,41 @@
+src/format.ts
+  s_714240b5e3c494::t_e647b2c33dcb06 33-37
+  s_714240b5e3c494::t_0f2a5a8770da5a 22-32,38-43
+  s_714240b5e3c494::t_9079bb10e82512 18-19
+  s_8c808361855539::t_641641c1438822 20-21
+package.json
+  s_714240b5e3c494::t_1e098a4cf88e2c 3
+CHANGELOG.md
+  s_714240b5e3c494::t_c9d5321b4120d9 3-18
+src/index.ts
+  s_714240b5e3c494::t_7371250971e569 12
+__tests__/format.test.ts
+  s_714240b5e3c494::t_e79d476a79a854 5
+  s_714240b5e3c494::t_ab0c57f0b8e485 58-123
+README.md
+  s_714240b5e3c494::t_0fee0fe416b298 74-86
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "1dea13799a14eb74bca0c43e9c2d853d8ca4b8fb",
+  "prompts": {},
+  "sessions": {
+    "s_714240b5e3c494": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "ses_09073b593ffeVBJhzcbuLxdacK",
+        "model": "unknown"
+      },
+      "human_author": "mjnong <marcusnagy@icloud.com>"
+    },
+    "s_8c808361855539": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_09073b593ffeVBJhzcbuLxdacK",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "mjnong <marcusnagy@icloud.com>"
+    }
+  }
+}
