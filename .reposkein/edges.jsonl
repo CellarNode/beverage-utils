@@ -42,7 +42,7 @@
 {"from":"rs1:13a68d9e5302:file:__tests__/closure.test.ts","type":"IMPORTS","to":"rs1:13a68d9e5302:file:src/closure.ts","symbols":["CLOSURE_OPTIONS","STATIC_CLOSURE_FALLBACK","STATIC_CLOSURE_LABEL_MAP","STATIC_CLOSURE_REGISTRY","buildClosureLabelMap","formatClosureLabel","isClosure","normalizeAndCheckClosure"]}
 {"from":"rs1:13a68d9e5302:file:__tests__/country.test.ts","type":"IMPORTS","to":"rs1:13a68d9e5302:file:src/country.ts","symbols":["COUNTRY_CODES","STATIC_COUNTRY_FALLBACK","STATIC_COUNTRY_LABEL_MAP","buildCountryLabelMap","formatCountryLabel","isCountryCode","normalizeAndCheckCountryCode"]}
 {"from":"rs1:13a68d9e5302:file:__tests__/currency.test.ts","type":"IMPORTS","to":"rs1:13a68d9e5302:file:src/currency.ts","symbols":["ACTIVE_CURRENCIES","STATIC_CURRENCY_FALLBACK","STATIC_CURRENCY_LABEL_MAP","STATIC_CURRENCY_REGISTRY","buildCurrencyLabelMap","formatCurrencyLabel","isCurrency","normalizeAndCheckCurrency"]}
-{"from":"rs1:13a68d9e5302:file:__tests__/format.test.ts","type":"IMPORTS","to":"rs1:13a68d9e5302:file:src/format.ts","symbols":["buildEnterpriseTypeLabelMap","formatBeverageLabel","formatBeverageType","formatEnterpriseTypeLabel"]}
+{"from":"rs1:13a68d9e5302:file:__tests__/format.test.ts","type":"IMPORTS","to":"rs1:13a68d9e5302:file:src/format.ts","symbols":["buildEnterpriseTypeLabelMap","formatBeverageLabel","formatBeverageSubtype","formatBeverageType","formatEnterpriseTypeLabel"]}
 {"from":"rs1:13a68d9e5302:file:__tests__/format.test.ts","type":"IMPORTS","to":"rs1:13a68d9e5302:file:src/label-map.ts","symbols":["buildLabelMap"]}
 {"from":"rs1:13a68d9e5302:file:__tests__/format.test.ts","type":"IMPORTS","to":"rs1:13a68d9e5302:file:src/types.ts","symbols":["EnterpriseType"]}
 {"from":"rs1:13a68d9e5302:file:__tests__/freeze-hardening.test.ts","type":"IMPORTS","to":"rs1:13a68d9e5302:file:src/access-models.ts","symbols":["STATIC_ACCESS_MODEL_FALLBACK","STATIC_ACCESS_MODEL_REGISTRY"]}
@@ -98,6 +98,7 @@
 {"from":"rs1:13a68d9e5302:file:src/currency.ts","type":"DEFINES","to":"rs1:13a68d9e5302:var:src/currency.ts#STATIC_CURRENCY_REGISTRY"}
 {"from":"rs1:13a68d9e5302:file:src/format.ts","type":"DEFINES","to":"rs1:13a68d9e5302:func:src/format.ts#buildEnterpriseTypeLabelMap@0"}
 {"from":"rs1:13a68d9e5302:file:src/format.ts","type":"DEFINES","to":"rs1:13a68d9e5302:func:src/format.ts#formatBeverageLabel@2"}
+{"from":"rs1:13a68d9e5302:file:src/format.ts","type":"DEFINES","to":"rs1:13a68d9e5302:func:src/format.ts#formatBeverageSubtype@3"}
 {"from":"rs1:13a68d9e5302:file:src/format.ts","type":"DEFINES","to":"rs1:13a68d9e5302:func:src/format.ts#formatBeverageType@3"}
 {"from":"rs1:13a68d9e5302:file:src/format.ts","type":"DEFINES","to":"rs1:13a68d9e5302:func:src/format.ts#formatEnterpriseTypeLabel@1"}
 {"from":"rs1:13a68d9e5302:file:src/format.ts","type":"DEFINES","to":"rs1:13a68d9e5302:var:src/format.ts#ENTERPRISE_TYPE_LABELS"}
@@ -106,7 +107,7 @@
 {"from":"rs1:13a68d9e5302:file:src/index.ts","type":"IMPORTS","to":"rs1:13a68d9e5302:file:src/closure.ts","symbols":["CLOSURE_OPTIONS","Closure","ClosureRegistryEntry","STATIC_CLOSURE_FALLBACK","STATIC_CLOSURE_LABEL_MAP","STATIC_CLOSURE_REGISTRY","buildClosureLabelMap","formatClosureLabel","isClosure","normalizeAndCheckClosure"]}
 {"from":"rs1:13a68d9e5302:file:src/index.ts","type":"IMPORTS","to":"rs1:13a68d9e5302:file:src/country.ts","symbols":["COUNTRY_CODES","CountryCode","CountryRegistryEntry","STATIC_COUNTRY_FALLBACK","STATIC_COUNTRY_LABEL_MAP","buildCountryLabelMap","formatCountryLabel","isCountryCode","normalizeAndCheckCountryCode"]}
 {"from":"rs1:13a68d9e5302:file:src/index.ts","type":"IMPORTS","to":"rs1:13a68d9e5302:file:src/currency.ts","symbols":["ACTIVE_CURRENCIES","Currency","CurrencyRegistryEntry","STATIC_CURRENCY_FALLBACK","STATIC_CURRENCY_LABEL_MAP","STATIC_CURRENCY_REGISTRY","buildCurrencyLabelMap","formatCurrencyLabel","isCurrency","normalizeAndCheckCurrency"]}
-{"from":"rs1:13a68d9e5302:file:src/index.ts","type":"IMPORTS","to":"rs1:13a68d9e5302:file:src/format.ts","symbols":["buildEnterpriseTypeLabelMap","formatBeverageLabel","formatBeverageType","formatEnterpriseTypeLabel"]}
+{"from":"rs1:13a68d9e5302:file:src/index.ts","type":"IMPORTS","to":"rs1:13a68d9e5302:file:src/format.ts","symbols":["buildEnterpriseTypeLabelMap","formatBeverageLabel","formatBeverageSubtype","formatBeverageType","formatEnterpriseTypeLabel"]}
 {"from":"rs1:13a68d9e5302:file:src/index.ts","type":"IMPORTS","to":"rs1:13a68d9e5302:file:src/label-map.ts","symbols":["LabelMap","buildLabelMap"]}
 {"from":"rs1:13a68d9e5302:file:src/index.ts","type":"IMPORTS","to":"rs1:13a68d9e5302:file:src/normalize.ts","symbols":["normalizeToken","parseVolumeToLiters","resolveCountryCode"]}
 {"from":"rs1:13a68d9e5302:file:src/index.ts","type":"IMPORTS","to":"rs1:13a68d9e5302:file:src/packaging.ts","symbols":["PACKAGING_OPTIONS","Packaging","PackagingRegistryEntry","STATIC_PACKAGING_FALLBACK","STATIC_PACKAGING_LABEL_MAP","STATIC_PACKAGING_REGISTRY","buildPackagingLabelMap","formatPackagingLabel","isPackaging","normalizeAndCheckPackaging"]}
@@ -150,6 +151,8 @@
 {"from":"rs1:13a68d9e5302:file:src/vue/use-beverage-label-map.ts","type":"DEFINES","to":"rs1:13a68d9e5302:func:src/vue/use-beverage-label-map.ts#useBeverageLabelMap@1"}
 {"from":"rs1:13a68d9e5302:file:src/vue/use-beverage-label-map.ts","type":"IMPORTS","to":"rs1:13a68d9e5302:file:src/label-map.ts","symbols":["LabelMap","buildLabelMap"]}
 {"from":"rs1:13a68d9e5302:file:src/vue/use-beverage-label-map.ts","type":"IMPORTS","to":"rs1:13a68d9e5302:file:src/types.ts","symbols":["BeverageClassification"]}
-{"from":"rs1:13a68d9e5302:func:src/format.ts#formatBeverageType@3","type":"CALLS","to":"rs1:13a68d9e5302:func:src/format.ts#formatBeverageLabel@2","call_sites":2,"confidence":1.0,"resolution":"exact"}
+{"from":"rs1:13a68d9e5302:func:src/format.ts#formatBeverageSubtype@3","type":"CALLS","to":"rs1:13a68d9e5302:func:src/format.ts#formatBeverageLabel@2","call_sites":1,"confidence":1.0,"resolution":"exact"}
+{"from":"rs1:13a68d9e5302:func:src/format.ts#formatBeverageType@3","type":"CALLS","to":"rs1:13a68d9e5302:func:src/format.ts#formatBeverageLabel@2","call_sites":1,"confidence":1.0,"resolution":"exact"}
+{"from":"rs1:13a68d9e5302:func:src/format.ts#formatBeverageType@3","type":"CALLS","to":"rs1:13a68d9e5302:func:src/format.ts#formatBeverageSubtype@3","call_sites":1,"confidence":1.0,"resolution":"exact"}
 {"from":"rs1:13a68d9e5302:func:src/react/use-beverage-label-map.ts#useBeverageLabelMap@1","type":"CALLS","to":"rs1:13a68d9e5302:func:src/react/use-beverage-label-map.ts#beverageLabelMapOptions@1","call_sites":1,"confidence":1.0,"resolution":"exact"}
 {"from":"rs1:13a68d9e5302:func:src/vue/use-beverage-label-map.ts#useBeverageLabelMap@1","type":"CALLS","to":"rs1:13a68d9e5302:func:src/vue/use-beverage-label-map.ts#beverageLabelMapOptions@1","call_sites":1,"confidence":1.0,"resolution":"exact"}
