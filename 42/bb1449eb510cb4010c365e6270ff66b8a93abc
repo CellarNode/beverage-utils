@@ -1,0 +1,34 @@
+src/country.ts
+  s_449b7bc7e87457::t_beb6b3d91f4592 16
+  s_449b7bc7e87457::t_31eded456e8ce0 2-3,5,9-10,13,15,18,21,23,31-32,46,75
+  s_449b7bc7e87457::t_896b5f869d8897 6-8,11-12,19-20,25-27,48,51-53,55-62,69,72,79
+src/country-normalizer.ts
+  s_449b7bc7e87457::t_8a0a6d4dc0a7b5 22-48,65
+  s_449b7bc7e87457::t_31eded456e8ce0 1-21,49-64,66-73
+src/index.ts
+  s_449b7bc7e87457::t_31eded456e8ce0 16,21
+  s_449b7bc7e87457::t_91446309f0ff53 17-20
+src/normalize.ts
+  s_449b7bc7e87457::t_31eded456e8ce0 18-21
+__tests__/country.test.ts
+  s_449b7bc7e87457::t_896b5f869d8897 6,10-11,18-24,39-51,65,70,97-98,100-102,106,117-118,138-140,167-170,190-205
+  s_449b7bc7e87457::t_beb6b3d91f4592 3,13
+  s_449b7bc7e87457::t_123ede7515f31e 1-2,15,188-189
+  s_449b7bc7e87457::t_5a1f73e7dc41a4 14,206
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "42bb1449eb510cb4010c365e6270ff66b8a93abc",
+  "prompts": {},
+  "sessions": {
+    "s_449b7bc7e87457": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_036bbf145ffeGjyDfNLArtcJ0J",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "mjnong <marcusnagy@icloud.com>"
+    }
+  }
+}
