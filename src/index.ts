@@ -13,7 +13,12 @@ export {
   formatBeverageType,
   formatEnterpriseTypeLabel,
 } from "./format.js";
-export { normalizeToken, resolveCountryCode, parseVolumeToLiters } from "./normalize.js";
+export {
+  normalizeToken,
+  normalizeCountryToRegistryCode,
+  resolveCountryCode,
+  parseVolumeToLiters,
+} from "./normalize.js";
 
 // CEL-348 — canonical primitives moved here from `@cellarnode/ui/src/lib/*`.
 // React hooks + picker components stay in `@cellarnode/ui` (they depend on
