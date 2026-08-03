@@ -1,0 +1,35 @@
+package.json
+  s_449b7bc7e87457::t_0ef76511038e58 48
+scripts/generate-country-codes.mjs
+  s_449b7bc7e87457::t_0ef76511038e58 1-41
+.reposkein/edges.jsonl
+  s_36c2e3bfa74760::t_d94b4803ec2ab5 2,22,28-29,48,63-66,91-100,106-107,130,138,172-175
+.reposkein/nodes.jsonl
+  s_36c2e3bfa74760::t_aa5e07951f3e89 3,14,23-24,29-31,34,36,57-63,75,91,99-102,111-115
+src/country-codes.generated.ts
+  s_449b7bc7e87457::t_78b56cfae81da0 1-512
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "75b4915094efd5ccbc7f55e686cbbd8bdb29c369",
+  "prompts": {},
+  "sessions": {
+    "s_36c2e3bfa74760": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_04b83dca9ffeXGCo5mA7o2C3u0",
+        "model": "claude-opus-5"
+      },
+      "human_author": "mjnong <marcusnagy@icloud.com>"
+    },
+    "s_449b7bc7e87457": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_036bbf145ffeGjyDfNLArtcJ0J",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "mjnong <marcusnagy@icloud.com>"
+    }
+  }
+}
