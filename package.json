@@ -45,6 +45,7 @@
   ],
   "scripts": {
     "build": "tsc",
+    "generate:country-codes": "node scripts/generate-country-codes.mjs",
     "prepublishOnly": "npm run build",
     "check-exports": "npx publint && npx @arethetypeswrong/cli --pack .",
     "test": "vitest run",
