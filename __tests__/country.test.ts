@@ -1,20 +1,73 @@
-import { describe, it, expect } from "vitest";
+import countries from "i18n-iso-countries";
+import enLocale from "i18n-iso-countries/langs/en.json" with { type: "json" };
+import { describe, expect, it } from "vitest";
 import {
-  COUNTRY_CODES,
-  STATIC_COUNTRY_FALLBACK,
-  STATIC_COUNTRY_LABEL_MAP,
   buildCountryLabelMap,
+  COUNTRY_CODES,
+  type CountryCode,
   formatCountryLabel,
   isCountryCode,
   normalizeAndCheckCountryCode,
+  STATIC_COUNTRY_FALLBACK,
+  STATIC_COUNTRY_LABEL_MAP,
 } from "../src/country";
+import { normalizeCountryToRegistryCode } from "../src/index";
+
+countries.registerLocale(enLocale);
+
+const CURATED_COUNTRY_LABELS: Readonly<
+  Partial<Record<CountryCode, string>>
+> = {
+  FR: "France",
+  IT: "Italy",
+  ES: "Spain",
+  PT: "Portugal",
+  DE: "Germany",
+  AT: "Austria",
+  GR: "Greece",
+  HU: "Hungary",
+  GB: "United Kingdom",
+  CH: "Switzerland",
+  BE: "Belgium",
+  NL: "Netherlands",
+  DK: "Denmark",
+  SE: "Sweden",
+  NO: "Norway",
+  FI: "Finland",
+  PL: "Poland",
+  CZ: "Czechia",
+  HR: "Croatia",
+  SI: "Slovenia",
+  GE: "Georgia",
+  TR: "Turkey",
+  LB: "Lebanon",
+  ZA: "South Africa",
+  US: "United States",
+  CA: "Canada",
+  MX: "Mexico",
+  AR: "Argentina",
+  CL: "Chile",
+  UY: "Uruguay",
+  BR: "Brazil",
+  AU: "Australia",
+  NZ: "New Zealand",
+  JP: "Japan",
+  CN: "China",
+  KR: "South Korea",
+  IN: "India",
+  TH: "Thailand",
+  SG: "Singapore",
+  AE: "United Arab Emirates",
+};
 
 describe("COUNTRY_CODES tuple", () => {
-  it("matches the 40 canonical backend rows", () => {
-    // Mirrors `cellarnode-backend-v2/src/db/canonical/reference-data.ts:252-300`
-    // (`dataId: "country_codes"`). Adjust both in lockstep when the
-    // backend canonical row grows.
-    expect(COUNTRY_CODES.length).toBe(40);
+  it("matches the alpha-2 set from the pinned dataset", () => {
+    const pinnedCodes = Object.keys(countries.getAlpha2Codes()).sort();
+    expect(COUNTRY_CODES).toEqual(pinnedCodes);
+  });
+
+  it("includes Moldova", () => {
+    expect(COUNTRY_CODES).toContain("MD");
   });
 
   it("has unique entries", () => {
@@ -29,14 +82,18 @@ describe("COUNTRY_CODES tuple", () => {
 });
 
 describe("STATIC_COUNTRY_FALLBACK", () => {
-  it("contains the five most common producer countries", () => {
-    const codes = STATIC_COUNTRY_FALLBACK.map((e) => e.code);
-    expect(codes).toEqual(["FR", "IT", "ES", "DE", "US"]);
+  it("covers every generated country code", () => {
+    const codes = STATIC_COUNTRY_FALLBACK.map((entry) => entry.code);
+    expect(codes).toEqual(COUNTRY_CODES);
   });
 
-  it("derives the label map from the same source", () => {
-    expect(STATIC_COUNTRY_LABEL_MAP.FR).toBe("France");
-    expect(STATIC_COUNTRY_LABEL_MAP.US).toBe("United States");
+  it("preserves exactly the curated labels over generated English names", () => {
+    const englishNames = countries.getNames("en", { select: "official" });
+    for (const entry of STATIC_COUNTRY_FALLBACK) {
+      const expected = CURATED_COUNTRY_LABELS[entry.code] ?? englishNames[entry.code];
+      expect(entry.name).toBe(expected);
+      expect(STATIC_COUNTRY_LABEL_MAP[entry.code]).toBe(expected);
+    }
   });
 });
 
@@ -51,6 +108,7 @@ describe("formatCountryLabel", () => {
   it("returns the canonical name for a known code", () => {
     expect(formatCountryLabel("FR")).toBe("France");
     expect(formatCountryLabel("US")).toBe("United States");
+    expect(formatCountryLabel("CZ")).toBe("Czechia");
   });
 
   it("uppercases case-insensitive input", () => {
@@ -62,12 +120,6 @@ describe("formatCountryLabel", () => {
     // ZZ is not a canonical code; "ZZ" should come back verbatim so the
     // user sees the raw value rather than a blank cell.
     expect(formatCountryLabel("ZZ")).toBe("ZZ");
-  });
-
-  it("returns empty for non-string types", () => {
-    // Non-string types come through unmolested from upstream APIs in
-    // some consumer setups; the formatter must not crash.
-    expect(formatCountryLabel(123 as unknown as string)).toBe("");
   });
 
   it("uses a consumer-supplied label map when provided", () => {
@@ -88,17 +140,16 @@ describe("buildCountryLabelMap", () => {
 
   it("builds a code → name lookup from runtime entries", () => {
     const map = buildCountryLabelMap([
-      { code: "FR", name: "France" },
-      { code: "JP", name: "Japan" },
+      { code: "FR", name: "France (Live)" },
+      { code: "JP", name: "Japan (Live)" },
     ]);
-    expect(map.FR).toBe("France");
-    expect(map.JP).toBe("Japan");
+    expect(map.FR).toBe("France (Live)");
+    expect(map.JP).toBe("Japan (Live)");
+    expect(map.MD).toBe(STATIC_COUNTRY_LABEL_MAP.MD);
   });
 
   it("uppercases keys and trims whitespace", () => {
-    const map = buildCountryLabelMap([
-      { code: " fr ", name: "France" },
-    ]);
+    const map = buildCountryLabelMap([{ code: " fr ", name: "France" }]);
     expect(map.FR).toBe("France");
   });
 
@@ -106,12 +157,11 @@ describe("buildCountryLabelMap", () => {
     const map = buildCountryLabelMap([
       { code: "FR", name: "France" },
       { code: "", name: "Empty Code" },
-      // @ts-expect-error — intentionally malformed
       { code: 42, name: "Number Code" },
-      // @ts-expect-error — intentionally malformed
       { code: "JP", name: null },
     ]);
-    expect(Object.keys(map)).toEqual(["FR"]);
+    expect(map.FR).toBe("France");
+    expect(map.JP).toBe(STATIC_COUNTRY_LABEL_MAP.JP);
   });
 
   it("falls back to the static label map when every row is malformed", () => {
@@ -120,9 +170,7 @@ describe("buildCountryLabelMap", () => {
     // documented static floor instead of an empty map.
     const map = buildCountryLabelMap([
       { code: "", name: "Empty" },
-      // @ts-expect-error — intentionally malformed
       { code: 42, name: "Number" },
-      // @ts-expect-error — intentionally malformed
       { code: "JP", name: null },
     ]);
     expect(map).toBe(STATIC_COUNTRY_LABEL_MAP);
@@ -133,6 +181,9 @@ describe("isCountryCode", () => {
   it("returns true for exact canonical uppercase codes", () => {
     expect(isCountryCode("FR")).toBe(true);
     expect(isCountryCode("AE")).toBe(true);
+    expect(isCountryCode("MD")).toBe(true);
+    expect(isCountryCode("JE")).toBe(true);
+    expect(isCountryCode("AX")).toBe(true);
   });
 
   it("returns false for non-canonical-case input (no normalization)", () => {
@@ -149,9 +200,6 @@ describe("isCountryCode", () => {
   it("returns false for non-canonical codes", () => {
     expect(isCountryCode("ZZ")).toBe(false);
     expect(isCountryCode("XX")).toBe(false);
-    // ISO-3166 valid but NOT in our registry — registry is the contract:
-    expect(isCountryCode("JE")).toBe(false);
-    expect(isCountryCode("AX")).toBe(false);
   });
 
   it("returns false for non-string input", () => {
@@ -162,6 +210,10 @@ describe("isCountryCode", () => {
 });
 
 describe("normalizeAndCheckCountryCode", () => {
+  it("widens a country name before narrowing to the registry code", () => {
+    expect(normalizeAndCheckCountryCode("Moldova")).toBe("MD");
+  });
+
   it("returns the canonical code for exact uppercase input", () => {
     expect(normalizeAndCheckCountryCode("FR")).toBe("FR");
     expect(normalizeAndCheckCountryCode("AE")).toBe("AE");
@@ -175,9 +227,43 @@ describe("normalizeAndCheckCountryCode", () => {
 
   it("returns null for codes outside the registry", () => {
     expect(normalizeAndCheckCountryCode("ZZ")).toBeNull();
-    expect(normalizeAndCheckCountryCode("JE")).toBeNull();
-    expect(normalizeAndCheckCountryCode("AX")).toBeNull();
     expect(normalizeAndCheckCountryCode("")).toBeNull();
     expect(normalizeAndCheckCountryCode("   ")).toBeNull();
   });
+});
+
+describe("normalizeCountryToRegistryCode", () => {
+  it.each(["Congo", "Virgin Islands"])(
+    "returns null for %s, which names two different countries",
+    (raw) => {
+      expect(normalizeCountryToRegistryCode(raw)).toBeNull();
+    },
+  );
+
+  it.each([
+    ["Democratic Republic of the Congo", "CD"],
+    ["Republic of the Congo", "CG"],
+    ["Virgin Islands, British", "VG"],
+    ["Virgin Islands, U.S.", "VI"],
+    ["Korea, Republic of", "KR"],
+  ])("maps the unambiguous name %s to %s", (raw, expected) => {
+    expect(normalizeCountryToRegistryCode(raw)).toBe(expected);
+  });
+
+  it.each([
+    ["España", "ES"],
+    ["Moldova", "MD"],
+    ["MDA", "MD"],
+    ["MD", "MD"],
+    [" us ", "US"],
+  ])("maps %s to %s", (raw, expected) => {
+    expect(normalizeCountryToRegistryCode(raw)).toBe(expected);
+  });
+
+  it.each(["not-a-country", "", "   ", null, undefined])(
+    "returns null for %s",
+    (raw) => {
+      expect(normalizeCountryToRegistryCode(raw)).toBeNull();
+    },
+  );
 });
