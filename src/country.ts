@@ -5,7 +5,7 @@
 import {
   COUNTRY_CODES,
   type CountryCode,
-  STATIC_COUNTRY_LABEL_MAP,
+  STATIC_COUNTRY_LABEL_MAP as GENERATED_COUNTRY_LABEL_MAP,
 } from "./country-codes.generated.js";
 import {
   isCountryCode,
@@ -13,7 +13,58 @@ import {
 } from "./country-normalizer.js";
 
 export type { CountryCode };
-export { COUNTRY_CODES, isCountryCode, STATIC_COUNTRY_LABEL_MAP };
+export { COUNTRY_CODES, isCountryCode };
+
+const CURATED_COUNTRY_LABEL_OVERRIDES: Readonly<
+  Partial<Record<CountryCode, string>>
+> = Object.freeze({
+  FR: "France",
+  IT: "Italy",
+  ES: "Spain",
+  PT: "Portugal",
+  DE: "Germany",
+  AT: "Austria",
+  GR: "Greece",
+  HU: "Hungary",
+  GB: "United Kingdom",
+  CH: "Switzerland",
+  BE: "Belgium",
+  NL: "Netherlands",
+  DK: "Denmark",
+  SE: "Sweden",
+  NO: "Norway",
+  FI: "Finland",
+  PL: "Poland",
+  CZ: "Czechia",
+  HR: "Croatia",
+  SI: "Slovenia",
+  GE: "Georgia",
+  TR: "Turkey",
+  LB: "Lebanon",
+  ZA: "South Africa",
+  US: "United States",
+  CA: "Canada",
+  MX: "Mexico",
+  AR: "Argentina",
+  CL: "Chile",
+  UY: "Uruguay",
+  BR: "Brazil",
+  AU: "Australia",
+  NZ: "New Zealand",
+  JP: "Japan",
+  CN: "China",
+  KR: "South Korea",
+  IN: "India",
+  TH: "Thailand",
+  SG: "Singapore",
+  AE: "United Arab Emirates",
+});
+
+export const STATIC_COUNTRY_LABEL_MAP: Readonly<Record<string, string>> =
+  Object.freeze({
+    ...GENERATED_COUNTRY_LABEL_MAP,
+    ...CURATED_COUNTRY_LABEL_OVERRIDES,
+  });
 
 export interface CountryRegistryEntry {
   readonly code: CountryCode;

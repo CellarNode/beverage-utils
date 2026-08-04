@@ -4,6 +4,7 @@ import { describe, expect, it } from "vitest";
 import {
   buildCountryLabelMap,
   COUNTRY_CODES,
+  type CountryCode,
   formatCountryLabel,
   isCountryCode,
   normalizeAndCheckCountryCode,
@@ -13,6 +14,51 @@ import {
 import { normalizeCountryToRegistryCode } from "../src/index";
 
 countries.registerLocale(enLocale);
+
+const CURATED_COUNTRY_LABELS: Readonly<
+  Partial<Record<CountryCode, string>>
+> = {
+  FR: "France",
+  IT: "Italy",
+  ES: "Spain",
+  PT: "Portugal",
+  DE: "Germany",
+  AT: "Austria",
+  GR: "Greece",
+  HU: "Hungary",
+  GB: "United Kingdom",
+  CH: "Switzerland",
+  BE: "Belgium",
+  NL: "Netherlands",
+  DK: "Denmark",
+  SE: "Sweden",
+  NO: "Norway",
+  FI: "Finland",
+  PL: "Poland",
+  CZ: "Czechia",
+  HR: "Croatia",
+  SI: "Slovenia",
+  GE: "Georgia",
+  TR: "Turkey",
+  LB: "Lebanon",
+  ZA: "South Africa",
+  US: "United States",
+  CA: "Canada",
+  MX: "Mexico",
+  AR: "Argentina",
+  CL: "Chile",
+  UY: "Uruguay",
+  BR: "Brazil",
+  AU: "Australia",
+  NZ: "New Zealand",
+  JP: "Japan",
+  CN: "China",
+  KR: "South Korea",
+  IN: "India",
+  TH: "Thailand",
+  SG: "Singapore",
+  AE: "United Arab Emirates",
+};
 
 describe("COUNTRY_CODES tuple", () => {
   it("matches the alpha-2 set from the pinned dataset", () => {
@@ -41,13 +87,12 @@ describe("STATIC_COUNTRY_FALLBACK", () => {
     expect(codes).toEqual(COUNTRY_CODES);
   });
 
-  it("uses the pinned dataset's real English names", () => {
+  it("preserves exactly the curated labels over generated English names", () => {
     const englishNames = countries.getNames("en", { select: "official" });
     for (const entry of STATIC_COUNTRY_FALLBACK) {
-      expect(entry.name).toBe(englishNames[entry.code]);
-      expect(STATIC_COUNTRY_LABEL_MAP[entry.code]).toBe(
-        englishNames[entry.code],
-      );
+      const expected = CURATED_COUNTRY_LABELS[entry.code] ?? englishNames[entry.code];
+      expect(entry.name).toBe(expected);
+      expect(STATIC_COUNTRY_LABEL_MAP[entry.code]).toBe(expected);
     }
   });
 });
@@ -62,12 +107,13 @@ describe("formatCountryLabel", () => {
 
   it("returns the canonical name for a known code", () => {
     expect(formatCountryLabel("FR")).toBe("France");
-    expect(formatCountryLabel("US")).toBe("United States of America");
+    expect(formatCountryLabel("US")).toBe("United States");
+    expect(formatCountryLabel("CZ")).toBe("Czechia");
   });
 
   it("uppercases case-insensitive input", () => {
     expect(formatCountryLabel("fr")).toBe("France");
-    expect(formatCountryLabel("us ")).toBe("United States of America");
+    expect(formatCountryLabel("us ")).toBe("United States");
   });
 
   it("echoes the input back for an unknown code", () => {
@@ -187,6 +233,23 @@ describe("normalizeAndCheckCountryCode", () => {
 });
 
 describe("normalizeCountryToRegistryCode", () => {
+  it.each(["Congo", "Virgin Islands"])(
+    "returns null for %s, which names two different countries",
+    (raw) => {
+      expect(normalizeCountryToRegistryCode(raw)).toBeNull();
+    },
+  );
+
+  it.each([
+    ["Democratic Republic of the Congo", "CD"],
+    ["Republic of the Congo", "CG"],
+    ["Virgin Islands, British", "VG"],
+    ["Virgin Islands, U.S.", "VI"],
+    ["Korea, Republic of", "KR"],
+  ])("maps the unambiguous name %s to %s", (raw, expected) => {
+    expect(normalizeCountryToRegistryCode(raw)).toBe(expected);
+  });
+
   it.each([
     ["España", "ES"],
     ["Moldova", "MD"],

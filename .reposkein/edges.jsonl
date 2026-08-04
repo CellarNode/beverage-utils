@@ -44,7 +44,8 @@
 {"from":"rs1:13a68d9e5302:dir:src/vue","type":"CONTAINS","to":"rs1:13a68d9e5302:file:src/vue/use-beverage-label-map.ts"}
 {"from":"rs1:13a68d9e5302:file:__tests__/access-models.test.ts","type":"IMPORTS","to":"rs1:13a68d9e5302:file:src/access-models.ts","symbols":["ACCESS_MODELS","STATIC_ACCESS_MODEL_FALLBACK","STATIC_ACCESS_MODEL_LABEL_MAP","STATIC_ACCESS_MODEL_REGISTRY","buildAccessModelLabelMap","formatAccessModelLabel","getAccessModelEntry","isAccessModel","normalizeAndCheckAccessModel"]}
 {"from":"rs1:13a68d9e5302:file:__tests__/closure.test.ts","type":"IMPORTS","to":"rs1:13a68d9e5302:file:src/closure.ts","symbols":["CLOSURE_OPTIONS","STATIC_CLOSURE_FALLBACK","STATIC_CLOSURE_LABEL_MAP","STATIC_CLOSURE_REGISTRY","buildClosureLabelMap","formatClosureLabel","isClosure","normalizeAndCheckClosure"]}
-{"from":"rs1:13a68d9e5302:file:__tests__/country.test.ts","type":"IMPORTS","to":"rs1:13a68d9e5302:file:src/country.ts","symbols":["COUNTRY_CODES","STATIC_COUNTRY_FALLBACK","STATIC_COUNTRY_LABEL_MAP","buildCountryLabelMap","formatCountryLabel","isCountryCode","normalizeAndCheckCountryCode"]}
+{"from":"rs1:13a68d9e5302:file:__tests__/country.test.ts","type":"DEFINES","to":"rs1:13a68d9e5302:var:__tests__/country.test.ts#CURATED_COUNTRY_LABELS"}
+{"from":"rs1:13a68d9e5302:file:__tests__/country.test.ts","type":"IMPORTS","to":"rs1:13a68d9e5302:file:src/country.ts","symbols":["COUNTRY_CODES","CountryCode","STATIC_COUNTRY_FALLBACK","STATIC_COUNTRY_LABEL_MAP","buildCountryLabelMap","formatCountryLabel","isCountryCode","normalizeAndCheckCountryCode"]}
 {"from":"rs1:13a68d9e5302:file:__tests__/country.test.ts","type":"IMPORTS","to":"rs1:13a68d9e5302:file:src/index.ts","symbols":["normalizeCountryToRegistryCode"]}
 {"from":"rs1:13a68d9e5302:file:__tests__/currency.test.ts","type":"IMPORTS","to":"rs1:13a68d9e5302:file:src/currency.ts","symbols":["ACTIVE_CURRENCIES","STATIC_CURRENCY_FALLBACK","STATIC_CURRENCY_LABEL_MAP","STATIC_CURRENCY_REGISTRY","buildCurrencyLabelMap","formatCurrencyLabel","isCurrency","normalizeAndCheckCurrency"]}
 {"from":"rs1:13a68d9e5302:file:__tests__/format.test.ts","type":"IMPORTS","to":"rs1:13a68d9e5302:file:src/format.ts","symbols":["buildEnterpriseTypeLabelMap","formatBeverageLabel","formatBeverageSubtype","formatBeverageType","formatEnterpriseTypeLabel"]}
@@ -90,6 +91,8 @@
 {"from":"rs1:13a68d9e5302:file:src/closure.ts","type":"DEFINES","to":"rs1:13a68d9e5302:var:src/closure.ts#STATIC_CLOSURE_REGISTRY"}
 {"from":"rs1:13a68d9e5302:file:src/country-codes.generated.ts","type":"DEFINES","to":"rs1:13a68d9e5302:var:src/country-codes.generated.ts#COUNTRY_CODES"}
 {"from":"rs1:13a68d9e5302:file:src/country-codes.generated.ts","type":"DEFINES","to":"rs1:13a68d9e5302:var:src/country-codes.generated.ts#STATIC_COUNTRY_LABEL_MAP"}
+{"from":"rs1:13a68d9e5302:file:src/country-normalizer.ts","type":"DEFINES","to":"rs1:13a68d9e5302:func:src/country-normalizer.ts#addCountryNameAlias@2"}
+{"from":"rs1:13a68d9e5302:file:src/country-normalizer.ts","type":"DEFINES","to":"rs1:13a68d9e5302:func:src/country-normalizer.ts#addCountryNameAndCommaAlias@2"}
 {"from":"rs1:13a68d9e5302:file:src/country-normalizer.ts","type":"DEFINES","to":"rs1:13a68d9e5302:func:src/country-normalizer.ts#countryNameKey@1"}
 {"from":"rs1:13a68d9e5302:file:src/country-normalizer.ts","type":"DEFINES","to":"rs1:13a68d9e5302:func:src/country-normalizer.ts#isCountryCode@1"}
 {"from":"rs1:13a68d9e5302:file:src/country-normalizer.ts","type":"DEFINES","to":"rs1:13a68d9e5302:func:src/country-normalizer.ts#normalizeCountryToRegistryCode@1"}
@@ -102,8 +105,10 @@
 {"from":"rs1:13a68d9e5302:file:src/country.ts","type":"DEFINES","to":"rs1:13a68d9e5302:func:src/country.ts#formatCountryLabel@2"}
 {"from":"rs1:13a68d9e5302:file:src/country.ts","type":"DEFINES","to":"rs1:13a68d9e5302:func:src/country.ts#normalizeAndCheckCountryCode@1"}
 {"from":"rs1:13a68d9e5302:file:src/country.ts","type":"DEFINES","to":"rs1:13a68d9e5302:iface:src/country.ts#CountryRegistryEntry"}
+{"from":"rs1:13a68d9e5302:file:src/country.ts","type":"DEFINES","to":"rs1:13a68d9e5302:var:src/country.ts#CURATED_COUNTRY_LABEL_OVERRIDES"}
 {"from":"rs1:13a68d9e5302:file:src/country.ts","type":"DEFINES","to":"rs1:13a68d9e5302:var:src/country.ts#STATIC_COUNTRY_FALLBACK"}
-{"from":"rs1:13a68d9e5302:file:src/country.ts","type":"IMPORTS","to":"rs1:13a68d9e5302:file:src/country-codes.generated.ts","symbols":["COUNTRY_CODES","CountryCode","STATIC_COUNTRY_LABEL_MAP"]}
+{"from":"rs1:13a68d9e5302:file:src/country.ts","type":"DEFINES","to":"rs1:13a68d9e5302:var:src/country.ts#STATIC_COUNTRY_LABEL_MAP"}
+{"from":"rs1:13a68d9e5302:file:src/country.ts","type":"IMPORTS","to":"rs1:13a68d9e5302:file:src/country-codes.generated.ts","symbols":["COUNTRY_CODES","CountryCode","GENERATED_COUNTRY_LABEL_MAP"]}
 {"from":"rs1:13a68d9e5302:file:src/country.ts","type":"IMPORTS","to":"rs1:13a68d9e5302:file:src/country-normalizer.ts","symbols":["isCountryCode","normalizeCountryToRegistryCode"]}
 {"from":"rs1:13a68d9e5302:file:src/currency.ts","type":"DEFINES","to":"rs1:13a68d9e5302:func:src/currency.ts#buildCurrencyLabelMap@1"}
 {"from":"rs1:13a68d9e5302:file:src/currency.ts","type":"DEFINES","to":"rs1:13a68d9e5302:func:src/currency.ts#formatCurrencyLabel@2"}
@@ -169,6 +174,8 @@
 {"from":"rs1:13a68d9e5302:file:src/vue/use-beverage-label-map.ts","type":"DEFINES","to":"rs1:13a68d9e5302:func:src/vue/use-beverage-label-map.ts#useBeverageLabelMap@1"}
 {"from":"rs1:13a68d9e5302:file:src/vue/use-beverage-label-map.ts","type":"IMPORTS","to":"rs1:13a68d9e5302:file:src/label-map.ts","symbols":["LabelMap","buildLabelMap"]}
 {"from":"rs1:13a68d9e5302:file:src/vue/use-beverage-label-map.ts","type":"IMPORTS","to":"rs1:13a68d9e5302:file:src/types.ts","symbols":["BeverageClassification"]}
+{"from":"rs1:13a68d9e5302:func:src/country-normalizer.ts#addCountryNameAlias@2","type":"CALLS","to":"rs1:13a68d9e5302:func:src/country-normalizer.ts#countryNameKey@1","call_sites":1,"confidence":1.0,"resolution":"exact"}
+{"from":"rs1:13a68d9e5302:func:src/country-normalizer.ts#addCountryNameAndCommaAlias@2","type":"CALLS","to":"rs1:13a68d9e5302:func:src/country-normalizer.ts#addCountryNameAlias@2","call_sites":2,"confidence":1.0,"resolution":"exact"}
 {"from":"rs1:13a68d9e5302:func:src/country-normalizer.ts#normalizeCountryToRegistryCode@1","type":"CALLS","to":"rs1:13a68d9e5302:func:src/country-normalizer.ts#countryNameKey@1","call_sites":1,"confidence":1.0,"resolution":"exact"}
 {"from":"rs1:13a68d9e5302:func:src/country-normalizer.ts#normalizeCountryToRegistryCode@1","type":"CALLS","to":"rs1:13a68d9e5302:func:src/country-normalizer.ts#isCountryCode@1","call_sites":2,"confidence":1.0,"resolution":"exact"}
 {"from":"rs1:13a68d9e5302:func:src/country-normalizer.ts#resolveCountryCode@1","type":"CALLS","to":"rs1:13a68d9e5302:func:src/country-normalizer.ts#normalizeCountryToRegistryCode@1","call_sites":1,"confidence":1.0,"resolution":"exact"}

@@ -28,20 +28,37 @@ function countryNameKey(name: string): string {
     .replace(/\s+/g, " ");
 }
 
-const COUNTRY_CODE_BY_LOCALIZED_NAME = new Map<string, CountryCode>();
+const COUNTRY_CODE_BY_LOCALIZED_NAME = new Map<
+  string,
+  CountryCode | null
+>();
+
+function addCountryNameAlias(name: string, code: CountryCode): void {
+  const key = countryNameKey(name);
+  const existingCode = COUNTRY_CODE_BY_LOCALIZED_NAME.get(key);
+  if (existingCode === undefined) {
+    COUNTRY_CODE_BY_LOCALIZED_NAME.set(key, code);
+    return;
+  }
+  if (existingCode !== code) {
+    COUNTRY_CODE_BY_LOCALIZED_NAME.set(key, null);
+  }
+}
+
+function addCountryNameAndCommaAlias(name: string, code: CountryCode): void {
+  addCountryNameAlias(name, code);
+  const qualifierStart = name.indexOf(",");
+  if (qualifierStart > 0) {
+    addCountryNameAlias(name.slice(0, qualifierStart), code);
+  }
+}
+
 for (const locale of COUNTRY_NAME_LOCALES) {
   const localizedNames = countries.getNames(locale, { select: "all" });
   for (const [code, names] of Object.entries(localizedNames)) {
     if (!isCountryCode(code)) continue;
     for (const name of names) {
-      COUNTRY_CODE_BY_LOCALIZED_NAME.set(countryNameKey(name), code);
-      const qualifierStart = name.indexOf(",");
-      if (qualifierStart > 0) {
-        COUNTRY_CODE_BY_LOCALIZED_NAME.set(
-          countryNameKey(name.slice(0, qualifierStart)),
-          code,
-        );
-      }
+      addCountryNameAndCommaAlias(name, code);
     }
   }
 }
