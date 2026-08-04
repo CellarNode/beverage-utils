@@ -1,5 +1,36 @@
 # Changelog
 
+## 0.9.0 (2026-08-04)
+
+Release the registry-gated country normalizer shipped in #7 (CEL-1196). That PR
+merged without a version bump, so nothing published — this bump is what actually
+releases it.
+
+- **`COUNTRY_CODES` is now the full ISO-3166-1 alpha-2 set (250 codes)**,
+  generated from the pinned `i18n-iso-countries` dependency into
+  `src/country-codes.generated.ts` via `pnpm generate:country-codes`. It was a
+  hand-maintained 40-code tuple, which silently rejected valid origins such as
+  Moldova after the backend widened its `country_codes` row. `CountryCode`
+  widens with it.
+- **New `normalizeCountryToRegistryCode(raw)`** — the single normalization
+  implementation. Widens an alpha-2 code, alpha-3 code, or localized en/es/sv
+  name, then narrows to `CountryCode`. Ambiguous names resolve to `null` rather
+  than guessing: `congo` (CG/CD) and `virgin islands` (VG/VI) collide in the
+  dataset and previously returned whichever entry was inserted last.
+- **`resolveCountryCode` and `normalizeAndCheckCountryCode` are deprecated
+  delegates** over that one implementation. Kept exported for one migration
+  cycle so consumers can move at their own pace.
+- **`STATIC_COUNTRY_FALLBACK` / `STATIC_COUNTRY_LABEL_MAP` cover the full set.**
+  The previous five-entry fallback was itself a silent-shrink mechanism. The 40
+  previously curated display names are preserved verbatim via an override map in
+  hand-written source, so `formatCountryLabel("US")` stays "United States" and
+  `CZ` stays "Czechia"; other codes use their generated ISO name.
+
+Breaking: `CountryCode` grows from 40 to 250 members, so exhaustive
+`Record<CountryCode, X>` maps and switches over the old union no longer compile.
+Minor bump per 0.x convention, but treat it as a coordinated breaking release —
+`@cellarnode/ui` needs the paired change in CellarNode/ui#251.
+
 ## 0.8.0 (2026-07-17)
 
 Add the category-aware subtype-only formatter (CEL-1069).
