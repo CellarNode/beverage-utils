@@ -1,0 +1,35 @@
+package.json
+  s_36c2e3bfa74760::t_010c4c7c4bff6a 3
+CHANGELOG.md
+  s_b51d53d24480e4::t_ff72a5c11cf7ef 3-33
+.reposkein/edges.jsonl
+  s_36c2e3bfa74760::t_4d92847b3e902d 10
+.reposkein/nodes.jsonl
+  s_36c2e3bfa74760::t_8e337ecf7fe8e1 9,22-24
+package-lock.json
+  s_36c2e3bfa74760::t_f37318e52f2b10 3,9
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "abf3f5b921577a917b5f7780ee9f46a78c28ef05",
+  "prompts": {},
+  "sessions": {
+    "s_36c2e3bfa74760": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_04b83dca9ffeXGCo5mA7o2C3u0",
+        "model": "claude-opus-5"
+      },
+      "human_author": "mjnong <marcusnagy@icloud.com>"
+    },
+    "s_b51d53d24480e4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "ses_04b83dca9ffeXGCo5mA7o2C3u0",
+        "model": "unknown"
+      },
+      "human_author": "mjnong <marcusnagy@icloud.com>"
+    }
+  }
+}
