@@ -56,3 +56,20 @@ Subtype IDs like `red` are reused across categories. `red` under Still Wine = "R
 ## Workflow
 
 Build-in-lib-first / publish-then-update discipline is encoded in the `/cellarnode-component-workflow` skill — load it before touching this package from a consumer task.
+
+## Agent skills
+
+### Issue tracker
+
+Linear, workspace `cellarnode`, team **CellarNode** (`CEL`) — Linear MCP first,
+GraphQL `issueCreate` fallback. There are no GitHub issues. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Linear states carry `needs-triage` (`Backlog`) and `wontfix` (`Canceled`); three new labels
+carry `needs-info`, `ready-for-agent`, `ready-for-human`. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context. ADRs are graph-anchored RepoSkein decisions, not `docs/adr/*.md`.
+See `docs/agents/domain.md`.
