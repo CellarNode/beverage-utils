@@ -1,3 +1,5 @@
+import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 import countries from "i18n-iso-countries";
 import enLocale from "i18n-iso-countries/langs/en.json" with { type: "json" };
 import { describe, expect, it } from "vitest";
@@ -59,6 +61,22 @@ const CURATED_COUNTRY_LABELS: Readonly<
   SG: "Singapore",
   AE: "United Arab Emirates",
 };
+
+describe("i18n-iso-countries version pin", () => {
+  it("is pinned to an exact version, not a caret range", () => {
+    // i18n-iso-countries feeds the committed+published codegen output in
+    // src/country-codes.generated.ts. A caret range lets a patch bump
+    // (e.g. an upstream label rename) silently drift that generated file.
+    // See scripts/generate-country-codes.mjs for the full rationale.
+    const packageJsonUrl = new URL("../package.json", import.meta.url);
+    const packageJson = JSON.parse(
+      readFileSync(fileURLToPath(packageJsonUrl), "utf8"),
+    );
+    const pinned = packageJson.dependencies["i18n-iso-countries"];
+    expect(pinned).toBe("7.14.0");
+    expect(pinned).not.toMatch(/^[\^~]/);
+  });
+});
 
 describe("COUNTRY_CODES tuple", () => {
   it("matches the alpha-2 set from the pinned dataset", () => {
