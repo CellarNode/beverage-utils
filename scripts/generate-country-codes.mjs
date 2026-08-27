@@ -1,5 +1,12 @@
 import { writeFile } from "node:fs/promises";
 
+// i18n-iso-countries is pinned to an EXACT version in package.json (no
+// caret) because it is a build-time codegen input, not a runtime dep this
+// package merely re-exports: its `getNames()` output is baked into
+// src/country-codes.generated.ts and committed + published. A patch bump
+// can silently rename a country label (e.g. Turkey -> Türkiye) and drift
+// the generated file without anyone touching this script. Bump the pin
+// deliberately, regenerate, and diff the output before committing.
 import countries from "i18n-iso-countries";
 import enLocale from "i18n-iso-countries/langs/en.json" with { type: "json" };
 
