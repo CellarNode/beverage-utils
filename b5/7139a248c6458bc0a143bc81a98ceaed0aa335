@@ -1,0 +1,19 @@
+.reposkein/.gitattributes
+  s_410727dcf0451b::t_5009c186ed86e4 1-8,15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "b57139a248c6458bc0a143bc81a98ceaed0aa335",
+  "prompts": {},
+  "sessions": {
+    "s_410727dcf0451b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a04c1e-472e-7a22-a911-d27b4c5c2b05",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "mjnong <marcusnagy@icloud.com>"
+    }
+  }
+}
