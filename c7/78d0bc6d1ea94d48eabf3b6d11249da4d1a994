@@ -1,0 +1,38 @@
+scripts/sync-canonical.mjs
+  s_d50ba8486564aa::t_62cf395eedcfc6 135-144
+src/access-models.ts
+  s_d50ba8486564aa::t_509de541f8ac5b 50-57,60-73
+src/classifications.ts
+  s_d50ba8486564aa::t_378c37d761f36c 1-62
+scripts/generate-classifications.mjs
+  s_d50ba8486564aa::t_c8105fc0565f11 1-102
+package.json
+  s_d50ba8486564aa::t_c07f722d323445 50-51,55
+  s_d50ba8486564aa::t_8b6129ff04d2e5 35-36
+src/procurement-channels.ts
+  s_d50ba8486564aa::t_9709fbda280407 72-79,82-106
+src/format.ts
+  s_d50ba8486564aa::t_dc57cdc18f920a 51-58,60-64
+src/canonical/index.ts
+  s_d50ba8486564aa::t_f7570922f4a245 5,7-13,15-25,27-34
+src/index.ts
+  s_d50ba8486564aa::t_f574d48787b064 114-120,124
+src/classifications.generated.ts
+  s_d50ba8486564aa::t_c7d8b94cbd2382 1-265
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "c778d0bc6d1ea94d48eabf3b6d11249da4d1a994",
+  "prompts": {},
+  "sessions": {
+    "s_d50ba8486564aa": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e6d88843-ce36-43aa-af8f-6047e313bcd3",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "mjnong <marcusnagy@icloud.com>"
+    }
+  }
+}
