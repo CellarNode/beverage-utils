@@ -1,0 +1,23 @@
+__tests__/canonical-parity.test.ts
+  s_d50ba8486564aa::t_a9e653b47e90d0 205-245,248-257,265-277,279
+  s_d50ba8486564aa::t_e99386bca959d4 139-141
+  s_d50ba8486564aa::t_4da5109f8ab626 103-108
+  s_d50ba8486564aa::t_9975b797979fe6 44-50
+  s_d50ba8486564aa::t_e54d1ef094e515 16
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "9e8bd49de27a4d020ee9bb58702ad3597d33483c",
+  "prompts": {},
+  "sessions": {
+    "s_d50ba8486564aa": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e6d88843-ce36-43aa-af8f-6047e313bcd3",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "mjnong <marcusnagy@icloud.com>"
+    }
+  }
+}
