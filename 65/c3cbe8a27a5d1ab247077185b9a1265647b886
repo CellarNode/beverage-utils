@@ -1,0 +1,19 @@
+.reposkein/decisions/2026-09-03-vendor-frontend-reference-statics-from-the-backend-s-generat.json
+  s_70417f91115072::t_6696190490b29d 5,9,11-23
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "65c3cbe8a27a5d1ab247077185b9a1265647b886",
+  "prompts": {},
+  "sessions": {
+    "s_70417f91115072": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f1f4e8bb-ce9e-4012-9a3d-73c1e5ce1a51",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "mjnong <marcusnagy@icloud.com>"
+    }
+  }
+}
