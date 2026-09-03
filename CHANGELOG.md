@@ -1,6 +1,40 @@
 # Changelog
 
+## Unreleased
+
+Vendor the backend canonical reference-data JSON with a parity test suite
+(CEL-1604 D13/D27). Backend half is `cellarnode-backend-v2` PR #608, which
+commits a generated `apps/cellarnode/src/db/canonical/reference-data.json`
+with a CI staleness check.
+
+- **New `src/canonical/reference-data.json`** — vendored, verbatim copy of
+  the backend's generated canonical rows (17 rows, schema version 1).
+  Refresh with `pnpm sync-canonical [path-to-backend-json]` (defaults to the
+  sibling `../cellarnode-backend-v2` checkout layout). Provenance recorded
+  in `src/canonical/SYNC.md` on every sync.
+- **This package's first test suite: `__tests__/*.test.ts` (vitest)**,
+  including the new `__tests__/canonical-parity.test.ts` — every shipped
+  static that mirrors a canonical backend row (`ACCESS_MODELS`,
+  `PACKAGING_OPTIONS`, `CLOSURE_OPTIONS`, `ACTIVE_CURRENCIES`,
+  `PROCUREMENT_CHANNELS`, `EnterpriseType`, `COUNTRY_CODES` +
+  `STATIC_COUNTRY_LABEL_MAP`) is deep-equal-checked against the vendored
+  JSON, so drift between this package and the backend fails loudly instead
+  of silently diverging.
+- **`STATIC_ACCESS_MODEL_REGISTRY`, `STATIC_PROCUREMENT_CHANNEL_REGISTRY`,
+  and the enterprise-type label map are now derived** from the vendored
+  JSON at module load instead of being hand-typed a second time; the
+  literal-union tuples (`ACCESS_MODELS`, `PROCUREMENT_CHANNELS`, etc.) stay
+  hand-typed (deriving them would widen their type to `string`) and are
+  pinned by the parity suite instead.
+- **New export: `getCanonicalClassifications()`** — the full canonical
+  beverage category → subtype taxonomy (10 categories), read from the
+  vendored JSON. `@cellarnode/ui`'s opportunity wizard currently hand-copies
+  this taxonomy in `ui/src/opportunities/wizard/classification-options.ts`;
+  it should read from this accessor once it takes this package's next
+  release (follow-up PR, not part of this change).
+
 ## 0.9.0 (2026-08-04)
+
 
 Release the registry-gated country normalizer shipped in #7 (CEL-1196). That PR
 merged without a version bump, so nothing published — this bump is what actually

@@ -1,4 +1,5 @@
 import type { LabelMap } from "./label-map.js";
+import { getCanonicalEnterpriseTypeIds } from "./canonical/index.js";
 
 export function formatBeverageLabel(
   key: string | null | undefined,
@@ -47,12 +48,18 @@ export function formatBeverageSubtype(
  * Canonical lowercase enterprise type IDs that match the
  * `enterprise_types` reference-data rows and the Drizzle
  * `enterpriseType` pgEnum in cellarnode-backend-v2.
+ *
+ * Ids come from the vendored canonical JSON (CEL-1604); the backend row
+ * carries ids only (no display names), so labels are derived with the
+ * same humanize transform {@link formatBeverageLabel} uses for every other
+ * slug in this package — titlecasing `"distributor"` to `"Distributor"`
+ * requires no data the canonical row doesn't already provide.
+ * `__tests__/canonical-parity.test.ts` pins the `EnterpriseType` literal
+ * union (in `./types.ts`) against this same row's id set.
  */
-const ENTERPRISE_TYPE_LABELS: LabelMap = {
-  producer: "Producer",
-  importer: "Importer",
-  distributor: "Distributor",
-};
+const ENTERPRISE_TYPE_LABELS: LabelMap = Object.fromEntries(
+  getCanonicalEnterpriseTypeIds().map((id) => [id, formatBeverageLabel(id)]),
+);
 
 /**
  * Formats a canonical enterprise type ID into its display label.

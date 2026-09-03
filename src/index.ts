@@ -110,3 +110,12 @@ export type {
   ProcurementChannel,
   ProcurementChannelRegistryEntry,
 } from "./procurement-channels.js";
+
+// Canonical reference-data accessor (CEL-1604). The vendored JSON + the
+// rest of the typed accessors in `./canonical/index.ts` are an internal +
+// test-only seam (see `__tests__/canonical-parity.test.ts`); this is the
+// one accessor consumers need — `@cellarnode/ui`'s opportunity wizard
+// currently hand-copies this taxonomy in
+// `ui/src/opportunities/wizard/classification-options.ts` and should read
+// it from here instead once it takes this package's release.
+export { getCanonicalClassifications } from "./canonical/index.js";

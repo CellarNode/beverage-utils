@@ -18,6 +18,8 @@
  * Per CEL-336 acceptance criteria every canonical helper exports BOTH a
  * label formatter AND a typed union literal.
  */
+import { getCanonicalAccessModels } from "./canonical/index.js";
+
 export const ACCESS_MODELS = ["directed", "open"] as const;
 
 /**
@@ -46,22 +48,15 @@ export interface AccessModelRegistryEntry {
  * but consumers rendering before the query resolves (SSR, offline, brand
  * new client with no React-Query cache) get a usable list immediately —
  * the static floor mirrors the canonical 2 rows verbatim.
+ *
+ * Derived from the vendored canonical JSON (CEL-1604) rather than
+ * hand-typed — see `./canonical/index.ts`. `ACCESS_MODELS` above stays
+ * hand-typed (deriving the literal union itself would widen `AccessModel`
+ * to `string`); `__tests__/canonical-parity.test.ts` pins that tuple
+ * against the same vendored row.
  */
 export const STATIC_ACCESS_MODEL_REGISTRY: readonly AccessModelRegistryEntry[] =
-  Object.freeze([
-    Object.freeze({
-      id: "directed",
-      name: "Directed",
-      description:
-        "Offers routed through recommended or designated importer(s)",
-    }),
-    Object.freeze({
-      id: "open",
-      name: "Open",
-      description:
-        "Free competition — any eligible party can compete on price and terms",
-    }),
-  ]);
+  Object.freeze(getCanonicalAccessModels().map((entry) => Object.freeze({ ...entry })));
 
 /**
  * Convenience tuple-typed list of just the canonical ids. Useful for
