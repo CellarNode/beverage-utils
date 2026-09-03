@@ -1,0 +1,24 @@
+.reposkein/decisions/2026-09-03-vendor-frontend-reference-statics-from-the-backend-s-generat.json
+  s_d50ba8486564aa::t_896184c1576d6b 3,5-7,10
+CHANGELOG.md
+  s_d50ba8486564aa::t_d68a868f6daf8f 5-7,10-20,22-25,27-46
+docs/adr/0001-2026-09-03-vendor-frontend-reference-statics-from-the-backend-s-generat.md
+  s_d50ba8486564aa::t_155301c30aa549 1-10,12-14,16-18,20-22
+  s_d50ba8486564aa::t_014c93f3d944ea 11,15,19,23
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "fe836ae6498b7930f87aed7959739d7b6e60439d",
+  "prompts": {},
+  "sessions": {
+    "s_d50ba8486564aa": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e6d88843-ce36-43aa-af8f-6047e313bcd3",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "mjnong <marcusnagy@icloud.com>"
+    }
+  }
+}
