@@ -4,9 +4,9 @@ Vendored copy of `apps/cellarnode/src/db/canonical/reference-data.ts` from `cell
 (CEL-1604 D13/D27). Regenerate with `pnpm sync-canonical`; never hand-edit
 `reference-data.json`.
 
-- **Last synced:** 2026-09-03T10:26:40.597Z
+- **Last synced:** 2026-09-03T10:41:33.261Z
 - **Source path:** `../../../../cellarnode-backend-v2/.claude/worktrees/cel-1604-canonical-json/apps/cellarnode/src/db/canonical/reference-data.json`
-- **Source commit (backend HEAD at sync time):** `a729d15c41a886127051d9c101afd1356267b133`
+- **Source commit (backend HEAD at sync time):** `cf4db5567b2ed43e244182dfc7f10c8ae1e19ff5`
 - **Backend generator:** `apps/cellarnode/src/db/canonical/generate-reference-data-json.ts`
 - **Backend source file:** `apps/cellarnode/src/db/canonical/reference-data.ts`
 - **Schema version:** 1
