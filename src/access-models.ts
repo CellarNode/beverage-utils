@@ -18,8 +18,6 @@
  * Per CEL-336 acceptance criteria every canonical helper exports BOTH a
  * label formatter AND a typed union literal.
  */
-import { getCanonicalAccessModels } from "./canonical/index.js";
-
 export const ACCESS_MODELS = ["directed", "open"] as const;
 
 /**
@@ -49,14 +47,30 @@ export interface AccessModelRegistryEntry {
  * new client with no React-Query cache) get a usable list immediately —
  * the static floor mirrors the canonical 2 rows verbatim.
  *
- * Derived from the vendored canonical JSON (CEL-1604) rather than
- * hand-typed — see `./canonical/index.ts`. `ACCESS_MODELS` above stays
- * hand-typed (deriving the literal union itself would widen `AccessModel`
- * to `string`); `__tests__/canonical-parity.test.ts` pins that tuple
- * against the same vendored row.
+ * Hand-typed literal (CEL-1604 review fixup, P0-1) rather than derived from
+ * the vendored canonical JSON at module load — see `./canonical/index.ts`.
+ * A prior draft derived this via `getCanonicalAccessModels()`, but no
+ * bundler can prove that derivation pure, so it pulled the 157 KB vendored
+ * JSON into every consumer of this module. `__tests__/canonical-parity.test.ts`
+ * pins this literal (and the `ACCESS_MODELS` tuple above, which stays
+ * hand-typed for the same reason — deriving it would also widen
+ * `AccessModel` to `string`) against that same vendored row instead.
  */
 export const STATIC_ACCESS_MODEL_REGISTRY: readonly AccessModelRegistryEntry[] =
-  Object.freeze(getCanonicalAccessModels().map((entry) => Object.freeze({ ...entry })));
+  Object.freeze([
+    Object.freeze({
+      id: "directed",
+      name: "Directed",
+      description:
+        "Offers routed through recommended or designated importer(s)",
+    }),
+    Object.freeze({
+      id: "open",
+      name: "Open",
+      description:
+        "Free competition — any eligible party can compete on price and terms",
+    }),
+  ]);
 
 /**
  * Convenience tuple-typed list of just the canonical ids. Useful for

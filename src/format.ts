@@ -1,5 +1,4 @@
 import type { LabelMap } from "./label-map.js";
-import { getCanonicalEnterpriseTypeIds } from "./canonical/index.js";
 
 export function formatBeverageLabel(
   key: string | null | undefined,
@@ -49,17 +48,20 @@ export function formatBeverageSubtype(
  * `enterprise_types` reference-data rows and the Drizzle
  * `enterpriseType` pgEnum in cellarnode-backend-v2.
  *
- * Ids come from the vendored canonical JSON (CEL-1604); the backend row
- * carries ids only (no display names), so labels are derived with the
- * same humanize transform {@link formatBeverageLabel} uses for every other
- * slug in this package — titlecasing `"distributor"` to `"Distributor"`
- * requires no data the canonical row doesn't already provide.
- * `__tests__/canonical-parity.test.ts` pins the `EnterpriseType` literal
- * union (in `./types.ts`) against this same row's id set.
+ * Hand-typed literal (CEL-1604 review fixup, P0-1) rather than derived from
+ * the vendored canonical JSON at module load — deriving it pulled the 157 KB
+ * `src/canonical/reference-data.json` into every consumer of this module's
+ * exports (`formatEnterpriseTypeLabel`, `buildEnterpriseTypeLabelMap`),
+ * since no bundler can prove the derivation pure and drop the unused JSON.
+ * `__tests__/canonical-parity.test.ts` pins this literal (and the
+ * `EnterpriseType` union in `./types.ts`) against that same vendored row
+ * instead, so drift still fails loudly without paying the runtime cost.
  */
-const ENTERPRISE_TYPE_LABELS: LabelMap = Object.fromEntries(
-  getCanonicalEnterpriseTypeIds().map((id) => [id, formatBeverageLabel(id)]),
-);
+const ENTERPRISE_TYPE_LABELS: LabelMap = {
+  producer: "Producer",
+  importer: "Importer",
+  distributor: "Distributor",
+};
 
 /**
  * Formats a canonical enterprise type ID into its display label.

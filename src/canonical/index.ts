@@ -2,37 +2,40 @@
  * Typed accessor over the vendored backend canonical reference-data JSON
  * (CEL-1604 D13/D27).
  *
- * `reference-data.json` in this directory is a verbatim copy of
+ * `reference-data.json` in this directory is a deterministic copy of
  * `cellarnode-backend-v2`'s generated
- * `apps/cellarnode/src/db/canonical/reference-data.json` (see `SYNC.md` for
- * provenance + `pnpm sync-canonical` to refresh it). It is the single
- * source of truth this package's hand-typed statics are checked against —
- * `__tests__/canonical-parity.test.ts` deep-equals every shipped static
- * against the accessors below so drift between the two fails loudly.
+ * `apps/cellarnode/src/db/canonical/reference-data.json` — sorted by
+ * `dataId` and re-serialized with a stable indent, not a byte-for-byte
+ * copy (see `SYNC.md` for provenance + `pnpm sync-canonical` to refresh
+ * it). It is the single source of truth this package's hand-typed statics
+ * are checked against — `__tests__/canonical-parity.test.ts` deep-equals
+ * every shipped static against the accessors below so drift between the
+ * two fails loudly.
  *
- * Two shapes of static coexist deliberately:
+ * Every public static this package ships stays **hand-typed** (`AccessModel`,
+ * `Packaging`, `Closure`, `Currency`, `ProcurementChannel`, `CountryCode`
+ * literal unions, and the richer `STATIC_ACCESS_MODEL_REGISTRY` /
+ * `STATIC_PROCUREMENT_CHANNEL_REGISTRY` / enterprise-type label map
+ * registries) rather than derived from this runtime JSON import — deriving
+ * pulls the whole vendored JSON into any consumer's bundle, because no
+ * bundler can prove `Object.freeze(getCanonicalX().map(...))` pure and drop
+ * the now-reached JSON module (CEL-1604 review fixup, P0-1). The parity
+ * test pins every hand-typed static against the accessors below instead:
+ * any drift from the vendored row fails a test, with zero runtime cost to
+ * consumers.
  *
- * - **Pinned literal unions** (`AccessModel`, `Packaging`, `Closure`,
- *   `Currency`, `ProcurementChannel`, `CountryCode`) stay hand-typed `as
- *   const` tuples in their own modules — deriving them from this runtime
- *   JSON import would widen their type to `string` and change the public
- *   API. The parity test pins them instead.
- * - **Richer registries without a literal-union public type**
- *   (`STATIC_ACCESS_MODEL_REGISTRY`, `STATIC_PROCUREMENT_CHANNEL_REGISTRY`,
- *   `ENTERPRISE_TYPE_LABELS`) are derived directly from these accessors —
- *   see the call sites in `../access-models.ts`, `../procurement-channels.ts`,
- *   and `../format.ts`.
- *
- * This module is intentionally NOT re-exported from the package root: it's
- * an internal + test-only seam plus the one deliberately public export,
- * {@link getCanonicalClassifications}, which `@cellarnode/ui`'s opportunity
- * wizard needs to stop hand-copying the category/subtype taxonomy (see the
- * PR description for the follow-up ui change).
+ * This module is intentionally **not** re-exported from the package root
+ * and is not imported by any shipped module — it is purely an internal,
+ * test-only seam for `__tests__/canonical-parity.test.ts` and for
+ * `scripts/generate-classifications.mjs` (via the vendored JSON file
+ * directly, not this module). The one accessor `@cellarnode/ui`'s
+ * opportunity wizard needs, `getCanonicalClassifications()`, lives in
+ * `../classifications.ts` instead, backed by a generated literal rather
+ * than this runtime JSON — see that module's doc comment.
  */
 import referenceData from "./reference-data.json" with { type: "json" };
 import type { AccessModel } from "../access-models.js";
 import type { ProcurementChannel } from "../procurement-channels.js";
-import type { BeverageCategory, BeverageClassification } from "../types.js";
 
 /** `$meta.schemaVersion` this package's accessors are written against. */
 export const SUPPORTED_CANONICAL_SCHEMA_VERSION = 1;
@@ -223,51 +226,4 @@ export function getCanonicalOperatingMarkets(): ReadonlyArray<{ code: string; na
   return requireCanonicalRow<OperatingMarketsJson>("operating_markets").jsonData.codes.map(
     (c) => ({ code: c.code, name: c.name }),
   );
-}
-
-interface BeverageClassificationsJson {
-  readonly description: string;
-  readonly version: number;
-  readonly categories: ReadonlyArray<{
-    readonly id: string;
-    readonly name: string;
-    readonly hsHeading?: string;
-    readonly hsSubheadings?: ReadonlyArray<{ readonly code: string; readonly description: string }>;
-    readonly subtypes: ReadonlyArray<{
-      readonly id: string;
-      readonly name: string;
-      readonly oivType?: string;
-    }>;
-  }>;
-}
-
-/**
- * The full canonical beverage category → subtype taxonomy (10 categories,
- * CEL-1604 item 5). `@cellarnode/beverage-utils` deliberately ships no
- * hand-typed static for this — it's normally hydrated at runtime via the
- * framework adapters' TanStack Query options — but `@cellarnode/ui`'s
- * opportunity wizard needs a build-in fallback that can't fetch reference
- * data, and currently hand-copies the taxonomy in
- * `ui/src/opportunities/wizard/classification-options.ts`. This accessor
- * is what that file should read from once it moves to consume this
- * package's release (see the PR description).
- *
- * Drops each category's `hsSubheadings` (not part of {@link BeverageCategory})
- * — this package's public type only carries the top-level `hsHeading`.
- */
-export function getCanonicalClassifications(): BeverageClassification {
-  const { jsonData } = requireCanonicalRow<BeverageClassificationsJson>(
-    "beverage_classifications",
-  );
-  const categories: BeverageCategory[] = jsonData.categories.map((cat) => ({
-    id: cat.id,
-    name: cat.name,
-    hsHeading: cat.hsHeading,
-    subtypes: cat.subtypes.map((sub) => ({
-      id: sub.id,
-      name: sub.name,
-      oivType: sub.oivType,
-    })),
-  }));
-  return { categories };
 }

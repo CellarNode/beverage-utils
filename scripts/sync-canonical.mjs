@@ -132,6 +132,16 @@ vendored here.
 `;
   await writeFile(DEST_SYNC_MD, syncNote, "utf8");
 
+  // Re-derive src/classifications.generated.ts from the freshly-synced JSON
+  // (CEL-1604 review fixup, P0-1) so a sync never leaves the generated
+  // literal stale — `pnpm check-classifications-fresh` (part of `npm test`)
+  // catches it if this step is ever skipped or its output hand-edited.
+  execFileSync(
+    process.execPath,
+    [resolve(PACKAGE_ROOT, "scripts/generate-classifications.mjs")],
+    { stdio: "inherit" },
+  );
+
   console.log(`Synced ${sortedData.length} canonical rows from:\n  ${sourcePath}`);
   console.log(`  -> ${relative(PACKAGE_ROOT, DEST_JSON)}`);
   console.log(`  -> ${relative(PACKAGE_ROOT, DEST_SYNC_MD)}`);

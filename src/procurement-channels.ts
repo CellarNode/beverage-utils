@@ -45,7 +45,6 @@ export type ProcurementChannel = (typeof PROCUREMENT_CHANNELS)[number];
  * pull in two files just to read one row.
  */
 import type { AccessModel } from "./access-models.js";
-import { getCanonicalProcurementChannels } from "./canonical/index.js";
 
 /**
  * One canonical procurement channel entry. `id` is the canonical id (one
@@ -70,14 +69,41 @@ export interface ProcurementChannelRegistryEntry {
  * new client with no React-Query cache) get a usable list immediately —
  * the static floor mirrors the canonical 3 rows verbatim.
  *
- * Derived from the vendored canonical JSON (CEL-1604) rather than
- * hand-typed — see `./canonical/index.ts`. `PROCUREMENT_CHANNELS` above
- * stays hand-typed (deriving the literal union would widen
- * `ProcurementChannel` to `string`); `__tests__/canonical-parity.test.ts`
- * pins that tuple against the same vendored row.
+ * Hand-typed literal (CEL-1604 review fixup, P0-1) rather than derived from
+ * the vendored canonical JSON at module load — see `./canonical/index.ts`.
+ * A prior draft derived this via `getCanonicalProcurementChannels()`, but no
+ * bundler can prove that derivation pure, so it pulled the 157 KB vendored
+ * JSON into every consumer of this module. `__tests__/canonical-parity.test.ts`
+ * pins this literal (and the `PROCUREMENT_CHANNELS` tuple above, which stays
+ * hand-typed for the same reason — deriving it would also widen
+ * `ProcurementChannel` to `string`) against that same vendored row instead.
  */
 export const STATIC_PROCUREMENT_CHANNEL_REGISTRY: readonly ProcurementChannelRegistryEntry[] =
-  Object.freeze(getCanonicalProcurementChannels().map((entry) => Object.freeze({ ...entry })));
+  Object.freeze([
+    Object.freeze({
+      id: "monopoly",
+      name: "State Monopoly",
+      description:
+        "Government-controlled retail (Systembolaget, Vinmonopolet, LCBO, SAQ)",
+      defaultAccessModel: "directed",
+      isMonopoly: true,
+    }),
+    Object.freeze({
+      id: "importer",
+      name: "Importer",
+      description: "Direct importer request for specific beverages",
+      defaultAccessModel: "directed",
+      isMonopoly: false,
+    }),
+    Object.freeze({
+      id: "direct",
+      name: "Direct",
+      description:
+        "Open market request from restaurants, retailers, or other buyers",
+      defaultAccessModel: "open",
+      isMonopoly: false,
+    }),
+  ]);
 
 /**
  * Convenience tuple-typed list of just the canonical ids. Useful for
