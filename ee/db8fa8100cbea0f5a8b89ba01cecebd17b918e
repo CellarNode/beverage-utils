@@ -1,0 +1,31 @@
+scripts/sync-canonical.mjs
+  s_d50ba8486564aa::t_743da46af84ab1 91-113,120-139
+  s_d50ba8486564aa::t_29e4cb2b40aad7 147-152,154,159-179,191
+  s_d50ba8486564aa::t_6b07bee8e6052d 11
+  s_d50ba8486564aa::t_37066411a987db 28
+  s_ea03d0f46ede5e::t_551d6d3333b72e 140
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "eedb8fa8100cbea0f5a8b89ba01cecebd17b918e",
+  "prompts": {},
+  "sessions": {
+    "s_d50ba8486564aa": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e6d88843-ce36-43aa-af8f-6047e313bcd3",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "mjnong <marcusnagy@icloud.com>"
+    },
+    "s_ea03d0f46ede5e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "bcf5f62a-4e19-432f-98c2-6d0e32d835df",
+        "model": "claude-opus-5"
+      },
+      "human_author": "mjnong <marcusnagy@icloud.com>"
+    }
+  }
+}
