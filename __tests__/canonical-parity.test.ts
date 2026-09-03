@@ -12,8 +12,8 @@ import {
   getCanonicalEnterpriseTypeIds,
   getCanonicalCountryCodes,
   getCanonicalOperatingMarkets,
-  getCanonicalClassifications,
 } from "../src/canonical/index";
+import { getCanonicalClassifications } from "../src/classifications";
 import { ACCESS_MODELS, STATIC_ACCESS_MODEL_REGISTRY } from "../src/access-models";
 import {
   PROCUREMENT_CHANNELS,
@@ -41,6 +41,13 @@ import type { EnterpriseType } from "../src/types";
  * `fic_label_schemas`, `price_recommendation_config`, `price_types`,
  * `subtype_aliases`) are out of scope — they belong to the backend / elabel
  * domain, not this package's public surface.
+ *
+ * `getCanonicalClassifications()` (`../src/classifications`) is checked
+ * separately below, against pinned literal expectations rather than the
+ * vendored row directly — it reads a generated snapshot
+ * (`src/classifications.generated.ts`), not this file's `canonical/index`
+ * accessors, so it stays out of every other shipped module's bundle
+ * (CEL-1604 review fixup, P0-1/P0-2).
  */
 
 describe("vendored canonical JSON — $meta", () => {
@@ -93,6 +100,12 @@ describe("access_models parity", () => {
     expect([...ACCESS_MODELS]).toEqual(expectedIds);
   });
 
+  // STATIC_ACCESS_MODEL_REGISTRY (src/access-models.ts) is a hand-typed
+  // literal (CEL-1604 review fixup, P0-1); getCanonicalAccessModels() reads
+  // the vendored JSON independently, so this is a genuine cross-check, not
+  // `expect(f(x)).toEqual(f(x))` — verified by mutating
+  // src/canonical/reference-data.json's access_models row and confirming
+  // this test fails.
   it("STATIC_ACCESS_MODEL_REGISTRY deep-equals the canonical row", () => {
     expect(STATIC_ACCESS_MODEL_REGISTRY).toEqual(getCanonicalAccessModels());
   });
@@ -123,6 +136,9 @@ describe("procurement_channels parity", () => {
   });
 
   it("STATIC_PROCUREMENT_CHANNEL_REGISTRY deep-equals the canonical row (incl. policy metadata)", () => {
+    // STATIC_PROCUREMENT_CHANNEL_REGISTRY (src/procurement-channels.ts) is a
+    // hand-typed literal (CEL-1604 review fixup, P0-1); same independence
+    // rationale as the access_models check above.
     expect(STATIC_PROCUREMENT_CHANNEL_REGISTRY).toEqual(getCanonicalProcurementChannels());
   });
 });
@@ -186,30 +202,58 @@ describe("operating_markets parity", () => {
 });
 
 describe("beverage_classifications — getCanonicalClassifications()", () => {
-  it("returns every canonical category with its subtypes, verbatim", () => {
-    const row = getCanonicalRow<{
-      categories: ReadonlyArray<{
-        id: string;
-        name: string;
-        hsHeading?: string;
-        subtypes: ReadonlyArray<{ id: string; name: string; oivType?: string }>;
-      }>;
-    }>("beverage_classifications");
-    if (!row) throw new Error("beverage_classifications row missing from vendored JSON");
+  // CEL-1604 review fixup, P0-2: the previous version of this suite derived
+  // its "expected" value from the same `beverage_classifications` row and
+  // the same id/name/hsHeading/subtypes projection that
+  // getCanonicalClassifications() itself applies, so it could not fail on
+  // drift — confirmed by mutating `beverage_classifications.categories[0].name`
+  // in `src/canonical/reference-data.json` and seeing 266/266 still pass.
+  // These assertions pin explicit literal expectations instead: the full
+  // category id list (in order), plus exact subtype id lists for two named
+  // categories. Cross-checked against
+  // `ui/src/opportunities/wizard/classification-options.ts` — all 10
+  // categories and every subtype list match today.
+  const EXPECTED_CATEGORY_IDS = [
+    "wine",
+    "sparkling_wine",
+    "fortified_wine",
+    "vermouth",
+    "beer",
+    "spirits",
+    "cider_mixed_drinks",
+    "flavored_wine",
+    "non_alcoholic",
+    "other",
+  ] as const;
 
-    const expected = row.jsonData.categories.map((cat) => ({
-      id: cat.id,
-      name: cat.name,
-      hsHeading: cat.hsHeading,
-      subtypes: cat.subtypes.map((sub) => ({
-        id: sub.id,
-        name: sub.name,
-        oivType: sub.oivType,
-      })),
-    }));
+  const EXPECTED_SUBTYPE_IDS: Record<string, readonly string[]> = {
+    wine: ["red", "white", "rose", "orange", "natural", "dessert"],
+    spirits: [
+      "whisky",
+      "vodka",
+      "gin",
+      "rum",
+      "tequila",
+      "brandy",
+      "liqueur",
+      "grappa",
+    ],
+  };
 
-    expect(getCanonicalClassifications()).toEqual({ categories: expected });
+  it("has exactly the 10 canonical category ids, in order", () => {
+    const { categories } = getCanonicalClassifications();
+    expect(categories.map((c) => c.id)).toEqual([...EXPECTED_CATEGORY_IDS]);
   });
+
+  it.each(Object.entries(EXPECTED_SUBTYPE_IDS))(
+    "%s has exactly its pinned subtype ids, in order",
+    (categoryId, expectedSubtypeIds) => {
+      const { categories } = getCanonicalClassifications();
+      const category = categories.find((c) => c.id === categoryId);
+      expect(category).toBeDefined();
+      expect(category?.subtypes.map((s) => s.id)).toEqual([...expectedSubtypeIds]);
+    },
+  );
 
   it("has exactly 10 categories, each with at least one subtype", () => {
     const { categories } = getCanonicalClassifications();
@@ -218,4 +262,18 @@ describe("beverage_classifications — getCanonicalClassifications()", () => {
       expect(category.subtypes.length).toBeGreaterThan(0);
     }
   });
+
+  it("returns a deeply frozen classification (CEL-1604 review fixup, P2-5)", () => {
+    const classification = getCanonicalClassifications();
+    expect(Object.isFrozen(classification)).toBe(true);
+    expect(Object.isFrozen(classification.categories)).toBe(true);
+    expect(Object.isFrozen(classification.categories[0])).toBe(true);
+    expect(Object.isFrozen(classification.categories[0].subtypes)).toBe(true);
+    expect(() => (classification.categories as unknown[]).push({})).toThrow(TypeError);
+  });
+
+  it("returns the same frozen reference on every call", () => {
+    expect(getCanonicalClassifications()).toBe(getCanonicalClassifications());
+  });
 });
+
