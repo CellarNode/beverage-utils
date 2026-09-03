@@ -8,7 +8,7 @@
  * dump of `reference-data.ts` (the Drizzle-seeded canonical rows) with a
  * `$meta` header (generator, sourceFile, schemaVersion, entryCount) plus a
  * `data` array of `{ dataId, canonicalVersion, jsonData }` rows sorted by
- * `dataId`. This script copies that file verbatim into
+ * `dataId`. This script copies that file deterministically into
  * `src/canonical/reference-data.json`, re-serialized with a stable 2-space
  * indent, and records provenance in `src/canonical/SYNC.md`.
  *
@@ -25,7 +25,7 @@
  *   ../cellarnode-backend-v2/apps/cellarnode/src/db/canonical/reference-data.json
  */
 import { readFile, writeFile } from "node:fs/promises";
-import { resolve, relative, dirname } from "node:path";
+import { resolve, relative, dirname, basename } from "node:path";
 import { fileURLToPath } from "node:url";
 import { execFileSync } from "node:child_process";
 
@@ -88,11 +88,55 @@ async function main() {
     );
   }
 
+  // Validate row shape + dataId uniqueness before vendoring — a malformed
+  // or duplicated row would otherwise silently ship broken input to
+  // src/canonical/index.ts's accessors (CEL-1604 review fixup, P1-4).
+  const seenDataIds = new Set();
+  parsed.data.forEach((row, i) => {
+    if (!row || typeof row !== "object") {
+      throw new Error(`${sourcePath}: data[${i}] is not an object.`);
+    }
+    if (typeof row.dataId !== "string" || row.dataId.length === 0) {
+      throw new Error(`${sourcePath}: data[${i}] is missing a non-empty string "dataId".`);
+    }
+    if (!("jsonData" in row)) {
+      throw new Error(`${sourcePath}: data[${i}] ("${row.dataId}") is missing "jsonData".`);
+    }
+    if (seenDataIds.has(row.dataId)) {
+      throw new Error(
+        `${sourcePath}: duplicate "dataId" "${row.dataId}" at data[${i}] — canonical ` +
+          `rows must have a unique dataId.`,
+      );
+    }
+    seenDataIds.add(row.dataId);
+  });
+
   // Re-serialize with a stable, diff-friendly 2-space indent regardless of
   // how the source file was formatted.
   const sortedData = [...parsed.data].sort((a, b) => a.dataId.localeCompare(b.dataId));
   const normalized = { $meta: parsed.$meta, data: sortedData };
   const output = `${JSON.stringify(normalized, null, 2)}\n`;
+
+  // Only touch the vendored JSON + SYNC.md when the content actually
+  // changed — a no-op sync (nothing changed on the backend since the last
+  // run) should leave `git status` clean instead of dirtying SYNC.md's
+  // timestamp every time someone runs this script (CEL-1604 review
+  // fixup, P1-4).
+  let previousOutput = null;
+  try {
+    previousOutput = await readFile(DEST_JSON, "utf8");
+  } catch {
+    // First sync — no existing vendored file yet.
+  }
+  const jsonChanged = previousOutput !== output;
+
+  if (!jsonChanged) {
+    console.log(
+      `No change in vendored canonical data (already in sync with ${sourcePath}) — ` +
+        `leaving ${relative(PACKAGE_ROOT, DEST_JSON)} and ${relative(PACKAGE_ROOT, DEST_SYNC_MD)} untouched.`,
+    );
+    return;
+  }
 
   await writeFile(DEST_JSON, output, "utf8");
 
@@ -100,14 +144,39 @@ async function main() {
   const dataIds = sortedData.map((row) => `\`${row.dataId}\` (v${row.canonicalVersion})`).join(", ");
 
   // Best-effort provenance: if the source file lives inside a git working
-  // tree, record its HEAD SHA so the PR body / SYNC.md can point at the
-  // exact backend commit this vendored copy came from. Never fails the
-  // sync — a missing/unclean git tree just omits the line.
+  // tree, record the source repo (by origin remote, not the filesystem
+  // path — a per-ticket worktree path like
+  // `.claude/worktrees/cel-1604-canonical-json` gets pruned after merge and
+  // would go stale in a committed SYNC.md) and its HEAD SHA. Never fails
+  // the sync — a missing/unclean git tree just omits these lines
+  // (CEL-1604 review fixup, P1-4).
   let sourceSha = null;
+  let sourceRepoLabel = null;
   try {
     sourceSha = execFileSync("git", ["-C", dirname(sourcePath), "rev-parse", "HEAD"], {
       encoding: "utf8",
     }).trim();
+    try {
+      const originUrl = execFileSync(
+        "git",
+        ["-C", dirname(sourcePath), "remote", "get-url", "origin"],
+        { encoding: "utf8" },
+      ).trim();
+      // "git@github.com:CellarNode/cellarnode-backend-v2.git" or
+      // "https://github.com/CellarNode/cellarnode-backend-v2.git" -> "CellarNode/cellarnode-backend-v2"
+      const match = originUrl.match(/[:/]([^/]+\/[^/]+?)(?:\.git)?$/);
+      sourceRepoLabel = match ? match[1] : originUrl;
+    } catch {
+      // No "origin" remote — fall back to the git toplevel dir name, which
+      // survives a worktree checkout (unlike the ticket-specific worktree
+      // path itself).
+      const toplevel = execFileSync(
+        "git",
+        ["-C", dirname(sourcePath), "rev-parse", "--show-toplevel"],
+        { encoding: "utf8" },
+      ).trim();
+      sourceRepoLabel = basename(toplevel);
+    }
   } catch {
     // Source isn't inside a git repo (or git isn't available) — skip.
   }
@@ -119,8 +188,7 @@ Vendored copy of \`${$meta.sourceFile}\` from \`cellarnode-backend-v2\`
 \`reference-data.json\`.
 
 - **Last synced:** ${syncedAt}
-- **Source path:** \`${relative(PACKAGE_ROOT, sourcePath) || sourcePath}\`
-${sourceSha ? `- **Source commit (backend HEAD at sync time):** \`${sourceSha}\`\n` : ""}- **Backend generator:** \`${$meta.generator}\`
+${sourceRepoLabel ? `- **Source repo:** \`${sourceRepoLabel}\`\n` : ""}${sourceSha ? `- **Source commit:** \`${sourceSha}\`\n` : ""}- **Backend generator:** \`${$meta.generator}\`
 - **Backend source file:** \`${$meta.sourceFile}\`
 - **Schema version:** ${$meta.schemaVersion}
 - **Entry count:** ${$meta.entryCount}
