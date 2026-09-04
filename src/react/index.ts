@@ -1,4 +1,3 @@
-export { beverageLabelMapOptions, useBeverageLabelMap } from "./use-beverage-label-map.js";
 export type {
   ReferenceDataRow,
   ReferenceDataTransport,
