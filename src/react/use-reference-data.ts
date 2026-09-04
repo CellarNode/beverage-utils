@@ -51,8 +51,11 @@ export interface ReferenceDataRow<T> {
   paths: { admin: string; public: string };
   /**
    * Parses + validates the raw JSON response into `T`. Return `null` for
-   * any shape the row doesn't recognise so the hook falls back to
-   * `fallback` instead of surfacing malformed data to consumers.
+   * any shape the row doesn't recognise — the query function then throws
+   * the same way a non-2xx response does (CEL-1607 review fixup), so
+   * TanStack Query retries and `isError` becomes `true` instead of caching
+   * a malformed payload as a "successful" result for `staleTime`.
+   * `fallback` still renders meanwhile via `query.data ?? row.fallback`.
    */
   parse: (json: unknown) => T | null;
   /** Static fallback rendered while loading, on error, or on malformed data. */
@@ -118,7 +121,12 @@ export function referenceDataOptions<T>(row: ReferenceDataRow<T>, options: UseRe
       }
       const json: unknown = await res.json();
       const parsed = row.parse(json);
-      return parsed ?? row.fallback;
+      if (parsed === null) {
+        throw new Error(
+          `@cellarnode/beverage-utils: GET ${path} for reference-data row "${row.dataId}" returned a body row.parse could not recognise`,
+        );
+      }
+      return parsed;
     },
     staleTime: staleTimeMs,
   });

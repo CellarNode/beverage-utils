@@ -115,7 +115,7 @@ describe("useReferenceData — transport error falls back to statics", () => {
     expect(result.current.data).toEqual(FALLBACK);
   });
 
-  it("falls back on a malformed (unparseable) body", async () => {
+  it("throws + falls back to statics on a malformed (unparseable) body, same as a non-2xx (CEL-1607 review fixup)", async () => {
     const fetchFn = vi.fn(async () => new Response(JSON.stringify({ nope: true }), { status: 200 }));
 
     const { result } = renderHook(
@@ -123,11 +123,12 @@ describe("useReferenceData — transport error falls back to statics", () => {
       { wrapper: wrapper() },
     );
 
-    await waitFor(() => expect(result.current.isLoading).toBe(false));
-    // Malformed data resolves the query successfully (no isError) but the
-    // hook substitutes the fallback rather than surfacing `row.parse`'s null.
+    // A 200 whose body row.parse can't recognise is treated the same as a
+    // transport failure: the query throws, isError becomes true (so a
+    // consumer can tell live data from a garbage payload), and the result
+    // is NOT cached as a success for staleTime.
+    await waitFor(() => expect(result.current.isError).toBe(true));
     expect(result.current.data).toEqual(FALLBACK);
-    expect(result.current.isError).toBe(false);
   });
 });
 
