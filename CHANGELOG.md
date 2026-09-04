@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.10.0 — 2026-09-04
 
 One parameterised `useReferenceData(row, { transport })` hook (CEL-1607,
 spec `docs/specs/2026-09-02-matching-canonical-deepening.md` §2 card 09
