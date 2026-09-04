@@ -1,0 +1,49 @@
+.reposkein/decisions/2026-09-04-one-parameterised-reference-data-hook-serves-every-dashboard.json
+  s_580509112886dd::t_7bd41609594bc4 1-18
+src/react/index.ts
+  s_580509112886dd::t_8e12592d4fb76b 2-13
+vitest.config.ts
+  s_580509112886dd::t_6fec32f6b5c589 5-8
+  s_580509112886dd::t_4468ff4ac66282 9
+package.json
+  s_580509112886dd::t_5a7794727eff1b 95
+  s_580509112886dd::t_74481c017cf876 96-97
+  s_580509112886dd::t_182dee7525d47c 98-99
+src/index.ts
+  s_580509112886dd::t_7c51205d25a1b3 124-140
+__tests__/react/use-reference-data.test.tsx
+  s_580509112886dd::t_d7436d844784f2 2-185
+  s_580509112886dd::t_cf42b69c23d1f9 1
+src/react/classification-reference-row.ts
+  s_580509112886dd::t_41301e25609fa9 1-86
+src/classifications.ts
+  s_580509112886dd::t_d30795d5e20a48 63-205
+  s_580509112886dd::t_20ecbc7d342b82 25
+__tests__/classifications.test.ts
+  s_580509112886dd::t_bd7b5da2948377 1-137
+__tests__/react/classification-reference-row.test.ts
+  s_580509112886dd::t_31f7e9a6609c01 1-53
+src/react/use-reference-data.ts
+  s_580509112886dd::t_11282ec636fa0b 1-159
+CHANGELOG.md
+  s_580509112886dd::t_69c57f0a477073 5-47,49-51
+  s_580509112886dd::t_f9de92890a293e 48
+package-lock.json
+  s_580509112886dd::t_e5911f46683819 19-23,77-112,124-126,149-158,173-287,1191-1245,1516-1558,1569-1575,1586-1599,1627-1660,1668-1681,1700-1706,1717-1736,1743-1764,1778-1797,1805-1833,1914-1930,1946-1950,1952-1953,1956-2122,2130-2170,2178-2194,2205-2237,2264-2296,2363-2387,2389-2391,2398-2417,2470-2503,2548-2554,2616-2661,2903-2963,2980-3018
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "4934fc499af0d7cd7f142d223d31a0e707b732b1",
+  "prompts": {},
+  "sessions": {
+    "s_580509112886dd": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0d3d13e5-c8b6-490e-a843-17650d7e29f5",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "mjnong <marcusnagy@icloud.com>"
+    }
+  }
+}
