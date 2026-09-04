@@ -1,0 +1,25 @@
+src/aroma-descriptors.ts
+  s_5738fadd419110::t_01016677995291 85
+  s_5738fadd419110::t_ae028d04ce3a12 71
+__tests__/aroma-descriptors.test.ts
+  s_5738fadd419110::t_0a4d08f5af81e5 55-66
+  s_5738fadd419110::t_e77ea6b42b2f03 92-104
+scripts/sync-canonical.mjs
+  s_5738fadd419110::t_f563503f7e23b8 133-147,149-172,174,177,194-200,202-210,222-228
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "f0bd5c89ffd6251c9b1cf2b210b4b04f9c600753",
+  "prompts": {},
+  "sessions": {
+    "s_5738fadd419110": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7a0aa8ce-8e85-4de2-b7f5-62249178d1c3",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "mjnong <marcusnagy@icloud.com>"
+    }
+  }
+}
