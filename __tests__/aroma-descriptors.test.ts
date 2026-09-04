@@ -52,6 +52,18 @@ describe("getAromaDescriptorFamily", () => {
     expect(getAromaDescriptorFamily("non_alcoholic")).toBeNull();
     expect(getAromaDescriptorFamily("not-a-real-family")).toBeNull();
   });
+
+  it("returns null for inherited Object.prototype keys instead of resolving them", () => {
+    // A bare index lookup on a plain object resolves inherited keys
+    // (toString, constructor, valueOf, __proto__) to prototype values
+    // instead of falling through to the not-found branch. A caller
+    // passing a category id straight from an API response must not
+    // trip this — CEL-1618 CodeRabbit finding 1.
+    expect(getAromaDescriptorFamily("toString")).toBeNull();
+    expect(getAromaDescriptorFamily("constructor")).toBeNull();
+    expect(getAromaDescriptorFamily("valueOf")).toBeNull();
+    expect(getAromaDescriptorFamily("__proto__")).toBeNull();
+  });
 });
 
 describe("getAromaDescriptorLabel", () => {
@@ -76,5 +88,18 @@ describe("getAromaDescriptorLabel", () => {
   it("round-trips a custom value exactly, including case and whitespace", () => {
     const custom = "  Grandma's Cellar Note  ";
     expect(getAromaDescriptorLabel("wine", custom)).toBe(custom);
+  });
+
+  it("is lenient — never throws for inherited Object.prototype keys as familyId", () => {
+    // Same inherited-key hazard as getAromaDescriptorFamily, but here the
+    // bug was a hard throw ("Cannot read properties of undefined (reading
+    // 'find')") because Object.prototype.toString etc. don't have a
+    // `.terms` array — a direct violation of this function's documented
+    // "lenient by design, never throws" contract. CEL-1618 CodeRabbit
+    // finding 1.
+    expect(getAromaDescriptorLabel("toString", "x")).toBe("x");
+    expect(getAromaDescriptorLabel("constructor", "x")).toBe("x");
+    expect(getAromaDescriptorLabel("valueOf", "x")).toBe("x");
+    expect(getAromaDescriptorLabel("__proto__", "x")).toBe("x");
   });
 });

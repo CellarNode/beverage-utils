@@ -130,58 +130,51 @@ async function main() {
   }
   const jsonChanged = previousOutput !== output;
 
-  if (!jsonChanged) {
-    console.log(
-      `No change in vendored canonical data (already in sync with ${sourcePath}) — ` +
-        `leaving ${relative(PACKAGE_ROOT, DEST_JSON)} and ${relative(PACKAGE_ROOT, DEST_SYNC_MD)} untouched.`,
-    );
-    return;
-  }
+  if (jsonChanged) {
+    await writeFile(DEST_JSON, output, "utf8");
 
-  await writeFile(DEST_JSON, output, "utf8");
+    const syncedAt = new Date().toISOString();
+    const dataIds = sortedData.map((row) => `\`${row.dataId}\` (v${row.canonicalVersion})`).join(", ");
 
-  const syncedAt = new Date().toISOString();
-  const dataIds = sortedData.map((row) => `\`${row.dataId}\` (v${row.canonicalVersion})`).join(", ");
-
-  // Best-effort provenance: if the source file lives inside a git working
-  // tree, record the source repo (by origin remote, not the filesystem
-  // path — a per-ticket worktree path like
-  // `.claude/worktrees/cel-1604-canonical-json` gets pruned after merge and
-  // would go stale in a committed SYNC.md) and its HEAD SHA. Never fails
-  // the sync — a missing/unclean git tree just omits these lines
-  // (CEL-1604 review fixup, P1-4).
-  let sourceSha = null;
-  let sourceRepoLabel = null;
-  try {
-    sourceSha = execFileSync("git", ["-C", dirname(sourcePath), "rev-parse", "HEAD"], {
-      encoding: "utf8",
-    }).trim();
+    // Best-effort provenance: if the source file lives inside a git working
+    // tree, record the source repo (by origin remote, not the filesystem
+    // path — a per-ticket worktree path like
+    // `.claude/worktrees/cel-1604-canonical-json` gets pruned after merge and
+    // would go stale in a committed SYNC.md) and its HEAD SHA. Never fails
+    // the sync — a missing/unclean git tree just omits these lines
+    // (CEL-1604 review fixup, P1-4).
+    let sourceSha = null;
+    let sourceRepoLabel = null;
     try {
-      const originUrl = execFileSync(
-        "git",
-        ["-C", dirname(sourcePath), "remote", "get-url", "origin"],
-        { encoding: "utf8" },
-      ).trim();
-      // "git@github.com:CellarNode/cellarnode-backend-v2.git" or
-      // "https://github.com/CellarNode/cellarnode-backend-v2.git" -> "CellarNode/cellarnode-backend-v2"
-      const match = originUrl.match(/[:/]([^/]+\/[^/]+?)(?:\.git)?$/);
-      sourceRepoLabel = match ? match[1] : originUrl;
+      sourceSha = execFileSync("git", ["-C", dirname(sourcePath), "rev-parse", "HEAD"], {
+        encoding: "utf8",
+      }).trim();
+      try {
+        const originUrl = execFileSync(
+          "git",
+          ["-C", dirname(sourcePath), "remote", "get-url", "origin"],
+          { encoding: "utf8" },
+        ).trim();
+        // "git@github.com:CellarNode/cellarnode-backend-v2.git" or
+        // "https://github.com/CellarNode/cellarnode-backend-v2.git" -> "CellarNode/cellarnode-backend-v2"
+        const match = originUrl.match(/[:/]([^/]+\/[^/]+?)(?:\.git)?$/);
+        sourceRepoLabel = match ? match[1] : originUrl;
+      } catch {
+        // No "origin" remote — fall back to the git toplevel dir name, which
+        // survives a worktree checkout (unlike the ticket-specific worktree
+        // path itself).
+        const toplevel = execFileSync(
+          "git",
+          ["-C", dirname(sourcePath), "rev-parse", "--show-toplevel"],
+          { encoding: "utf8" },
+        ).trim();
+        sourceRepoLabel = basename(toplevel);
+      }
     } catch {
-      // No "origin" remote — fall back to the git toplevel dir name, which
-      // survives a worktree checkout (unlike the ticket-specific worktree
-      // path itself).
-      const toplevel = execFileSync(
-        "git",
-        ["-C", dirname(sourcePath), "rev-parse", "--show-toplevel"],
-        { encoding: "utf8" },
-      ).trim();
-      sourceRepoLabel = basename(toplevel);
+      // Source isn't inside a git repo (or git isn't available) — skip.
     }
-  } catch {
-    // Source isn't inside a git repo (or git isn't available) — skip.
-  }
 
-  const syncNote = `# Canonical reference-data sync log
+    const syncNote = `# Canonical reference-data sync log
 
 Vendored copy of \`${$meta.sourceFile}\` from \`cellarnode-backend-v2\`
 (CEL-1604 D13/D27). Regenerate with \`pnpm sync-canonical\`; never hand-edit
@@ -198,12 +191,23 @@ Run \`pnpm test\` after every sync — \`__tests__/canonical-parity.test.ts\`
 fails loudly if any shipped static in this package has drifted from the rows
 vendored here.
 `;
-  await writeFile(DEST_SYNC_MD, syncNote, "utf8");
+    await writeFile(DEST_SYNC_MD, syncNote, "utf8");
+  } else {
+    console.log(
+      `No change in vendored canonical data (already in sync with ${sourcePath}) — ` +
+        `leaving ${relative(PACKAGE_ROOT, DEST_JSON)} and ${relative(PACKAGE_ROOT, DEST_SYNC_MD)} untouched.`,
+    );
+  }
 
-  // Re-derive src/classifications.generated.ts from the freshly-synced JSON
-  // (CEL-1604 review fixup, P0-1) so a sync never leaves the generated
-  // literal stale — `pnpm check-classifications-fresh` (part of `npm test`)
-  // catches it if this step is ever skipped or its output hand-edited.
+  // Re-derive src/classifications.generated.ts and
+  // src/aroma-descriptors.generated.ts from the vendored canonical JSON on
+  // EVERY successful sync, including the no-change branch above — so a
+  // sync never leaves a generated literal stale (CEL-1604 review fixup,
+  // P0-1; CEL-1618 regression fix: the early `return` on the no-change path
+  // used to skip regeneration entirely, silently reintroducing the same
+  // staleness bug for both generated files). `pnpm check-classifications-fresh`
+  // / the aroma-descriptors freshness check (part of `npm test`) catches it
+  // if this step is ever skipped or its output hand-edited.
   execFileSync(
     process.execPath,
     [resolve(PACKAGE_ROOT, "scripts/generate-classifications.mjs")],
@@ -215,9 +219,13 @@ vendored here.
     { stdio: "inherit" },
   );
 
-  console.log(`Synced ${sortedData.length} canonical rows from:\n  ${sourcePath}`);
-  console.log(`  -> ${relative(PACKAGE_ROOT, DEST_JSON)}`);
-  console.log(`  -> ${relative(PACKAGE_ROOT, DEST_SYNC_MD)}`);
+  if (jsonChanged) {
+    console.log(`Synced ${sortedData.length} canonical rows from:\n  ${sourcePath}`);
+    console.log(`  -> ${relative(PACKAGE_ROOT, DEST_JSON)}`);
+    console.log(`  -> ${relative(PACKAGE_ROOT, DEST_SYNC_MD)}`);
+  } else {
+    console.log("Regenerated generated literals from the already-synced canonical JSON.");
+  }
 }
 
 main().catch((err) => {

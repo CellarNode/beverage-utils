@@ -68,6 +68,7 @@ export function getAromaDescriptorFamilies(): AromaDescriptorFamilies {
 
 /** One family's vocabulary (label, standard reference, and terms), or `null` when `familyId` has no lexicon. */
 export function getAromaDescriptorFamily(familyId: string): AromaDescriptorFamily | null {
+  if (!Object.hasOwn(FROZEN_AROMA_DESCRIPTOR_FAMILIES, familyId)) return null;
   return FROZEN_AROMA_DESCRIPTOR_FAMILIES[familyId] ?? null;
 }
 
@@ -81,6 +82,7 @@ export function getAromaDescriptorFamily(familyId: string): AromaDescriptorFamil
  * term matched.
  */
 export function getAromaDescriptorLabel(familyId: string, slugOrText: string): string {
+  if (!Object.hasOwn(FROZEN_AROMA_DESCRIPTOR_FAMILIES, familyId)) return slugOrText;
   const family = FROZEN_AROMA_DESCRIPTOR_FAMILIES[familyId];
   if (!family) return slugOrText;
   const term = family.terms.find((t) => t.slug === slugOrText);
