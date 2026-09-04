@@ -1,0 +1,22 @@
+src/react/classification-reference-row.ts
+  s_ed14d8f128748c::t_1d6ba3e06e0337 34-41
+  s_ed14d8f128748c::t_ccce8384b7e17b 1,7-30
+__tests__/react/classification-reference-row.test.ts
+  s_ed14d8f128748c::t_4003d8192ee897 34-50
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "fb3ba8bdf06ce63627806b6f07bf22ec85236a06",
+  "prompts": {},
+  "sessions": {
+    "s_ed14d8f128748c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4eebdb83-6892-4407-a245-670666827fc1",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "mjnong <marcusnagy@icloud.com>"
+    }
+  }
+}

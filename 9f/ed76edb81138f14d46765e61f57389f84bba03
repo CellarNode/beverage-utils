@@ -1,0 +1,19 @@
+.reposkein/decisions/2026-09-04-one-parameterised-reference-data-hook-serves-every-dashboard.json
+  s_4f83e2469334e1::t_a8453f6b1a33e9 5,9,11-19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "9fed76edb81138f14d46765e61f57389f84bba03",
+  "prompts": {},
+  "sessions": {
+    "s_4f83e2469334e1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7b33bf81-9966-419d-af1d-51ea92792ace",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "mjnong <marcusnagy@icloud.com>"
+    }
+  }
+}

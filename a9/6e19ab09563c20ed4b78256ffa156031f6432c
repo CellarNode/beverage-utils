@@ -1,0 +1,22 @@
+__tests__/react/use-reference-data.test.tsx
+  s_ed14d8f128748c::t_17b41352747dd6 118,126-130
+src/react/use-reference-data.ts
+  s_ed14d8f128748c::t_18a82372470088 124-129
+  s_ed14d8f128748c::t_0847e78d90561f 54-58
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "a96e19ab09563c20ed4b78256ffa156031f6432c",
+  "prompts": {},
+  "sessions": {
+    "s_ed14d8f128748c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4eebdb83-6892-4407-a245-670666827fc1",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "mjnong <marcusnagy@icloud.com>"
+    }
+  }
+}
