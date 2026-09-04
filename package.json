@@ -45,15 +45,17 @@
     "oiv"
   ],
   "scripts": {
-    "build": "tsc",
+    "clean": "node -e \"require('fs').rmSync('dist', { recursive: true, force: true })\"",
+    "build": "npm run clean && tsc",
+    "verify-dist": "node scripts/verify-dist-no-orphans.mjs",
     "generate:country-codes": "node scripts/generate-country-codes.mjs",
     "generate:classifications": "node scripts/generate-classifications.mjs",
     "check-classifications-fresh": "node scripts/generate-classifications.mjs && git diff --exit-code src/classifications.generated.ts",
     "generate:aroma-descriptors": "node scripts/generate-aroma-descriptors.mjs",
     "check-aroma-descriptors-fresh": "node scripts/generate-aroma-descriptors.mjs && git diff --exit-code src/aroma-descriptors.generated.ts",
     "sync-canonical": "node scripts/sync-canonical.mjs",
-    "prepublishOnly": "npm run build",
-    "check-exports": "npx publint && npx @arethetypeswrong/cli --pack .",
+    "prepublishOnly": "npm run build && npm run verify-dist",
+    "check-exports": "npm run verify-dist && npx publint && npx @arethetypeswrong/cli --pack .",
     "test": "npm run check-classifications-fresh && npm run check-aroma-descriptors-fresh && vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit"
