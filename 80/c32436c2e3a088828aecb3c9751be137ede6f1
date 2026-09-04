@@ -1,0 +1,25 @@
+Makefile
+  s_e5f8d8b90686f3::t_fc572d48698176 2-15,32-33,35-45,47-77
+  s_e5f8d8b90686f3::t_3e524602a4fcff 1,16-31,34,46
+scripts/verify-dist-no-orphans.mjs
+  s_e5f8d8b90686f3::t_2056a849d9352e 1-92
+package.json
+  s_e5f8d8b90686f3::t_8b81763996343d 58
+  s_e5f8d8b90686f3::t_f5adefaf9b87e7 48-50,57
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "80c32436c2e3a088828aecb3c9751be137ede6f1",
+  "prompts": {},
+  "sessions": {
+    "s_e5f8d8b90686f3": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "bec5cb4e-ef5b-4da6-9fc9-9f7983c1bfc5",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "mjnong <marcusnagy@icloud.com>"
+    }
+  }
+}
