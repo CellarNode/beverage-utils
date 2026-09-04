@@ -1,0 +1,27 @@
+src/react/classification-reference-row.ts
+  s_e5f8d8b90686f3::t_f9221c50ff472a 48-52
+README.md
+  s_e5f8d8b90686f3::t_76001a413d8cfb 166-167
+  s_e5f8d8b90686f3::t_124660cc371791 137-138
+  s_e5f8d8b90686f3::t_ba70a4f826c5b0 89,98-99,102-105,111-118,122-125,128-132
+CHANGELOG.md
+  s_e5f8d8b90686f3::t_601516f347a72c 3-27
+src/react/use-reference-data.ts
+  s_e5f8d8b90686f3::t_fe8dcd0e8535ad 140,143-144
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "9ad93d0cf7d05dbaa4905dc851f89ee998641e3a",
+  "prompts": {},
+  "sessions": {
+    "s_e5f8d8b90686f3": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "bec5cb4e-ef5b-4da6-9fc9-9f7983c1bfc5",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "mjnong <marcusnagy@icloud.com>"
+    }
+  }
+}
