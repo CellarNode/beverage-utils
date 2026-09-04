@@ -4,6 +4,18 @@ export type {
   BeverageClassification,
   EnterpriseType,
 } from "./types.js";
+// Aroma/sensory descriptor lexicon (CEL-1618).
+export type {
+  AromaDescriptorTerm,
+  AromaDescriptorFamily,
+  AromaDescriptorFamilies,
+} from "./types.js";
+export {
+  getAromaDescriptorFamilies,
+  getAromaDescriptorFamily,
+  getAromaDescriptorLabel,
+} from "./aroma-descriptors.js";
+
 export type { LabelMap } from "./label-map.js";
 export { buildLabelMap } from "./label-map.js";
 export {

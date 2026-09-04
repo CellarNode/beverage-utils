@@ -12,8 +12,10 @@ import {
   getCanonicalEnterpriseTypeIds,
   getCanonicalCountryCodes,
   getCanonicalOperatingMarkets,
+  getCanonicalAromaDescriptorFamilies,
 } from "../src/canonical/index";
 import { getCanonicalClassifications } from "../src/classifications";
+import { getAromaDescriptorFamilies } from "../src/aroma-descriptors";
 import { ACCESS_MODELS, STATIC_ACCESS_MODEL_REGISTRY } from "../src/access-models";
 import {
   PROCUREMENT_CHANNELS,
@@ -48,6 +50,13 @@ import type { EnterpriseType } from "../src/types";
  * (`src/classifications.generated.ts`), not this file's `canonical/index`
  * accessors, so it stays out of every other shipped module's bundle
  * (CEL-1604 review fixup, P0-1/P0-2).
+ *
+ * `getAromaDescriptorFamilies()` (`../src/aroma-descriptors`, CEL-1618)
+ * ships the same way: a generated snapshot
+ * (`src/aroma-descriptors.generated.ts`), checked below via
+ * `getCanonicalAromaDescriptorFamilies()` (the `canonical/index` accessor)
+ * as an independent cross-check, same rationale as
+ * `STATIC_ACCESS_MODEL_REGISTRY` above.
  */
 
 describe("vendored canonical JSON — $meta", () => {
@@ -199,6 +208,19 @@ describe("operating_markets parity", () => {
     for (const { code, name } of operatingMarkets) {
       expect(STATIC_COUNTRY_LABEL_MAP[code]).toBe(name);
     }
+  });
+});
+
+describe("aroma_descriptors parity", () => {
+  it("getAromaDescriptorFamilies() deep-equals the canonical row's families", () => {
+    // getAromaDescriptorFamilies() (src/aroma-descriptors.ts) reads the
+    // generated literal (src/aroma-descriptors.generated.ts); this compares
+    // it against getCanonicalAromaDescriptorFamilies(), which reads the
+    // vendored JSON independently — a genuine cross-check, not
+    // expect(f(x)).toEqual(f(x)) (same rationale as the access_models check
+    // above). The generated literal's frozen wrapper is stripped by
+    // structuredClone-style deep equality, so freezing doesn't affect this.
+    expect(getAromaDescriptorFamilies()).toEqual(getCanonicalAromaDescriptorFamilies());
   });
 });
 

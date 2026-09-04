@@ -1,5 +1,34 @@
 # Changelog
 
+## 0.11.0 — 2026-09-04
+
+`getAromaDescriptorFamilies()` / `getAromaDescriptorFamily()` /
+`getAromaDescriptorLabel()` (CEL-1618) — a client-side accessor over the
+`aroma_descriptors` canonical row vendored in 0.10.0 (CEL-1614/CEL-1604),
+consumed by `@cellarnode/ui`'s product-editor sensory tab to render
+family-scoped aroma chips (`ui` PR, same ticket).
+
+- **New `src/aroma-descriptors.ts`** + generated
+  `src/aroma-descriptors.generated.ts` (via `scripts/generate-aroma-descriptors.mjs`,
+  wired into `pnpm sync-canonical` and `pnpm check-aroma-descriptors-fresh`,
+  same pattern as `classifications.generated.ts`/CEL-1604 P0-1: the vendored
+  157 KB `reference-data.json` never reaches a consumer's bundle).
+- Lenient by design, mirroring the backend
+  (`cellarnode-backend-v2/apps/cellarnode/src/lib/aroma-descriptor-index.ts`,
+  CEL-1614): `getAromaDescriptorLabel(familyId, value)` returns the
+  canonical label for a known slug and the input unchanged for anything
+  else (unmigrated free text or a genuine producer custom entry) — never
+  throws, never drops a value. Does not re-implement the backend's
+  fold/alias resolution (`resolveAromaDescriptor`); this package only needs
+  slug -> label plus a family's term list for suggestions.
+- Ships all three v1 families (`wine`, `spirits`, `beer`) even though only
+  `wine`'s sensory fields are `string[]` on the backend today — spirits and
+  beer are staged (CEL-1614), so no separate release is needed once those
+  fields widen.
+- New exports from the package root: `AromaDescriptorTerm`,
+  `AromaDescriptorFamily`, `AromaDescriptorFamilies` types plus the three
+  functions above.
+
 ## 0.10.0 — 2026-09-04
 
 One parameterised `useReferenceData(row, { transport })` hook (CEL-1607,
