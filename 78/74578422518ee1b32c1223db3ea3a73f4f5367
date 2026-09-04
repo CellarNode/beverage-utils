@@ -1,0 +1,24 @@
+src/canonical/reference-data.json
+  s_ea03d0f46ede5e::t_107d4cdc4a4084 6,49-847
+  s_ea03d0f46ede5e::t_02994cea6644bc 848-849
+__tests__/canonical-parity.test.ts
+  s_ea03d0f46ede5e::t_e41c1936fd42b5 62,72
+src/canonical/SYNC.md
+  s_ea03d0f46ede5e::t_107d4cdc4a4084 7-9,13-14
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "7874578422518ee1b32c1223db3ea3a73f4f5367",
+  "prompts": {},
+  "sessions": {
+    "s_ea03d0f46ede5e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "bcf5f62a-4e19-432f-98c2-6d0e32d835df",
+        "model": "claude-opus-5"
+      },
+      "human_author": "mjnong <marcusnagy@icloud.com>"
+    }
+  }
+}
