@@ -227,3 +227,32 @@ export function getCanonicalOperatingMarkets(): ReadonlyArray<{ code: string; na
     (c) => ({ code: c.code, name: c.name }),
   );
 }
+
+interface AromaDescriptorTermJson {
+  readonly slug: string;
+  readonly label: string;
+  readonly "x-standard": string;
+  readonly aliases?: readonly string[];
+}
+
+interface AromaDescriptorFamilyJson {
+  readonly label: string;
+  readonly standardRef: string;
+  readonly terms: readonly AromaDescriptorTermJson[];
+}
+
+interface AromaDescriptorsJson {
+  readonly description: string;
+  readonly version: number;
+  readonly families: Readonly<Record<string, AromaDescriptorFamilyJson>>;
+}
+
+/**
+ * CEL-1618 — canonical aroma/sensory descriptor lexicon (CEL-1614), grouped
+ * by beverage family. Backs `src/aroma-descriptors.generated.ts`
+ * (`scripts/generate-aroma-descriptors.mjs`) — parity-tested against
+ * `getAromaDescriptorFamilies()` in `__tests__/canonical-parity.test.ts`.
+ */
+export function getCanonicalAromaDescriptorFamilies(): AromaDescriptorsJson["families"] {
+  return requireCanonicalRow<AromaDescriptorsJson>("aroma_descriptors").jsonData.families;
+}

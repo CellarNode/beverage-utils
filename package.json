@@ -1,6 +1,6 @@
 {
   "name": "@cellarnode/beverage-utils",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "description": "Beverage classification utilities — label mapping, formatting, and display helpers for the CellarNode industry-standard beverage classification system.",
   "license": "MIT",
   "type": "module",
@@ -49,10 +49,12 @@
     "generate:country-codes": "node scripts/generate-country-codes.mjs",
     "generate:classifications": "node scripts/generate-classifications.mjs",
     "check-classifications-fresh": "node scripts/generate-classifications.mjs && git diff --exit-code src/classifications.generated.ts",
+    "generate:aroma-descriptors": "node scripts/generate-aroma-descriptors.mjs",
+    "check-aroma-descriptors-fresh": "node scripts/generate-aroma-descriptors.mjs && git diff --exit-code src/aroma-descriptors.generated.ts",
     "sync-canonical": "node scripts/sync-canonical.mjs",
     "prepublishOnly": "npm run build",
     "check-exports": "npx publint && npx @arethetypeswrong/cli --pack .",
-    "test": "npm run check-classifications-fresh && vitest run",
+    "test": "npm run check-classifications-fresh && npm run check-aroma-descriptors-fresh && vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit"
   },

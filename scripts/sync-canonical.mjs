@@ -209,6 +209,11 @@ vendored here.
     [resolve(PACKAGE_ROOT, "scripts/generate-classifications.mjs")],
     { stdio: "inherit" },
   );
+  execFileSync(
+    process.execPath,
+    [resolve(PACKAGE_ROOT, "scripts/generate-aroma-descriptors.mjs")],
+    { stdio: "inherit" },
+  );
 
   console.log(`Synced ${sortedData.length} canonical rows from:\n  ${sourcePath}`);
   console.log(`  -> ${relative(PACKAGE_ROOT, DEST_JSON)}`);
