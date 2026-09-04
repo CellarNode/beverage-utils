@@ -1,0 +1,21 @@
+package.json
+  s_ea03d0f46ede5e::t_a373deb88fef21 3
+CHANGELOG.md
+  s_ea03d0f46ede5e::t_a373deb88fef21 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "507eee8119e24ca77d34ef506543c9d57760df14",
+  "prompts": {},
+  "sessions": {
+    "s_ea03d0f46ede5e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "bcf5f62a-4e19-432f-98c2-6d0e32d835df",
+        "model": "claude-opus-5"
+      },
+      "human_author": "mjnong <marcusnagy@icloud.com>"
+    }
+  }
+}
