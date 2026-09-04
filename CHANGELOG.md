@@ -1,6 +1,52 @@
 # Changelog
 
+## Unreleased
+
+Vendor the backend canonical reference-data JSON, pinned by a parity test
+suite (CEL-1604 D13/D27). Backend half is `cellarnode-backend-v2` PR #608,
+which commits a generated `apps/cellarnode/src/db/canonical/reference-data.json`
+with a CI staleness check.
+
+- **New `src/canonical/reference-data.json`** — vendored, deterministic copy
+  (sorted by `dataId`, re-serialized with a stable indent — not a byte-for-byte
+  copy) of the backend's generated canonical rows (17 rows, schema version 1).
+  Test-only: nothing shipped imports it (see below). Refresh with
+  `pnpm sync-canonical [path-to-backend-json]` (defaults to the sibling
+  `../cellarnode-backend-v2` checkout layout; also regenerates
+  `src/classifications.generated.ts`). Provenance recorded in
+  `src/canonical/SYNC.md` on every sync.
+- **New `__tests__/canonical-parity.test.ts` (vitest)**, joining this
+  package's existing 10-file test suite — every shipped static that mirrors
+  a canonical backend row (`ACCESS_MODELS`, `STATIC_ACCESS_MODEL_REGISTRY`,
+  `PACKAGING_OPTIONS`, `CLOSURE_OPTIONS`, `ACTIVE_CURRENCIES`,
+  `PROCUREMENT_CHANNELS`, `STATIC_PROCUREMENT_CHANNEL_REGISTRY`,
+  `EnterpriseType`, `COUNTRY_CODES` + `STATIC_COUNTRY_LABEL_MAP`) is
+  deep-equal-checked against the vendored JSON, so drift between this
+  package and the backend fails loudly instead of silently diverging.
+- **`STATIC_ACCESS_MODEL_REGISTRY`, `STATIC_PROCUREMENT_CHANNEL_REGISTRY`,
+  and the enterprise-type label map stay hand-typed** — same as every other
+  literal-union tuple (`ACCESS_MODELS`, `PROCUREMENT_CHANNELS`, etc.), and
+  for the same reason where it applies (deriving them from the vendored JSON
+  would widen their public type to `string`). The parity suite pins all of
+  them against the vendored row instead of deriving any of them at module
+  load — an earlier draft derived the three registries above, which pulled
+  the 157 KB vendored JSON into every consumer of `formatBeverageLabel`,
+  `isAccessModel`, `getProcurementChannelEntry` and friends; reverted before
+  merge (review fixup, P0-1).
+- **New export: `getCanonicalClassifications()`** (`src/classifications.ts`)
+  — the full canonical beverage category → subtype taxonomy (10
+  categories). Backed by a generated literal
+  (`src/classifications.generated.ts`, produced by
+  `scripts/generate-classifications.mjs` from the vendored JSON — same
+  pattern as `src/country-codes.generated.ts`), not a runtime JSON read, so
+  importing it costs ~2.4 KB minified rather than the full vendored JSON.
+  `@cellarnode/ui`'s opportunity wizard currently hand-copies this taxonomy
+  in `ui/src/opportunities/wizard/classification-options.ts`; it should read
+  from this accessor once it takes this package's next release (follow-up
+  PR, not part of this change).
+
 ## 0.9.0 (2026-08-04)
+
 
 Release the registry-gated country normalizer shipped in #7 (CEL-1196). That PR
 merged without a version bump, so nothing published — this bump is what actually

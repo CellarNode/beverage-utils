@@ -1,0 +1,4905 @@
+{
+  "$meta": {
+    "generator": "apps/cellarnode/src/db/canonical/generate-reference-data-json.ts",
+    "sourceFile": "apps/cellarnode/src/db/canonical/reference-data.ts",
+    "schemaVersion": 1,
+    "entryCount": 17
+  },
+  "data": [
+    {
+      "dataId": "access_models",
+      "canonicalVersion": 1,
+      "jsonData": {
+        "version": 1,
+        "description": "How offer selection works — directed through specific importers or open competition",
+        "options": [
+          {
+            "id": "directed",
+            "name": "Directed",
+            "description": "Offers routed through recommended or designated importer(s)"
+          },
+          {
+            "id": "open",
+            "name": "Open",
+            "description": "Free competition — any eligible party can compete on price and terms"
+          }
+        ]
+      }
+    },
+    {
+      "dataId": "active_currencies",
+      "canonicalVersion": 2,
+      "jsonData": {
+        "codes": [
+          "EUR",
+          "SEK",
+          "USD",
+          "GBP",
+          "NOK",
+          "DKK",
+          "CHF",
+          "PLN",
+          "CZK",
+          "CAD",
+          "AUD",
+          "JPY"
+        ]
+      }
+    },
+    {
+      "dataId": "beverage_classifications",
+      "canonicalVersion": 1,
+      "jsonData": {
+        "version": 2,
+        "description": "Industry-standard beverage classification with HS tariff codes and OIV wine type mappings",
+        "categories": [
+          {
+            "id": "wine",
+            "name": "Still Wine",
+            "hsHeading": "2204",
+            "hsSubheadings": [
+              {
+                "code": "2204.21",
+                "description": "Wine in containers <= 2L"
+              },
+              {
+                "code": "2204.22",
+                "description": "Wine in containers 2L-10L"
+              },
+              {
+                "code": "2204.29",
+                "description": "Wine in containers > 10L"
+              }
+            ],
+            "subtypes": [
+              {
+                "id": "red",
+                "name": "Red Wine",
+                "oivType": "1"
+              },
+              {
+                "id": "white",
+                "name": "White Wine",
+                "oivType": "2"
+              },
+              {
+                "id": "rose",
+                "name": "Rosé Wine",
+                "oivType": "3"
+              },
+              {
+                "id": "orange",
+                "name": "Orange Wine"
+              },
+              {
+                "id": "natural",
+                "name": "Natural Wine"
+              },
+              {
+                "id": "dessert",
+                "name": "Dessert Wine",
+                "oivType": "6"
+              }
+            ]
+          },
+          {
+            "id": "sparkling_wine",
+            "name": "Sparkling Wine",
+            "hsHeading": "2204",
+            "hsSubheadings": [
+              {
+                "code": "2204.10",
+                "description": "Sparkling wine"
+              }
+            ],
+            "subtypes": [
+              {
+                "id": "white",
+                "name": "White Sparkling"
+              },
+              {
+                "id": "rose",
+                "name": "Rosé Sparkling"
+              },
+              {
+                "id": "red",
+                "name": "Red Sparkling"
+              }
+            ]
+          },
+          {
+            "id": "fortified_wine",
+            "name": "Fortified Wine",
+            "hsHeading": "2204",
+            "hsSubheadings": [
+              {
+                "code": "2204.21",
+                "description": "Fortified wine in containers <= 2L"
+              }
+            ],
+            "subtypes": [
+              {
+                "id": "port",
+                "name": "Port",
+                "oivType": "5"
+              },
+              {
+                "id": "sherry",
+                "name": "Sherry & Montilla",
+                "oivType": "5"
+              },
+              {
+                "id": "madeira",
+                "name": "Madeira",
+                "oivType": "5"
+              }
+            ]
+          },
+          {
+            "id": "vermouth",
+            "name": "Vermouth & Aromatized Wine",
+            "hsHeading": "2205",
+            "hsSubheadings": [
+              {
+                "code": "2205.10",
+                "description": "Vermouth in containers <= 2L"
+              },
+              {
+                "code": "2205.90",
+                "description": "Vermouth in other containers"
+              }
+            ],
+            "subtypes": [
+              {
+                "id": "sweet_vermouth",
+                "name": "Sweet Vermouth"
+              },
+              {
+                "id": "dry_vermouth",
+                "name": "Dry Vermouth"
+              },
+              {
+                "id": "other_aromatized",
+                "name": "Other Aromatized"
+              }
+            ]
+          },
+          {
+            "id": "beer",
+            "name": "Beer",
+            "hsHeading": "2203",
+            "hsSubheadings": [
+              {
+                "code": "2203.00",
+                "description": "Beer made from malt"
+              }
+            ],
+            "subtypes": [
+              {
+                "id": "lager",
+                "name": "Lager"
+              },
+              {
+                "id": "ale",
+                "name": "Ale"
+              },
+              {
+                "id": "ipa",
+                "name": "IPA"
+              },
+              {
+                "id": "stout",
+                "name": "Stout"
+              },
+              {
+                "id": "wheat_beer",
+                "name": "Wheat Beer"
+              },
+              {
+                "id": "pilsner",
+                "name": "Pilsner"
+              },
+              {
+                "id": "porter",
+                "name": "Porter"
+              },
+              {
+                "id": "sour",
+                "name": "Sour"
+              }
+            ]
+          },
+          {
+            "id": "spirits",
+            "name": "Spirits",
+            "hsHeading": "2208",
+            "hsSubheadings": [
+              {
+                "code": "2208.20",
+                "description": "Grape spirits / brandy"
+              },
+              {
+                "code": "2208.30",
+                "description": "Whiskies"
+              },
+              {
+                "code": "2208.40",
+                "description": "Rum and tafia"
+              },
+              {
+                "code": "2208.50",
+                "description": "Gin and Geneva"
+              },
+              {
+                "code": "2208.60",
+                "description": "Vodka"
+              },
+              {
+                "code": "2208.70",
+                "description": "Liqueurs and cordials"
+              },
+              {
+                "code": "2208.90",
+                "description": "Other spirits (tequila, grappa, etc.)"
+              }
+            ],
+            "subtypes": [
+              {
+                "id": "whisky",
+                "name": "Whisky"
+              },
+              {
+                "id": "vodka",
+                "name": "Vodka"
+              },
+              {
+                "id": "gin",
+                "name": "Gin"
+              },
+              {
+                "id": "rum",
+                "name": "Rum"
+              },
+              {
+                "id": "tequila",
+                "name": "Tequila"
+              },
+              {
+                "id": "brandy",
+                "name": "Brandy"
+              },
+              {
+                "id": "liqueur",
+                "name": "Liqueur"
+              },
+              {
+                "id": "grappa",
+                "name": "Grappa"
+              }
+            ]
+          },
+          {
+            "id": "cider_mixed_drinks",
+            "name": "Cider, Perry, Mead & Mixed",
+            "hsHeading": "2206",
+            "hsSubheadings": [
+              {
+                "code": "2206.00",
+                "description": "Other fermented beverages"
+              }
+            ],
+            "subtypes": [
+              {
+                "id": "dry_cider",
+                "name": "Dry Cider"
+              },
+              {
+                "id": "sweet_cider",
+                "name": "Sweet Cider"
+              },
+              {
+                "id": "fruit_cider",
+                "name": "Fruit Cider"
+              },
+              {
+                "id": "perry",
+                "name": "Perry"
+              },
+              {
+                "id": "mead",
+                "name": "Mead"
+              },
+              {
+                "id": "sake",
+                "name": "Sake"
+              }
+            ]
+          },
+          {
+            "id": "flavored_wine",
+            "name": "Flavored & Fruit Wine",
+            "hsHeading": "2206",
+            "hsSubheadings": [
+              {
+                "code": "2206.00",
+                "description": "Other fermented beverages"
+              }
+            ],
+            "subtypes": [
+              {
+                "id": "fruit_wine",
+                "name": "Fruit Wine"
+              },
+              {
+                "id": "flavored_wine",
+                "name": "Flavored Wine"
+              }
+            ]
+          },
+          {
+            "id": "non_alcoholic",
+            "name": "Non-Alcoholic",
+            "hsHeading": "2202",
+            "hsSubheadings": [
+              {
+                "code": "2202.91",
+                "description": "Non-alcoholic beer"
+              },
+              {
+                "code": "2202.99",
+                "description": "Other non-alcoholic beverages"
+              }
+            ],
+            "subtypes": [
+              {
+                "id": "na_beer",
+                "name": "Non-Alcoholic Beer"
+              },
+              {
+                "id": "na_wine",
+                "name": "Non-Alcoholic Wine"
+              },
+              {
+                "id": "na_spirits",
+                "name": "Non-Alcoholic Spirits"
+              }
+            ]
+          },
+          {
+            "id": "other",
+            "name": "Other",
+            "hsHeading": "",
+            "hsSubheadings": [],
+            "subtypes": [
+              {
+                "id": "mulled_wine",
+                "name": "Mulled Wine"
+              },
+              {
+                "id": "other",
+                "name": "Other"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "dataId": "beverage_type_schemas",
+      "canonicalVersion": 2,
+      "jsonData": {
+        "schemaVer": "1-0-0",
+        "maturityDefault": "stable",
+        "standardsRefs": {
+          "WSET-L3-SAT": {
+            "name": "WSET Level 3 Systematic Approach to Tasting",
+            "version": "Rev. 2016",
+            "url": "https://www.wsetglobal.com/knowledge-centre/wset-systematic-approach-to-tasting-sat/"
+          },
+          "WSET-L3-Spirits": {
+            "name": "WSET Level 3 Spirits Systematic Approach to Tasting",
+            "version": "May 2019, Issue 1",
+            "url": "https://www.wsetglobal.com/media/10098/wset_l3spirits_sat_en_may2019-issue1.pdf"
+          },
+          "BJCP-2021": {
+            "name": "Beer Judge Certification Program Style Guidelines",
+            "version": "2021",
+            "url": "https://www.bjcp.org/style/"
+          },
+          "OIV-MA": {
+            "name": "OIV Compendium of International Methods of Analysis",
+            "version": "Current Edition",
+            "url": "https://www.oiv.int/standards"
+          },
+          "ISO-13299": {
+            "name": "ISO 13299 Sensory Analysis — Methodology — General Guidance for Establishing a Sensory Profile",
+            "version": "2016",
+            "url": "https://www.iso.org/standard/58042.html"
+          },
+          "CellarNode": {
+            "name": "CellarNode Native Extension",
+            "version": "1-0-0",
+            "url": "https://standards.cellarnode.com"
+          }
+        },
+        "version": 2,
+        "categories": {
+          "wine": {
+            "label": "Wine",
+            "sections": {
+              "sensory": {
+                "label": "Sensory Details",
+                "stages": {
+                  "appearance": {
+                    "label": "Appearance",
+                    "fields": {
+                      "colour": {
+                        "type": "string",
+                        "label": "Colour",
+                        "x-standard": "WSET-L3-SAT",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "intensity": {
+                        "type": "enum",
+                        "label": "Intensity",
+                        "enum": [
+                          "pale",
+                          "medium-",
+                          "medium",
+                          "medium+",
+                          "deep"
+                        ],
+                        "enumLabels": [
+                          "Pale",
+                          "Medium−",
+                          "Medium",
+                          "Medium+",
+                          "Deep"
+                        ],
+                        "x-standard": "WSET-L3-SAT",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "clarity": {
+                        "type": "enum",
+                        "label": "Clarity",
+                        "enum": [
+                          "clear",
+                          "hazy"
+                        ],
+                        "enumLabels": [
+                          "Clear",
+                          "Hazy"
+                        ],
+                        "x-standard": "WSET-L3-SAT",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "viscosity": {
+                        "type": "string",
+                        "label": "Viscosity",
+                        "x-standard": "WSET-L3-SAT",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "effervescence": {
+                        "type": "string",
+                        "label": "Effervescence",
+                        "x-standard": "WSET-L3-SAT",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      }
+                    }
+                  },
+                  "nose": {
+                    "label": "Nose",
+                    "fields": {
+                      "condition": {
+                        "type": "enum",
+                        "label": "Condition",
+                        "enum": [
+                          "clean",
+                          "unclean"
+                        ],
+                        "enumLabels": [
+                          "Clean",
+                          "Unclean"
+                        ],
+                        "x-standard": "WSET-L3-SAT",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "intensity": {
+                        "type": "enum",
+                        "label": "Intensity",
+                        "enum": [
+                          "light",
+                          "medium-",
+                          "medium",
+                          "medium+",
+                          "pronounced"
+                        ],
+                        "enumLabels": [
+                          "Light",
+                          "Medium−",
+                          "Medium",
+                          "Medium+",
+                          "Pronounced"
+                        ],
+                        "x-standard": "WSET-L3-SAT",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "primaryAromas": {
+                        "type": "string[]",
+                        "label": "Primary Aromas",
+                        "description": "Grape-derived aroma descriptors (fruit, floral, herbaceous, mineral)",
+                        "x-standard": "WSET-L3-SAT",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "secondaryAromas": {
+                        "type": "string[]",
+                        "label": "Secondary Aromas",
+                        "description": "Fermentation-derived descriptors (yeast, MLF, autolysis)",
+                        "x-standard": "WSET-L3-SAT",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "tertiaryAromas": {
+                        "type": "string[]",
+                        "label": "Tertiary Aromas",
+                        "description": "Aging-derived descriptors (oak, bottle aging, oxidation)",
+                        "x-standard": "WSET-L3-SAT",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "development": {
+                        "type": "enum",
+                        "label": "Development",
+                        "enum": [
+                          "youthful",
+                          "developing",
+                          "fully developed",
+                          "tired"
+                        ],
+                        "enumLabels": [
+                          "Youthful",
+                          "Developing",
+                          "Fully Developed",
+                          "Tired"
+                        ],
+                        "x-standard": "WSET-L3-SAT",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "fruitAromas": {
+                        "type": "string",
+                        "label": "Fruit Aromas",
+                        "x-standard": "CellarNode",
+                        "x-maturity": "deprecated",
+                        "x-deprecatedIn": "1-0-0"
+                      },
+                      "floralAromas": {
+                        "type": "string",
+                        "label": "Floral Aromas",
+                        "x-standard": "CellarNode",
+                        "x-maturity": "deprecated",
+                        "x-deprecatedIn": "1-0-0"
+                      },
+                      "herbalVegetal": {
+                        "type": "string",
+                        "label": "Herbal / Vegetal",
+                        "x-standard": "CellarNode",
+                        "x-maturity": "deprecated",
+                        "x-deprecatedIn": "1-0-0"
+                      },
+                      "spice": {
+                        "type": "string",
+                        "label": "Spice",
+                        "x-standard": "CellarNode",
+                        "x-maturity": "deprecated",
+                        "x-deprecatedIn": "1-0-0"
+                      },
+                      "oakAgeing": {
+                        "type": "string",
+                        "label": "Oak / Ageing",
+                        "x-standard": "CellarNode",
+                        "x-maturity": "deprecated",
+                        "x-deprecatedIn": "1-0-0"
+                      },
+                      "earthMineral": {
+                        "type": "string",
+                        "label": "Earth / Mineral",
+                        "x-standard": "CellarNode",
+                        "x-maturity": "deprecated",
+                        "x-deprecatedIn": "1-0-0"
+                      },
+                      "faults": {
+                        "type": "string",
+                        "label": "Faults",
+                        "x-standard": "CellarNode",
+                        "x-maturity": "deprecated",
+                        "x-deprecatedIn": "1-0-0"
+                      }
+                    }
+                  },
+                  "palate": {
+                    "label": "Palate",
+                    "fields": {
+                      "sweetness": {
+                        "type": "enum",
+                        "label": "Sweetness",
+                        "enum": [
+                          "dry",
+                          "off-dry",
+                          "medium-dry",
+                          "medium-sweet",
+                          "sweet",
+                          "luscious"
+                        ],
+                        "enumLabels": [
+                          "Dry",
+                          "Off-Dry",
+                          "Medium-Dry",
+                          "Medium-Sweet",
+                          "Sweet",
+                          "Luscious"
+                        ],
+                        "x-standard": "WSET-L3-SAT",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "acidity": {
+                        "type": "enum",
+                        "label": "Acidity",
+                        "enum": [
+                          "low",
+                          "medium-",
+                          "medium",
+                          "medium+",
+                          "high"
+                        ],
+                        "enumLabels": [
+                          "Low",
+                          "Medium−",
+                          "Medium",
+                          "Medium+",
+                          "High"
+                        ],
+                        "x-standard": "WSET-L3-SAT",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "tannin": {
+                        "type": "enum",
+                        "label": "Tannin",
+                        "enum": [
+                          "low",
+                          "medium-",
+                          "medium",
+                          "medium+",
+                          "high"
+                        ],
+                        "enumLabels": [
+                          "Low",
+                          "Medium−",
+                          "Medium",
+                          "Medium+",
+                          "High"
+                        ],
+                        "x-standard": "WSET-L3-SAT",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "alcohol": {
+                        "type": "enum",
+                        "label": "Alcohol",
+                        "enum": [
+                          "low",
+                          "medium-",
+                          "medium",
+                          "medium+",
+                          "high"
+                        ],
+                        "enumLabels": [
+                          "Low",
+                          "Medium−",
+                          "Medium",
+                          "Medium+",
+                          "High"
+                        ],
+                        "x-standard": "WSET-L3-SAT",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "body": {
+                        "type": "enum",
+                        "label": "Body",
+                        "enum": [
+                          "light",
+                          "medium-",
+                          "medium",
+                          "medium+",
+                          "full"
+                        ],
+                        "enumLabels": [
+                          "Light",
+                          "Medium−",
+                          "Medium",
+                          "Medium+",
+                          "Full"
+                        ],
+                        "x-standard": "WSET-L3-SAT",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "flavourIntensity": {
+                        "type": "enum",
+                        "label": "Flavour Intensity",
+                        "enum": [
+                          "light",
+                          "medium-",
+                          "medium",
+                          "medium+",
+                          "pronounced"
+                        ],
+                        "enumLabels": [
+                          "Light",
+                          "Medium−",
+                          "Medium",
+                          "Medium+",
+                          "Pronounced"
+                        ],
+                        "x-standard": "WSET-L3-SAT",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "flavourCharacteristics": {
+                        "type": "string[]",
+                        "label": "Flavour Characteristics",
+                        "x-standard": "WSET-L3-SAT",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "flavorProfile": {
+                        "type": "string",
+                        "label": "Flavor Profile",
+                        "x-standard": "CellarNode",
+                        "x-maturity": "deprecated",
+                        "x-deprecatedIn": "1-0-0"
+                      },
+                      "balance": {
+                        "type": "string",
+                        "label": "Balance",
+                        "x-standard": "CellarNode",
+                        "x-maturity": "candidate"
+                      }
+                    }
+                  },
+                  "mouthfeel": {
+                    "label": "Mouthfeel",
+                    "fields": {
+                      "texture": {
+                        "type": "string",
+                        "label": "Texture",
+                        "x-standard": "ISO-13299",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "astringency": {
+                        "type": "string",
+                        "label": "Astringency",
+                        "x-standard": "ISO-13299",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "weight": {
+                        "type": "string",
+                        "label": "Weight",
+                        "x-standard": "ISO-13299",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      }
+                    }
+                  },
+                  "finish": {
+                    "label": "Finish",
+                    "fields": {
+                      "length": {
+                        "type": "enum",
+                        "label": "Length",
+                        "enum": [
+                          "short",
+                          "medium-",
+                          "medium",
+                          "medium+",
+                          "long"
+                        ],
+                        "enumLabels": [
+                          "Short",
+                          "Medium−",
+                          "Medium",
+                          "Medium+",
+                          "Long"
+                        ],
+                        "x-standard": "WSET-L3-SAT",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "qualityLevel": {
+                        "type": "enum",
+                        "label": "Quality Level",
+                        "enum": [
+                          "poor",
+                          "acceptable",
+                          "good",
+                          "very good",
+                          "outstanding"
+                        ],
+                        "enumLabels": [
+                          "Poor",
+                          "Acceptable",
+                          "Good",
+                          "Very Good",
+                          "Outstanding"
+                        ],
+                        "x-standard": "WSET-L3-SAT",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "agingPotential": {
+                        "type": "enum",
+                        "label": "Aging Potential",
+                        "enum": [
+                          "too young",
+                          "drink now with potential",
+                          "drink now",
+                          "too old"
+                        ],
+                        "enumLabels": [
+                          "Too Young",
+                          "Drink Now (with Potential)",
+                          "Drink Now",
+                          "Too Old"
+                        ],
+                        "x-standard": "WSET-L3-SAT",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "flavorPersistence": {
+                        "type": "string",
+                        "label": "Flavor Persistence",
+                        "x-standard": "CellarNode",
+                        "x-maturity": "deprecated",
+                        "x-deprecatedIn": "1-0-0"
+                      },
+                      "evolution": {
+                        "type": "string",
+                        "label": "Evolution",
+                        "x-standard": "CellarNode",
+                        "x-maturity": "candidate"
+                      }
+                    }
+                  },
+                  "serving": {
+                    "label": "Serving",
+                    "fields": {
+                      "style": {
+                        "type": "string",
+                        "label": "Style",
+                        "x-standard": "CellarNode",
+                        "x-maturity": "candidate"
+                      },
+                      "servingTemperature": {
+                        "type": "string",
+                        "label": "Serving Temperature",
+                        "x-standard": "CellarNode",
+                        "x-maturity": "candidate"
+                      },
+                      "glassware": {
+                        "type": "string",
+                        "label": "Glassware",
+                        "x-standard": "CellarNode",
+                        "x-maturity": "candidate"
+                      }
+                    }
+                  }
+                }
+              },
+              "composition": {
+                "label": "Grape Composition",
+                "itemLabel": "Grape Variety",
+                "percentageLabel": "Blend %",
+                "supportsPercentage": true
+              },
+              "technical": {
+                "label": "Technical",
+                "fields": {
+                  "residualSugar": {
+                    "type": "number",
+                    "label": "Residual Sugar",
+                    "unit": "g/L",
+                    "x-standard": "OIV-MA",
+                    "x-maturity": "stable",
+                    "x-addedIn": "1-0-0"
+                  },
+                  "totalAcidity": {
+                    "type": "number",
+                    "label": "Total Acidity",
+                    "unit": "g/L",
+                    "x-standard": "OIV-MA",
+                    "x-maturity": "stable",
+                    "x-addedIn": "1-0-0"
+                  },
+                  "pH": {
+                    "type": "number",
+                    "label": "pH",
+                    "x-standard": "OIV-MA",
+                    "x-maturity": "stable",
+                    "x-addedIn": "1-0-0"
+                  },
+                  "abv": {
+                    "type": "number",
+                    "label": "ABV",
+                    "unit": "%",
+                    "x-standard": "OIV-MA",
+                    "x-maturity": "stable",
+                    "x-addedIn": "1-0-0"
+                  },
+                  "volatileAcidity": {
+                    "type": "number",
+                    "label": "Volatile Acidity",
+                    "unit": "g/L",
+                    "x-standard": "OIV-MA",
+                    "x-maturity": "candidate"
+                  },
+                  "totalSO2": {
+                    "type": "number",
+                    "label": "Total SO₂",
+                    "unit": "mg/L",
+                    "x-standard": "OIV-MA",
+                    "x-maturity": "candidate"
+                  }
+                }
+              }
+            },
+            "subtypeOverrides": {
+              "sparkling_wine": {
+                "sections.sensory.stages.appearance.fields": {
+                  "+headRetention": {
+                    "type": "string",
+                    "label": "Head Retention",
+                    "x-maturity": "stable"
+                  },
+                  "+mousse": {
+                    "type": "string",
+                    "label": "Mousse",
+                    "x-maturity": "stable"
+                  }
+                },
+                "sections.sensory.stages.mouthfeel.fields": {
+                  "+mousse": {
+                    "type": "string",
+                    "label": "Mousse Quality",
+                    "x-maturity": "stable"
+                  }
+                },
+                "sections.technical.fields": {
+                  "+atmospheres": {
+                    "type": "number",
+                    "label": "Pressure",
+                    "unit": "atm",
+                    "x-maturity": "stable"
+                  }
+                }
+              },
+              "fortified_wine": {},
+              "vermouth": {},
+              "flavored_wine": {}
+            }
+          },
+          "beer": {
+            "label": "Beer",
+            "sections": {
+              "sensory": {
+                "label": "Sensory Details",
+                "stages": {
+                  "appearance": {
+                    "label": "Appearance",
+                    "fields": {
+                      "colour": {
+                        "type": "string",
+                        "label": "Colour",
+                        "x-standard": "BJCP-2021",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "clarity": {
+                        "type": "string",
+                        "label": "Clarity",
+                        "x-standard": "BJCP-2021",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "headRetention": {
+                        "type": "string",
+                        "label": "Head Retention",
+                        "x-standard": "BJCP-2021",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "foamTexture": {
+                        "type": "string",
+                        "label": "Foam Texture",
+                        "x-standard": "BJCP-2021",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "carbonationVisibility": {
+                        "type": "string",
+                        "label": "Carbonation Visibility",
+                        "x-standard": "BJCP-2021",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "foamColour": {
+                        "type": "string",
+                        "label": "Foam Colour",
+                        "x-standard": "BJCP-2021",
+                        "x-maturity": "draft"
+                      },
+                      "lacing": {
+                        "type": "string",
+                        "label": "Lacing",
+                        "x-standard": "BJCP-2021",
+                        "x-maturity": "draft"
+                      }
+                    }
+                  },
+                  "nose": {
+                    "label": "Nose",
+                    "fields": {
+                      "maltAromas": {
+                        "type": "string",
+                        "label": "Malt Aromas",
+                        "x-standard": "BJCP-2021",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "hopAromas": {
+                        "type": "string",
+                        "label": "Hop Aromas",
+                        "x-standard": "BJCP-2021",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "yeastCharacter": {
+                        "type": "string",
+                        "label": "Yeast Character",
+                        "x-standard": "BJCP-2021",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "esters": {
+                        "type": "string",
+                        "label": "Esters",
+                        "x-standard": "BJCP-2021",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "phenolics": {
+                        "type": "string",
+                        "label": "Phenolics",
+                        "x-standard": "BJCP-2021",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "roastToast": {
+                        "type": "string",
+                        "label": "Roast / Toast",
+                        "x-standard": "BJCP-2021",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "offAromas": {
+                        "type": "string",
+                        "label": "Off Aromas",
+                        "x-standard": "BJCP-2021",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      }
+                    }
+                  },
+                  "palate": {
+                    "label": "Palate",
+                    "fields": {
+                      "maltSweetness": {
+                        "type": "string",
+                        "label": "Malt Sweetness",
+                        "x-standard": "BJCP-2021",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "hopBitterness": {
+                        "type": "string",
+                        "label": "Hop Bitterness",
+                        "x-standard": "BJCP-2021",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "hopFlavour": {
+                        "type": "string",
+                        "label": "Hop Flavour",
+                        "x-standard": "BJCP-2021",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "balance": {
+                        "type": "string",
+                        "label": "Balance",
+                        "x-standard": "BJCP-2021",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "alcohol": {
+                        "type": "string",
+                        "label": "Alcohol",
+                        "x-standard": "BJCP-2021",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      }
+                    }
+                  },
+                  "mouthfeel": {
+                    "label": "Mouthfeel",
+                    "fields": {
+                      "body": {
+                        "type": "string",
+                        "label": "Body",
+                        "x-standard": "BJCP-2021",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "carbonationLevel": {
+                        "type": "string",
+                        "label": "Carbonation Level",
+                        "x-standard": "BJCP-2021",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "creaminess": {
+                        "type": "string",
+                        "label": "Creaminess",
+                        "x-standard": "BJCP-2021",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "astringency": {
+                        "type": "string",
+                        "label": "Astringency",
+                        "x-standard": "BJCP-2021",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "warmth": {
+                        "type": "string",
+                        "label": "Warmth",
+                        "x-standard": "BJCP-2021",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      }
+                    }
+                  },
+                  "finish": {
+                    "label": "Finish",
+                    "fields": {
+                      "bitternessPersistence": {
+                        "type": "string",
+                        "label": "Bitterness Persistence",
+                        "x-standard": "BJCP-2021",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "dryness": {
+                        "type": "string",
+                        "label": "Dryness",
+                        "x-standard": "BJCP-2021",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "flavorLength": {
+                        "type": "string",
+                        "label": "Flavor Length",
+                        "x-standard": "BJCP-2021",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      }
+                    }
+                  },
+                  "serving": {
+                    "label": "Serving",
+                    "fields": {
+                      "style": {
+                        "type": "string",
+                        "label": "Style",
+                        "x-standard": "BJCP-2021",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "servingTemperature": {
+                        "type": "string",
+                        "label": "Serving Temperature",
+                        "x-standard": "BJCP-2021",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "glassware": {
+                        "type": "string",
+                        "label": "Glassware",
+                        "x-standard": "BJCP-2021",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      }
+                    }
+                  }
+                }
+              },
+              "composition": {
+                "label": "Grain Bill",
+                "itemLabel": "Grain / Hop",
+                "percentageLabel": "Grain Bill %",
+                "supportsPercentage": true
+              },
+              "technical": {
+                "label": "Technical",
+                "fields": {
+                  "abv": {
+                    "type": "number",
+                    "label": "ABV",
+                    "unit": "%",
+                    "x-standard": "BJCP-2021",
+                    "x-maturity": "stable",
+                    "x-addedIn": "1-0-0"
+                  },
+                  "ibu": {
+                    "type": "number",
+                    "label": "IBU",
+                    "x-standard": "BJCP-2021",
+                    "x-maturity": "stable",
+                    "x-addedIn": "1-0-0"
+                  },
+                  "og": {
+                    "type": "number",
+                    "label": "Original Gravity",
+                    "x-standard": "BJCP-2021",
+                    "x-maturity": "candidate"
+                  },
+                  "fg": {
+                    "type": "number",
+                    "label": "Final Gravity",
+                    "x-standard": "BJCP-2021",
+                    "x-maturity": "candidate"
+                  },
+                  "srm": {
+                    "type": "number",
+                    "label": "SRM (Colour)",
+                    "x-standard": "BJCP-2021",
+                    "x-maturity": "candidate"
+                  },
+                  "co2Volumes": {
+                    "type": "number",
+                    "label": "CO₂ Volumes",
+                    "x-standard": "BJCP-2021",
+                    "x-maturity": "draft"
+                  }
+                }
+              }
+            },
+            "subtypeOverrides": {
+              "cider_mixed_drinks": {}
+            }
+          },
+          "spirits": {
+            "label": "Spirits",
+            "sections": {
+              "sensory": {
+                "label": "Sensory Details",
+                "stages": {
+                  "appearance": {
+                    "label": "Appearance",
+                    "fields": {
+                      "colour": {
+                        "type": "string",
+                        "label": "Colour",
+                        "x-standard": "WSET-L3-Spirits",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "clarity": {
+                        "type": "string",
+                        "label": "Clarity",
+                        "x-standard": "WSET-L3-Spirits",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "viscosity": {
+                        "type": "string",
+                        "label": "Viscosity",
+                        "x-standard": "WSET-L3-Spirits",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      }
+                    }
+                  },
+                  "nose": {
+                    "label": "Nose",
+                    "fields": {
+                      "intensity": {
+                        "type": "string",
+                        "label": "Intensity",
+                        "x-standard": "WSET-L3-Spirits",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "baseIngredientCharacter": {
+                        "type": "string",
+                        "label": "Base Ingredient Character",
+                        "x-standard": "WSET-L3-Spirits",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "distillationNotes": {
+                        "type": "string",
+                        "label": "Distillation Notes",
+                        "x-standard": "WSET-L3-Spirits",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "barrelInfluence": {
+                        "type": "string",
+                        "label": "Barrel Influence",
+                        "x-standard": "WSET-L3-Spirits",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "spice": {
+                        "type": "string",
+                        "label": "Spice",
+                        "x-standard": "WSET-L3-Spirits",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "sweetAromatics": {
+                        "type": "string",
+                        "label": "Sweet Aromatics",
+                        "x-standard": "WSET-L3-Spirits",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "offAromas": {
+                        "type": "string",
+                        "label": "Off Aromas",
+                        "x-standard": "WSET-L3-Spirits",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "complexity": {
+                        "type": "string",
+                        "label": "Complexity",
+                        "x-standard": "WSET-L3-Spirits",
+                        "x-maturity": "candidate"
+                      }
+                    }
+                  },
+                  "palate": {
+                    "label": "Palate",
+                    "fields": {
+                      "sweetness": {
+                        "type": "string",
+                        "label": "Sweetness",
+                        "x-standard": "WSET-L3-Spirits",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "alcoholIntensity": {
+                        "type": "string",
+                        "label": "Alcohol Intensity",
+                        "x-standard": "WSET-L3-Spirits",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "flavorProfile": {
+                        "type": "string",
+                        "label": "Flavor Profile",
+                        "x-standard": "WSET-L3-Spirits",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "oakInfluence": {
+                        "type": "string",
+                        "label": "Oak Influence",
+                        "x-standard": "WSET-L3-Spirits",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "balance": {
+                        "type": "string",
+                        "label": "Balance",
+                        "x-standard": "WSET-L3-Spirits",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      }
+                    }
+                  },
+                  "mouthfeel": {
+                    "label": "Mouthfeel",
+                    "fields": {
+                      "body": {
+                        "type": "string",
+                        "label": "Body",
+                        "x-standard": "WSET-L3-Spirits",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "oiliness": {
+                        "type": "string",
+                        "label": "Oiliness",
+                        "x-standard": "WSET-L3-Spirits",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "heatBurn": {
+                        "type": "string",
+                        "label": "Heat / Burn",
+                        "x-standard": "WSET-L3-Spirits",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "smoothness": {
+                        "type": "string",
+                        "label": "Smoothness",
+                        "x-standard": "WSET-L3-Spirits",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "alcoholIntegration": {
+                        "type": "string",
+                        "label": "Alcohol Integration",
+                        "x-standard": "WSET-L3-Spirits",
+                        "x-maturity": "candidate"
+                      }
+                    }
+                  },
+                  "finish": {
+                    "label": "Finish",
+                    "fields": {
+                      "length": {
+                        "type": "string",
+                        "label": "Length",
+                        "x-standard": "WSET-L3-Spirits",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "warmingSensation": {
+                        "type": "string",
+                        "label": "Warming Sensation",
+                        "x-standard": "WSET-L3-Spirits",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      },
+                      "flavorPersistence": {
+                        "type": "string",
+                        "label": "Flavor Persistence",
+                        "x-standard": "WSET-L3-Spirits",
+                        "x-maturity": "stable",
+                        "x-addedIn": "1-0-0"
+                      }
+                    }
+                  },
+                  "serving": {
+                    "label": "Serving",
+                    "fields": {
+                      "category": {
+                        "type": "string",
+                        "label": "Category",
+                        "x-standard": "CellarNode",
+                        "x-maturity": "candidate"
+                      },
+                      "servingMethod": {
+                        "type": "string",
+                        "label": "Serving Method",
+                        "x-standard": "CellarNode",
+                        "x-maturity": "candidate"
+                      },
+                      "dilutionRecommendations": {
+                        "type": "string",
+                        "label": "Dilution Recommendations",
+                        "x-standard": "CellarNode",
+                        "x-maturity": "candidate"
+                      }
+                    }
+                  }
+                }
+              },
+              "composition": {
+                "label": "Base Ingredients",
+                "itemLabel": "Base Ingredient",
+                "percentageLabel": "Proportion %",
+                "supportsPercentage": true
+              },
+              "technical": {
+                "label": "Technical",
+                "fields": {
+                  "abv": {
+                    "type": "number",
+                    "label": "ABV",
+                    "unit": "%",
+                    "x-standard": "WSET-L3-Spirits",
+                    "x-maturity": "stable",
+                    "x-addedIn": "1-0-0"
+                  },
+                  "caskType": {
+                    "type": "string",
+                    "label": "Cask Type",
+                    "x-standard": "CellarNode",
+                    "x-maturity": "draft"
+                  }
+                }
+              }
+            },
+            "subtypeOverrides": {}
+          },
+          "non_alcoholic": {
+            "label": "Non-Alcoholic",
+            "sections": {
+              "sensory": {
+                "label": "Sensory Details",
+                "stages": {
+                  "appearance": {
+                    "label": "Appearance",
+                    "fields": {
+                      "colour": {
+                        "type": "string",
+                        "label": "Colour",
+                        "x-standard": "CellarNode",
+                        "x-maturity": "draft"
+                      },
+                      "clarity": {
+                        "type": "string",
+                        "label": "Clarity",
+                        "x-standard": "CellarNode",
+                        "x-maturity": "draft"
+                      },
+                      "carbonationVisibility": {
+                        "type": "string",
+                        "label": "Carbonation Visibility",
+                        "x-standard": "CellarNode",
+                        "x-maturity": "draft"
+                      }
+                    }
+                  },
+                  "nose": {
+                    "label": "Nose",
+                    "fields": {
+                      "aromaIntensity": {
+                        "type": "string",
+                        "label": "Aroma Intensity",
+                        "x-standard": "CellarNode",
+                        "x-maturity": "draft"
+                      },
+                      "fruitAromas": {
+                        "type": "string",
+                        "label": "Fruit Aromas",
+                        "x-standard": "CellarNode",
+                        "x-maturity": "draft"
+                      },
+                      "botanicalAromas": {
+                        "type": "string",
+                        "label": "Botanical Aromas",
+                        "x-standard": "CellarNode",
+                        "x-maturity": "draft"
+                      },
+                      "sweetAromatics": {
+                        "type": "string",
+                        "label": "Sweet Aromatics",
+                        "x-standard": "CellarNode",
+                        "x-maturity": "draft"
+                      }
+                    }
+                  },
+                  "palate": {
+                    "label": "Palate",
+                    "fields": {
+                      "sweetness": {
+                        "type": "string",
+                        "label": "Sweetness",
+                        "x-standard": "CellarNode",
+                        "x-maturity": "draft"
+                      },
+                      "acidity": {
+                        "type": "string",
+                        "label": "Acidity",
+                        "x-standard": "CellarNode",
+                        "x-maturity": "draft"
+                      },
+                      "flavorProfile": {
+                        "type": "string",
+                        "label": "Flavor Profile",
+                        "x-standard": "CellarNode",
+                        "x-maturity": "draft"
+                      },
+                      "balance": {
+                        "type": "string",
+                        "label": "Balance",
+                        "x-standard": "CellarNode",
+                        "x-maturity": "draft"
+                      }
+                    }
+                  },
+                  "mouthfeel": {
+                    "label": "Mouthfeel",
+                    "fields": {
+                      "carbonationLevel": {
+                        "type": "string",
+                        "label": "Carbonation Level",
+                        "x-standard": "CellarNode",
+                        "x-maturity": "draft"
+                      },
+                      "body": {
+                        "type": "string",
+                        "label": "Body",
+                        "x-standard": "CellarNode",
+                        "x-maturity": "draft"
+                      },
+                      "creaminessSmoothness": {
+                        "type": "string",
+                        "label": "Creaminess / Smoothness",
+                        "x-standard": "CellarNode",
+                        "x-maturity": "draft"
+                      }
+                    }
+                  },
+                  "finish": {
+                    "label": "Finish",
+                    "fields": {
+                      "sweetnessPersistence": {
+                        "type": "string",
+                        "label": "Sweetness Persistence",
+                        "x-standard": "CellarNode",
+                        "x-maturity": "draft"
+                      },
+                      "refreshmentDryness": {
+                        "type": "string",
+                        "label": "Refreshment / Dryness",
+                        "x-standard": "CellarNode",
+                        "x-maturity": "draft"
+                      },
+                      "flavorLength": {
+                        "type": "string",
+                        "label": "Flavor Length",
+                        "x-standard": "CellarNode",
+                        "x-maturity": "draft"
+                      }
+                    }
+                  },
+                  "serving": {
+                    "label": "Serving",
+                    "fields": {
+                      "category": {
+                        "type": "string",
+                        "label": "Category",
+                        "x-standard": "CellarNode",
+                        "x-maturity": "draft"
+                      },
+                      "servingTemperature": {
+                        "type": "string",
+                        "label": "Serving Temperature",
+                        "x-standard": "CellarNode",
+                        "x-maturity": "draft"
+                      },
+                      "dilutionMixingPotential": {
+                        "type": "string",
+                        "label": "Dilution / Mixing Potential",
+                        "x-standard": "CellarNode",
+                        "x-maturity": "draft"
+                      }
+                    }
+                  }
+                }
+              },
+              "composition": {
+                "label": "Flavor Ingredients",
+                "itemLabel": "Flavor Ingredient",
+                "supportsPercentage": false
+              },
+              "technical": null
+            },
+            "subtypeOverrides": {
+              "other": {}
+            }
+          }
+        }
+      }
+    },
+    {
+      "dataId": "chemical_analysis_schemas",
+      "canonicalVersion": 1,
+      "jsonData": {
+        "schemaVer": "1-0-0",
+        "maturityDefault": "candidate",
+        "standardsRefs": {
+          "EU-2021-2117": {
+            "name": "Regulation (EU) 2021/2117 amending CMO Reg (EU) 1308/2013 (wine ingredient list + nutrition + e-label)",
+            "version": "applicable 2023-12-08",
+            "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32021R2117"
+          },
+          "FIC-1169-2011": {
+            "name": "Regulation (EU) 1169/2011 on the provision of food information to consumers (FIC)",
+            "version": "consolidated",
+            "url": "https://eur-lex.europa.eu/eli/reg/2011/1169/oj/eng"
+          },
+          "EU-2026-471": {
+            "name": "Regulation (EU) 2026/471 (wine package — de-alcoholised terms, PDO/PGI, export-only exemption)",
+            "version": "in force ~2026-03-18 (confirm OJ)",
+            "url": "https://www.europarl.europa.eu/legislative-train/theme-sustaining-our-quality-of-life-food-security-water-and-nature/file-wine-package"
+          },
+          "OIV-MA": {
+            "name": "OIV Compendium of International Methods of Analysis",
+            "version": "Current Edition",
+            "url": "https://www.oiv.int/standards"
+          },
+          "CellarNode": {
+            "name": "CellarNode Native Extension",
+            "version": "1-0-0",
+            "url": "https://standards.cellarnode.com"
+          }
+        },
+        "version": 1,
+        "categories": {
+          "wine": {
+            "label": "Wine",
+            "fields": {
+              "abv": {
+                "type": "number",
+                "label": "Alcohol by Volume",
+                "unit": "% vol",
+                "x-standard": "FIC-1169-2011",
+                "x-maturity": "stable",
+                "x-addedIn": "1-0-0",
+                "onLabel": true,
+                "description": "Actual alcoholic strength by volume — mandatory on the physical label (FIC Art 9(1)(k))."
+              },
+              "totalSo2": {
+                "type": "number",
+                "label": "Total Sulphur Dioxide",
+                "unit": "mg/L",
+                "x-standard": "OIV-MA",
+                "x-maturity": "candidate",
+                "x-addedIn": "1-0-0",
+                "allergen": {
+                  "thresholdMgPerL": 10,
+                  "declaration": "Contains sulphites"
+                },
+                "description": "Total SO2; > 10 mg/L triggers the mandatory 'Contains sulphites' allergen declaration (FIC Annex II §12)."
+              },
+              "residualSugar": {
+                "type": "number",
+                "label": "Residual Sugar",
+                "unit": "g/L",
+                "x-standard": "OIV-MA",
+                "x-maturity": "candidate",
+                "x-addedIn": "1-0-0",
+                "description": "Drives the sugars/carbohydrate nutrition value; also bands the permitted SO2 maximum."
+              },
+              "totalAcidity": {
+                "type": "number",
+                "label": "Total Acidity",
+                "unit": "g/L (tartaric)",
+                "x-standard": "OIV-MA",
+                "x-maturity": "candidate",
+                "x-addedIn": "1-0-0",
+                "description": "Titratable acidity — an energy-calculation input (organic acids 13 kJ/g)."
+              },
+              "glycerol": {
+                "type": "number",
+                "label": "Glycerol",
+                "unit": "g/L",
+                "x-standard": "OIV-MA",
+                "x-maturity": "candidate",
+                "x-addedIn": "1-0-0",
+                "description": "Energy-calculation input (18 kJ/g per FIC Annex XIV)."
+              },
+              "ph": {
+                "type": "number",
+                "label": "pH",
+                "x-standard": "OIV-MA",
+                "x-maturity": "stable",
+                "x-addedIn": "1-0-0",
+                "onLabel": false,
+                "description": "Winemaking / stability metric — NOT a label field (kept for the portfolio, never shown on the e-label)."
+              },
+              "energyKcal": {
+                "type": "number",
+                "label": "Energy",
+                "unit": "kcal/100ml",
+                "x-standard": "FIC-1169-2011",
+                "x-maturity": "candidate",
+                "x-addedIn": "1-0-0",
+                "onLabel": true,
+                "euMandatoryForElabel": false,
+                "description": "Energy value — mandatory ON the physical label (per 100 ml; expressed as both kJ and kcal). Derived from ethanol 29 kJ/g + carb/sugars 17 + glycerol 18 + organic acids 13."
+              }
+            }
+          },
+          "sparkling_wine": {
+            "label": "Sparkling Wine",
+            "fields": {
+              "abv": {
+                "type": "number",
+                "label": "Alcohol by Volume",
+                "unit": "% vol",
+                "x-standard": "FIC-1169-2011",
+                "x-maturity": "stable",
+                "x-addedIn": "1-0-0",
+                "onLabel": true,
+                "description": "Actual alcoholic strength by volume — mandatory on the physical label (FIC Art 9(1)(k))."
+              },
+              "totalSo2": {
+                "type": "number",
+                "label": "Total Sulphur Dioxide",
+                "unit": "mg/L",
+                "x-standard": "OIV-MA",
+                "x-maturity": "candidate",
+                "x-addedIn": "1-0-0",
+                "allergen": {
+                  "thresholdMgPerL": 10,
+                  "declaration": "Contains sulphites"
+                },
+                "description": "Total SO2; > 10 mg/L triggers the mandatory 'Contains sulphites' allergen declaration (FIC Annex II §12)."
+              },
+              "residualSugar": {
+                "type": "number",
+                "label": "Residual Sugar",
+                "unit": "g/L",
+                "x-standard": "OIV-MA",
+                "x-maturity": "candidate",
+                "x-addedIn": "1-0-0",
+                "description": "Drives the sugars/carbohydrate nutrition value; also bands the permitted SO2 maximum."
+              },
+              "totalAcidity": {
+                "type": "number",
+                "label": "Total Acidity",
+                "unit": "g/L (tartaric)",
+                "x-standard": "OIV-MA",
+                "x-maturity": "candidate",
+                "x-addedIn": "1-0-0",
+                "description": "Titratable acidity — an energy-calculation input (organic acids 13 kJ/g)."
+              },
+              "glycerol": {
+                "type": "number",
+                "label": "Glycerol",
+                "unit": "g/L",
+                "x-standard": "OIV-MA",
+                "x-maturity": "candidate",
+                "x-addedIn": "1-0-0",
+                "description": "Energy-calculation input (18 kJ/g per FIC Annex XIV)."
+              },
+              "ph": {
+                "type": "number",
+                "label": "pH",
+                "x-standard": "OIV-MA",
+                "x-maturity": "stable",
+                "x-addedIn": "1-0-0",
+                "onLabel": false,
+                "description": "Winemaking / stability metric — NOT a label field (kept for the portfolio, never shown on the e-label)."
+              },
+              "energyKcal": {
+                "type": "number",
+                "label": "Energy",
+                "unit": "kcal/100ml",
+                "x-standard": "FIC-1169-2011",
+                "x-maturity": "candidate",
+                "x-addedIn": "1-0-0",
+                "onLabel": true,
+                "euMandatoryForElabel": false,
+                "description": "Energy value — mandatory ON the physical label (per 100 ml; expressed as both kJ and kcal). Derived from ethanol 29 kJ/g + carb/sugars 17 + glycerol 18 + organic acids 13."
+              }
+            }
+          },
+          "fortified_wine": {
+            "label": "Fortified Wine",
+            "fields": {
+              "abv": {
+                "type": "number",
+                "label": "Alcohol by Volume",
+                "unit": "% vol",
+                "x-standard": "FIC-1169-2011",
+                "x-maturity": "stable",
+                "x-addedIn": "1-0-0",
+                "onLabel": true,
+                "description": "Actual alcoholic strength by volume — mandatory on the physical label (FIC Art 9(1)(k))."
+              },
+              "totalSo2": {
+                "type": "number",
+                "label": "Total Sulphur Dioxide",
+                "unit": "mg/L",
+                "x-standard": "OIV-MA",
+                "x-maturity": "candidate",
+                "x-addedIn": "1-0-0",
+                "allergen": {
+                  "thresholdMgPerL": 10,
+                  "declaration": "Contains sulphites"
+                },
+                "description": "Total SO2; > 10 mg/L triggers the mandatory 'Contains sulphites' allergen declaration (FIC Annex II §12)."
+              },
+              "residualSugar": {
+                "type": "number",
+                "label": "Residual Sugar",
+                "unit": "g/L",
+                "x-standard": "OIV-MA",
+                "x-maturity": "candidate",
+                "x-addedIn": "1-0-0",
+                "description": "Drives the sugars/carbohydrate nutrition value; also bands the permitted SO2 maximum."
+              },
+              "totalAcidity": {
+                "type": "number",
+                "label": "Total Acidity",
+                "unit": "g/L (tartaric)",
+                "x-standard": "OIV-MA",
+                "x-maturity": "candidate",
+                "x-addedIn": "1-0-0",
+                "description": "Titratable acidity — an energy-calculation input (organic acids 13 kJ/g)."
+              },
+              "glycerol": {
+                "type": "number",
+                "label": "Glycerol",
+                "unit": "g/L",
+                "x-standard": "OIV-MA",
+                "x-maturity": "candidate",
+                "x-addedIn": "1-0-0",
+                "description": "Energy-calculation input (18 kJ/g per FIC Annex XIV)."
+              },
+              "ph": {
+                "type": "number",
+                "label": "pH",
+                "x-standard": "OIV-MA",
+                "x-maturity": "stable",
+                "x-addedIn": "1-0-0",
+                "onLabel": false,
+                "description": "Winemaking / stability metric — NOT a label field (kept for the portfolio, never shown on the e-label)."
+              },
+              "energyKcal": {
+                "type": "number",
+                "label": "Energy",
+                "unit": "kcal/100ml",
+                "x-standard": "FIC-1169-2011",
+                "x-maturity": "candidate",
+                "x-addedIn": "1-0-0",
+                "onLabel": true,
+                "euMandatoryForElabel": false,
+                "description": "Energy value — mandatory ON the physical label (per 100 ml; expressed as both kJ and kcal). Derived from ethanol 29 kJ/g + carb/sugars 17 + glycerol 18 + organic acids 13."
+              }
+            }
+          },
+          "vermouth": {
+            "label": "Vermouth",
+            "fields": {
+              "abv": {
+                "type": "number",
+                "label": "Alcohol by Volume",
+                "unit": "% vol",
+                "x-standard": "FIC-1169-2011",
+                "x-maturity": "stable",
+                "x-addedIn": "1-0-0",
+                "onLabel": true,
+                "description": "Actual alcoholic strength by volume — mandatory on the physical label (FIC Art 9(1)(k))."
+              },
+              "totalSo2": {
+                "type": "number",
+                "label": "Total Sulphur Dioxide",
+                "unit": "mg/L",
+                "x-standard": "OIV-MA",
+                "x-maturity": "candidate",
+                "x-addedIn": "1-0-0",
+                "allergen": {
+                  "thresholdMgPerL": 10,
+                  "declaration": "Contains sulphites"
+                },
+                "description": "Total SO2; > 10 mg/L triggers the mandatory 'Contains sulphites' allergen declaration (FIC Annex II §12)."
+              },
+              "residualSugar": {
+                "type": "number",
+                "label": "Residual Sugar",
+                "unit": "g/L",
+                "x-standard": "OIV-MA",
+                "x-maturity": "candidate",
+                "x-addedIn": "1-0-0",
+                "description": "Drives the sugars/carbohydrate nutrition value; also bands the permitted SO2 maximum."
+              },
+              "totalAcidity": {
+                "type": "number",
+                "label": "Total Acidity",
+                "unit": "g/L (tartaric)",
+                "x-standard": "OIV-MA",
+                "x-maturity": "candidate",
+                "x-addedIn": "1-0-0",
+                "description": "Titratable acidity — an energy-calculation input (organic acids 13 kJ/g)."
+              },
+              "glycerol": {
+                "type": "number",
+                "label": "Glycerol",
+                "unit": "g/L",
+                "x-standard": "OIV-MA",
+                "x-maturity": "candidate",
+                "x-addedIn": "1-0-0",
+                "description": "Energy-calculation input (18 kJ/g per FIC Annex XIV)."
+              },
+              "ph": {
+                "type": "number",
+                "label": "pH",
+                "x-standard": "OIV-MA",
+                "x-maturity": "stable",
+                "x-addedIn": "1-0-0",
+                "onLabel": false,
+                "description": "Winemaking / stability metric — NOT a label field (kept for the portfolio, never shown on the e-label)."
+              },
+              "energyKcal": {
+                "type": "number",
+                "label": "Energy",
+                "unit": "kcal/100ml",
+                "x-standard": "FIC-1169-2011",
+                "x-maturity": "candidate",
+                "x-addedIn": "1-0-0",
+                "onLabel": true,
+                "euMandatoryForElabel": false,
+                "description": "Energy value — mandatory ON the physical label (per 100 ml; expressed as both kJ and kcal). Derived from ethanol 29 kJ/g + carb/sugars 17 + glycerol 18 + organic acids 13."
+              }
+            }
+          },
+          "flavored_wine": {
+            "label": "Aromatised / Flavoured Wine",
+            "fields": {
+              "abv": {
+                "type": "number",
+                "label": "Alcohol by Volume",
+                "unit": "% vol",
+                "x-standard": "FIC-1169-2011",
+                "x-maturity": "stable",
+                "x-addedIn": "1-0-0",
+                "onLabel": true,
+                "description": "Actual alcoholic strength by volume — mandatory on the physical label (FIC Art 9(1)(k))."
+              },
+              "totalSo2": {
+                "type": "number",
+                "label": "Total Sulphur Dioxide",
+                "unit": "mg/L",
+                "x-standard": "OIV-MA",
+                "x-maturity": "candidate",
+                "x-addedIn": "1-0-0",
+                "allergen": {
+                  "thresholdMgPerL": 10,
+                  "declaration": "Contains sulphites"
+                },
+                "description": "Total SO2; > 10 mg/L triggers the mandatory 'Contains sulphites' allergen declaration (FIC Annex II §12)."
+              },
+              "residualSugar": {
+                "type": "number",
+                "label": "Residual Sugar",
+                "unit": "g/L",
+                "x-standard": "OIV-MA",
+                "x-maturity": "candidate",
+                "x-addedIn": "1-0-0",
+                "description": "Drives the sugars/carbohydrate nutrition value; also bands the permitted SO2 maximum."
+              },
+              "totalAcidity": {
+                "type": "number",
+                "label": "Total Acidity",
+                "unit": "g/L (tartaric)",
+                "x-standard": "OIV-MA",
+                "x-maturity": "candidate",
+                "x-addedIn": "1-0-0",
+                "description": "Titratable acidity — an energy-calculation input (organic acids 13 kJ/g)."
+              },
+              "glycerol": {
+                "type": "number",
+                "label": "Glycerol",
+                "unit": "g/L",
+                "x-standard": "OIV-MA",
+                "x-maturity": "candidate",
+                "x-addedIn": "1-0-0",
+                "description": "Energy-calculation input (18 kJ/g per FIC Annex XIV)."
+              },
+              "ph": {
+                "type": "number",
+                "label": "pH",
+                "x-standard": "OIV-MA",
+                "x-maturity": "stable",
+                "x-addedIn": "1-0-0",
+                "onLabel": false,
+                "description": "Winemaking / stability metric — NOT a label field (kept for the portfolio, never shown on the e-label)."
+              },
+              "energyKcal": {
+                "type": "number",
+                "label": "Energy",
+                "unit": "kcal/100ml",
+                "x-standard": "FIC-1169-2011",
+                "x-maturity": "candidate",
+                "x-addedIn": "1-0-0",
+                "onLabel": true,
+                "euMandatoryForElabel": false,
+                "description": "Energy value — mandatory ON the physical label (per 100 ml; expressed as both kJ and kcal). Derived from ethanol 29 kJ/g + carb/sugars 17 + glycerol 18 + organic acids 13."
+              }
+            }
+          },
+          "beer": {
+            "label": "Beer",
+            "fields": {
+              "abv": {
+                "type": "number",
+                "label": "Alcohol by Volume",
+                "unit": "% vol",
+                "x-standard": "FIC-1169-2011",
+                "x-maturity": "stable",
+                "x-addedIn": "1-0-0",
+                "onLabel": true,
+                "description": "Actual alcoholic strength — mandatory on the physical label (FIC Art 9(1)(k))."
+              },
+              "energyKcal": {
+                "type": "number",
+                "label": "Energy",
+                "unit": "kcal/100ml",
+                "x-standard": "FIC-1169-2011",
+                "x-maturity": "candidate",
+                "x-addedIn": "1-0-0",
+                "euMandatoryForElabel": false,
+                "description": "Energy value — voluntary for FIC-exempt categories (>1.2% ABV); shown if the producer opts into a voluntary e-label."
+              }
+            }
+          },
+          "spirits": {
+            "label": "Spirits",
+            "fields": {
+              "abv": {
+                "type": "number",
+                "label": "Alcohol by Volume",
+                "unit": "% vol",
+                "x-standard": "FIC-1169-2011",
+                "x-maturity": "stable",
+                "x-addedIn": "1-0-0",
+                "onLabel": true,
+                "description": "Actual alcoholic strength — mandatory on the physical label (FIC Art 9(1)(k))."
+              },
+              "energyKcal": {
+                "type": "number",
+                "label": "Energy",
+                "unit": "kcal/100ml",
+                "x-standard": "FIC-1169-2011",
+                "x-maturity": "candidate",
+                "x-addedIn": "1-0-0",
+                "euMandatoryForElabel": false,
+                "description": "Energy value — voluntary for FIC-exempt categories (>1.2% ABV); shown if the producer opts into a voluntary e-label."
+              }
+            }
+          },
+          "cider_mixed_drinks": {
+            "label": "Cider & Mixed Drinks",
+            "fields": {
+              "abv": {
+                "type": "number",
+                "label": "Alcohol by Volume",
+                "unit": "% vol",
+                "x-standard": "FIC-1169-2011",
+                "x-maturity": "stable",
+                "x-addedIn": "1-0-0",
+                "onLabel": true,
+                "description": "Actual alcoholic strength — mandatory on the physical label (FIC Art 9(1)(k))."
+              },
+              "energyKcal": {
+                "type": "number",
+                "label": "Energy",
+                "unit": "kcal/100ml",
+                "x-standard": "FIC-1169-2011",
+                "x-maturity": "candidate",
+                "x-addedIn": "1-0-0",
+                "euMandatoryForElabel": false,
+                "description": "Energy value — voluntary for FIC-exempt categories (>1.2% ABV); shown if the producer opts into a voluntary e-label."
+              }
+            }
+          },
+          "non_alcoholic": {
+            "label": "Non-Alcoholic",
+            "fields": {
+              "abv": {
+                "type": "number",
+                "label": "Alcohol by Volume",
+                "unit": "% vol",
+                "x-standard": "FIC-1169-2011",
+                "x-maturity": "stable",
+                "x-addedIn": "1-0-0",
+                "onLabel": true,
+                "description": "Actual alcoholic strength — mandatory on the physical label (FIC Art 9(1)(k))."
+              },
+              "energyKcal": {
+                "type": "number",
+                "label": "Energy",
+                "unit": "kcal/100ml",
+                "x-standard": "FIC-1169-2011",
+                "x-maturity": "candidate",
+                "x-addedIn": "1-0-0",
+                "euMandatoryForElabel": false,
+                "description": "Energy value — voluntary for FIC-exempt categories (>1.2% ABV); shown if the producer opts into a voluntary e-label."
+              }
+            }
+          },
+          "other": {
+            "label": "Other",
+            "fields": {
+              "abv": {
+                "type": "number",
+                "label": "Alcohol by Volume",
+                "unit": "% vol",
+                "x-standard": "FIC-1169-2011",
+                "x-maturity": "stable",
+                "x-addedIn": "1-0-0",
+                "onLabel": true,
+                "description": "Actual alcoholic strength — mandatory on the physical label (FIC Art 9(1)(k))."
+              },
+              "energyKcal": {
+                "type": "number",
+                "label": "Energy",
+                "unit": "kcal/100ml",
+                "x-standard": "FIC-1169-2011",
+                "x-maturity": "candidate",
+                "x-addedIn": "1-0-0",
+                "euMandatoryForElabel": false,
+                "description": "Energy value — voluntary for FIC-exempt categories (>1.2% ABV); shown if the producer opts into a voluntary e-label."
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "dataId": "closure_options",
+      "canonicalVersion": 1,
+      "jsonData": [
+        "Natural cork",
+        "Technical cork",
+        "Screw cap",
+        "Glass closure",
+        "Crown cap",
+        "Other"
+      ]
+    },
+    {
+      "dataId": "country_codes",
+      "canonicalVersion": 2,
+      "jsonData": {
+        "description": "Full ISO-3166-1 alpha-2 set. Gates countryOfOrigin on opportunities and beverages. Business policy (which markets CellarNode buys in) lives in the separate operating_markets row.",
+        "codes": [
+          {
+            "code": "AD",
+            "name": "Andorra"
+          },
+          {
+            "code": "AE",
+            "name": "United Arab Emirates"
+          },
+          {
+            "code": "AF",
+            "name": "Afghanistan"
+          },
+          {
+            "code": "AG",
+            "name": "Antigua and Barbuda"
+          },
+          {
+            "code": "AI",
+            "name": "Anguilla"
+          },
+          {
+            "code": "AL",
+            "name": "Albania"
+          },
+          {
+            "code": "AM",
+            "name": "Armenia"
+          },
+          {
+            "code": "AO",
+            "name": "Angola"
+          },
+          {
+            "code": "AQ",
+            "name": "Antarctica"
+          },
+          {
+            "code": "AR",
+            "name": "Argentina"
+          },
+          {
+            "code": "AS",
+            "name": "American Samoa"
+          },
+          {
+            "code": "AT",
+            "name": "Austria"
+          },
+          {
+            "code": "AU",
+            "name": "Australia"
+          },
+          {
+            "code": "AW",
+            "name": "Aruba"
+          },
+          {
+            "code": "AX",
+            "name": "Åland Islands"
+          },
+          {
+            "code": "AZ",
+            "name": "Azerbaijan"
+          },
+          {
+            "code": "BA",
+            "name": "Bosnia and Herzegovina"
+          },
+          {
+            "code": "BB",
+            "name": "Barbados"
+          },
+          {
+            "code": "BD",
+            "name": "Bangladesh"
+          },
+          {
+            "code": "BE",
+            "name": "Belgium"
+          },
+          {
+            "code": "BF",
+            "name": "Burkina Faso"
+          },
+          {
+            "code": "BG",
+            "name": "Bulgaria"
+          },
+          {
+            "code": "BH",
+            "name": "Bahrain"
+          },
+          {
+            "code": "BI",
+            "name": "Burundi"
+          },
+          {
+            "code": "BJ",
+            "name": "Benin"
+          },
+          {
+            "code": "BL",
+            "name": "Saint Barthélemy"
+          },
+          {
+            "code": "BM",
+            "name": "Bermuda"
+          },
+          {
+            "code": "BN",
+            "name": "Brunei Darussalam"
+          },
+          {
+            "code": "BO",
+            "name": "Bolivia"
+          },
+          {
+            "code": "BQ",
+            "name": "Bonaire, Sint Eustatius and Saba"
+          },
+          {
+            "code": "BR",
+            "name": "Brazil"
+          },
+          {
+            "code": "BS",
+            "name": "Bahamas"
+          },
+          {
+            "code": "BT",
+            "name": "Bhutan"
+          },
+          {
+            "code": "BV",
+            "name": "Bouvet Island"
+          },
+          {
+            "code": "BW",
+            "name": "Botswana"
+          },
+          {
+            "code": "BY",
+            "name": "Belarus"
+          },
+          {
+            "code": "BZ",
+            "name": "Belize"
+          },
+          {
+            "code": "CA",
+            "name": "Canada"
+          },
+          {
+            "code": "CC",
+            "name": "Cocos (Keeling) Islands"
+          },
+          {
+            "code": "CD",
+            "name": "Democratic Republic of the Congo"
+          },
+          {
+            "code": "CF",
+            "name": "Central African Republic"
+          },
+          {
+            "code": "CG",
+            "name": "Republic of the Congo"
+          },
+          {
+            "code": "CH",
+            "name": "Switzerland"
+          },
+          {
+            "code": "CI",
+            "name": "Cote d'Ivoire"
+          },
+          {
+            "code": "CK",
+            "name": "Cook Islands"
+          },
+          {
+            "code": "CL",
+            "name": "Chile"
+          },
+          {
+            "code": "CM",
+            "name": "Cameroon"
+          },
+          {
+            "code": "CN",
+            "name": "China"
+          },
+          {
+            "code": "CO",
+            "name": "Colombia"
+          },
+          {
+            "code": "CR",
+            "name": "Costa Rica"
+          },
+          {
+            "code": "CU",
+            "name": "Cuba"
+          },
+          {
+            "code": "CV",
+            "name": "Cape Verde"
+          },
+          {
+            "code": "CW",
+            "name": "Curaçao"
+          },
+          {
+            "code": "CX",
+            "name": "Christmas Island"
+          },
+          {
+            "code": "CY",
+            "name": "Cyprus"
+          },
+          {
+            "code": "CZ",
+            "name": "Czechia"
+          },
+          {
+            "code": "DE",
+            "name": "Germany"
+          },
+          {
+            "code": "DJ",
+            "name": "Djibouti"
+          },
+          {
+            "code": "DK",
+            "name": "Denmark"
+          },
+          {
+            "code": "DM",
+            "name": "Dominica"
+          },
+          {
+            "code": "DO",
+            "name": "Dominican Republic"
+          },
+          {
+            "code": "DZ",
+            "name": "Algeria"
+          },
+          {
+            "code": "EC",
+            "name": "Ecuador"
+          },
+          {
+            "code": "EE",
+            "name": "Estonia"
+          },
+          {
+            "code": "EG",
+            "name": "Egypt"
+          },
+          {
+            "code": "EH",
+            "name": "Western Sahara"
+          },
+          {
+            "code": "ER",
+            "name": "Eritrea"
+          },
+          {
+            "code": "ES",
+            "name": "Spain"
+          },
+          {
+            "code": "ET",
+            "name": "Ethiopia"
+          },
+          {
+            "code": "FI",
+            "name": "Finland"
+          },
+          {
+            "code": "FJ",
+            "name": "Fiji"
+          },
+          {
+            "code": "FK",
+            "name": "Falkland Islands (Malvinas)"
+          },
+          {
+            "code": "FM",
+            "name": "Micronesia, Federated States of"
+          },
+          {
+            "code": "FO",
+            "name": "Faroe Islands"
+          },
+          {
+            "code": "FR",
+            "name": "France"
+          },
+          {
+            "code": "GA",
+            "name": "Gabon"
+          },
+          {
+            "code": "GB",
+            "name": "United Kingdom"
+          },
+          {
+            "code": "GD",
+            "name": "Grenada"
+          },
+          {
+            "code": "GE",
+            "name": "Georgia"
+          },
+          {
+            "code": "GF",
+            "name": "French Guiana"
+          },
+          {
+            "code": "GG",
+            "name": "Guernsey"
+          },
+          {
+            "code": "GH",
+            "name": "Ghana"
+          },
+          {
+            "code": "GI",
+            "name": "Gibraltar"
+          },
+          {
+            "code": "GL",
+            "name": "Greenland"
+          },
+          {
+            "code": "GM",
+            "name": "Republic of The Gambia"
+          },
+          {
+            "code": "GN",
+            "name": "Guinea"
+          },
+          {
+            "code": "GP",
+            "name": "Guadeloupe"
+          },
+          {
+            "code": "GQ",
+            "name": "Equatorial Guinea"
+          },
+          {
+            "code": "GR",
+            "name": "Greece"
+          },
+          {
+            "code": "GS",
+            "name": "South Georgia and the South Sandwich Islands"
+          },
+          {
+            "code": "GT",
+            "name": "Guatemala"
+          },
+          {
+            "code": "GU",
+            "name": "Guam"
+          },
+          {
+            "code": "GW",
+            "name": "Guinea-Bissau"
+          },
+          {
+            "code": "GY",
+            "name": "Guyana"
+          },
+          {
+            "code": "HK",
+            "name": "Hong Kong"
+          },
+          {
+            "code": "HM",
+            "name": "Heard Island and McDonald Islands"
+          },
+          {
+            "code": "HN",
+            "name": "Honduras"
+          },
+          {
+            "code": "HR",
+            "name": "Croatia"
+          },
+          {
+            "code": "HT",
+            "name": "Haiti"
+          },
+          {
+            "code": "HU",
+            "name": "Hungary"
+          },
+          {
+            "code": "ID",
+            "name": "Indonesia"
+          },
+          {
+            "code": "IE",
+            "name": "Ireland"
+          },
+          {
+            "code": "IL",
+            "name": "Israel"
+          },
+          {
+            "code": "IM",
+            "name": "Isle of Man"
+          },
+          {
+            "code": "IN",
+            "name": "India"
+          },
+          {
+            "code": "IO",
+            "name": "British Indian Ocean Territory"
+          },
+          {
+            "code": "IQ",
+            "name": "Iraq"
+          },
+          {
+            "code": "IR",
+            "name": "Islamic Republic of Iran"
+          },
+          {
+            "code": "IS",
+            "name": "Iceland"
+          },
+          {
+            "code": "IT",
+            "name": "Italy"
+          },
+          {
+            "code": "JE",
+            "name": "Jersey"
+          },
+          {
+            "code": "JM",
+            "name": "Jamaica"
+          },
+          {
+            "code": "JO",
+            "name": "Jordan"
+          },
+          {
+            "code": "JP",
+            "name": "Japan"
+          },
+          {
+            "code": "KE",
+            "name": "Kenya"
+          },
+          {
+            "code": "KG",
+            "name": "Kyrgyzstan"
+          },
+          {
+            "code": "KH",
+            "name": "Cambodia"
+          },
+          {
+            "code": "KI",
+            "name": "Kiribati"
+          },
+          {
+            "code": "KM",
+            "name": "Comoros"
+          },
+          {
+            "code": "KN",
+            "name": "Saint Kitts and Nevis"
+          },
+          {
+            "code": "KP",
+            "name": "North Korea"
+          },
+          {
+            "code": "KR",
+            "name": "South Korea"
+          },
+          {
+            "code": "KW",
+            "name": "Kuwait"
+          },
+          {
+            "code": "KY",
+            "name": "Cayman Islands"
+          },
+          {
+            "code": "KZ",
+            "name": "Kazakhstan"
+          },
+          {
+            "code": "LA",
+            "name": "Lao People's Democratic Republic"
+          },
+          {
+            "code": "LB",
+            "name": "Lebanon"
+          },
+          {
+            "code": "LC",
+            "name": "Saint Lucia"
+          },
+          {
+            "code": "LI",
+            "name": "Liechtenstein"
+          },
+          {
+            "code": "LK",
+            "name": "Sri Lanka"
+          },
+          {
+            "code": "LR",
+            "name": "Liberia"
+          },
+          {
+            "code": "LS",
+            "name": "Lesotho"
+          },
+          {
+            "code": "LT",
+            "name": "Lithuania"
+          },
+          {
+            "code": "LU",
+            "name": "Luxembourg"
+          },
+          {
+            "code": "LV",
+            "name": "Latvia"
+          },
+          {
+            "code": "LY",
+            "name": "Libya"
+          },
+          {
+            "code": "MA",
+            "name": "Morocco"
+          },
+          {
+            "code": "MC",
+            "name": "Monaco"
+          },
+          {
+            "code": "MD",
+            "name": "Moldova, Republic of"
+          },
+          {
+            "code": "ME",
+            "name": "Montenegro"
+          },
+          {
+            "code": "MF",
+            "name": "Saint Martin (French part)"
+          },
+          {
+            "code": "MG",
+            "name": "Madagascar"
+          },
+          {
+            "code": "MH",
+            "name": "Marshall Islands"
+          },
+          {
+            "code": "MK",
+            "name": "The Republic of North Macedonia"
+          },
+          {
+            "code": "ML",
+            "name": "Mali"
+          },
+          {
+            "code": "MM",
+            "name": "Myanmar"
+          },
+          {
+            "code": "MN",
+            "name": "Mongolia"
+          },
+          {
+            "code": "MO",
+            "name": "Macao"
+          },
+          {
+            "code": "MP",
+            "name": "Northern Mariana Islands"
+          },
+          {
+            "code": "MQ",
+            "name": "Martinique"
+          },
+          {
+            "code": "MR",
+            "name": "Mauritania"
+          },
+          {
+            "code": "MS",
+            "name": "Montserrat"
+          },
+          {
+            "code": "MT",
+            "name": "Malta"
+          },
+          {
+            "code": "MU",
+            "name": "Mauritius"
+          },
+          {
+            "code": "MV",
+            "name": "Maldives"
+          },
+          {
+            "code": "MW",
+            "name": "Malawi"
+          },
+          {
+            "code": "MX",
+            "name": "Mexico"
+          },
+          {
+            "code": "MY",
+            "name": "Malaysia"
+          },
+          {
+            "code": "MZ",
+            "name": "Mozambique"
+          },
+          {
+            "code": "NA",
+            "name": "Namibia"
+          },
+          {
+            "code": "NC",
+            "name": "New Caledonia"
+          },
+          {
+            "code": "NE",
+            "name": "Niger"
+          },
+          {
+            "code": "NF",
+            "name": "Norfolk Island"
+          },
+          {
+            "code": "NG",
+            "name": "Nigeria"
+          },
+          {
+            "code": "NI",
+            "name": "Nicaragua"
+          },
+          {
+            "code": "NL",
+            "name": "Netherlands"
+          },
+          {
+            "code": "NO",
+            "name": "Norway"
+          },
+          {
+            "code": "NP",
+            "name": "Nepal"
+          },
+          {
+            "code": "NR",
+            "name": "Nauru"
+          },
+          {
+            "code": "NU",
+            "name": "Niue"
+          },
+          {
+            "code": "NZ",
+            "name": "New Zealand"
+          },
+          {
+            "code": "OM",
+            "name": "Oman"
+          },
+          {
+            "code": "PA",
+            "name": "Panama"
+          },
+          {
+            "code": "PE",
+            "name": "Peru"
+          },
+          {
+            "code": "PF",
+            "name": "French Polynesia"
+          },
+          {
+            "code": "PG",
+            "name": "Papua New Guinea"
+          },
+          {
+            "code": "PH",
+            "name": "Philippines"
+          },
+          {
+            "code": "PK",
+            "name": "Pakistan"
+          },
+          {
+            "code": "PL",
+            "name": "Poland"
+          },
+          {
+            "code": "PM",
+            "name": "Saint Pierre and Miquelon"
+          },
+          {
+            "code": "PN",
+            "name": "Pitcairn"
+          },
+          {
+            "code": "PR",
+            "name": "Puerto Rico"
+          },
+          {
+            "code": "PS",
+            "name": "State of Palestine"
+          },
+          {
+            "code": "PT",
+            "name": "Portugal"
+          },
+          {
+            "code": "PW",
+            "name": "Palau"
+          },
+          {
+            "code": "PY",
+            "name": "Paraguay"
+          },
+          {
+            "code": "QA",
+            "name": "Qatar"
+          },
+          {
+            "code": "RE",
+            "name": "Reunion"
+          },
+          {
+            "code": "RO",
+            "name": "Romania"
+          },
+          {
+            "code": "RS",
+            "name": "Serbia"
+          },
+          {
+            "code": "RU",
+            "name": "Russian Federation"
+          },
+          {
+            "code": "RW",
+            "name": "Rwanda"
+          },
+          {
+            "code": "SA",
+            "name": "Saudi Arabia"
+          },
+          {
+            "code": "SB",
+            "name": "Solomon Islands"
+          },
+          {
+            "code": "SC",
+            "name": "Seychelles"
+          },
+          {
+            "code": "SD",
+            "name": "Sudan"
+          },
+          {
+            "code": "SE",
+            "name": "Sweden"
+          },
+          {
+            "code": "SG",
+            "name": "Singapore"
+          },
+          {
+            "code": "SH",
+            "name": "Saint Helena"
+          },
+          {
+            "code": "SI",
+            "name": "Slovenia"
+          },
+          {
+            "code": "SJ",
+            "name": "Svalbard and Jan Mayen"
+          },
+          {
+            "code": "SK",
+            "name": "Slovakia"
+          },
+          {
+            "code": "SL",
+            "name": "Sierra Leone"
+          },
+          {
+            "code": "SM",
+            "name": "San Marino"
+          },
+          {
+            "code": "SN",
+            "name": "Senegal"
+          },
+          {
+            "code": "SO",
+            "name": "Somalia"
+          },
+          {
+            "code": "SR",
+            "name": "Suriname"
+          },
+          {
+            "code": "SS",
+            "name": "South Sudan"
+          },
+          {
+            "code": "ST",
+            "name": "Sao Tome and Principe"
+          },
+          {
+            "code": "SV",
+            "name": "El Salvador"
+          },
+          {
+            "code": "SX",
+            "name": "Sint Maarten (Dutch part)"
+          },
+          {
+            "code": "SY",
+            "name": "Syrian Arab Republic"
+          },
+          {
+            "code": "SZ",
+            "name": "Eswatini"
+          },
+          {
+            "code": "TC",
+            "name": "Turks and Caicos Islands"
+          },
+          {
+            "code": "TD",
+            "name": "Chad"
+          },
+          {
+            "code": "TF",
+            "name": "French Southern Territories"
+          },
+          {
+            "code": "TG",
+            "name": "Togo"
+          },
+          {
+            "code": "TH",
+            "name": "Thailand"
+          },
+          {
+            "code": "TJ",
+            "name": "Tajikistan"
+          },
+          {
+            "code": "TK",
+            "name": "Tokelau"
+          },
+          {
+            "code": "TL",
+            "name": "Timor-Leste"
+          },
+          {
+            "code": "TM",
+            "name": "Turkmenistan"
+          },
+          {
+            "code": "TN",
+            "name": "Tunisia"
+          },
+          {
+            "code": "TO",
+            "name": "Tonga"
+          },
+          {
+            "code": "TR",
+            "name": "Turkey"
+          },
+          {
+            "code": "TT",
+            "name": "Trinidad and Tobago"
+          },
+          {
+            "code": "TV",
+            "name": "Tuvalu"
+          },
+          {
+            "code": "TW",
+            "name": "Taiwan, Province of China"
+          },
+          {
+            "code": "TZ",
+            "name": "United Republic of Tanzania"
+          },
+          {
+            "code": "UA",
+            "name": "Ukraine"
+          },
+          {
+            "code": "UG",
+            "name": "Uganda"
+          },
+          {
+            "code": "UM",
+            "name": "United States Minor Outlying Islands"
+          },
+          {
+            "code": "US",
+            "name": "United States"
+          },
+          {
+            "code": "UY",
+            "name": "Uruguay"
+          },
+          {
+            "code": "UZ",
+            "name": "Uzbekistan"
+          },
+          {
+            "code": "VA",
+            "name": "Holy See (Vatican City State)"
+          },
+          {
+            "code": "VC",
+            "name": "Saint Vincent and the Grenadines"
+          },
+          {
+            "code": "VE",
+            "name": "Venezuela"
+          },
+          {
+            "code": "VG",
+            "name": "Virgin Islands, British"
+          },
+          {
+            "code": "VI",
+            "name": "Virgin Islands, U.S."
+          },
+          {
+            "code": "VN",
+            "name": "Vietnam"
+          },
+          {
+            "code": "VU",
+            "name": "Vanuatu"
+          },
+          {
+            "code": "WF",
+            "name": "Wallis and Futuna"
+          },
+          {
+            "code": "WS",
+            "name": "Samoa"
+          },
+          {
+            "code": "XK",
+            "name": "Kosovo"
+          },
+          {
+            "code": "YE",
+            "name": "Yemen"
+          },
+          {
+            "code": "YT",
+            "name": "Mayotte"
+          },
+          {
+            "code": "ZA",
+            "name": "South Africa"
+          },
+          {
+            "code": "ZM",
+            "name": "Zambia"
+          },
+          {
+            "code": "ZW",
+            "name": "Zimbabwe"
+          }
+        ]
+      }
+    },
+    {
+      "dataId": "dedup_config",
+      "canonicalVersion": 1,
+      "jsonData": {
+        "version": 1,
+        "description": "Dedup calibration. autoDismissThreshold/autoMergeThreshold are LLM-confidence cutoffs (0-100). nameThreshold/producerThreshold are Jaro-Winkler cutoffs (0-1) for same-category flagging. crossCategory* gate the guarded cross-category pass; crossCategoryMaxCandidates caps the extra LLM calls per beverage.",
+        "autoDismissThreshold": 85,
+        "autoMergeThreshold": 90,
+        "nameThreshold": 0.9,
+        "producerThreshold": 0.8,
+        "crossCategoryNameThreshold": 0.95,
+        "crossCategoryProducerThreshold": 0.9,
+        "crossCategoryMaxCandidates": 5
+      }
+    },
+    {
+      "dataId": "elabel_compliance_requirements",
+      "canonicalVersion": 1,
+      "jsonData": {
+        "schemaVer": "1-0-0",
+        "version": 1,
+        "standardsRefs": {
+          "EU-2021-2117": {
+            "name": "Regulation (EU) 2021/2117 amending CMO Reg (EU) 1308/2013 (wine ingredient list + nutrition + e-label)",
+            "version": "applicable 2023-12-08",
+            "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32021R2117"
+          },
+          "FIC-1169-2011": {
+            "name": "Regulation (EU) 1169/2011 on the provision of food information to consumers (FIC)",
+            "version": "consolidated",
+            "url": "https://eur-lex.europa.eu/eli/reg/2011/1169/oj/eng"
+          },
+          "EU-2026-471": {
+            "name": "Regulation (EU) 2026/471 (wine package — de-alcoholised terms, PDO/PGI, export-only exemption)",
+            "version": "in force ~2026-03-18 (confirm OJ)",
+            "url": "https://www.europarl.europa.eu/legislative-train/theme-sustaining-our-quality-of-life-food-security-water-and-nature/file-wine-package"
+          },
+          "OIV-MA": {
+            "name": "OIV Compendium of International Methods of Analysis",
+            "version": "Current Edition",
+            "url": "https://www.oiv.int/standards"
+          },
+          "CellarNode": {
+            "name": "CellarNode Native Extension",
+            "version": "1-0-0",
+            "url": "https://standards.cellarnode.com"
+          }
+        },
+        "disclaimer": "Research-grounded, NOT legal advice. Confirm exact OJ/EUR-Lex wording, the per-market language matrix, national derogations, and Reg (EU) 2026/471 specifics with counsel before shipping label copy (see docs/elabel/PRD.md §11.3).",
+        "energyFactorsKjPerG": {
+          "ethanol": 29,
+          "carbohydrate": 17,
+          "sugars": 17,
+          "protein": 17,
+          "fat": 37,
+          "glycerol": 18,
+          "organicAcids": 13
+        },
+        "allergensAnnexII": [
+          "cereals_containing_gluten",
+          "crustaceans",
+          "eggs",
+          "fish",
+          "peanuts",
+          "soybeans",
+          "milk",
+          "tree_nuts",
+          "celery",
+          "mustard",
+          "sesame",
+          "sulphites",
+          "lupin",
+          "molluscs"
+        ],
+        "nutrition": {
+          "basisPer": "100ml",
+          "energyUnits": [
+            "kJ",
+            "kcal"
+          ],
+          "items": [
+            "energy",
+            "fat",
+            "saturates",
+            "carbohydrate",
+            "sugars",
+            "protein",
+            "salt"
+          ],
+          "energyOnlyOnLabelDerogation": "FIC Art 30(4) — alcoholic beverages >1.2% may limit the on-pack nutrition to energy value only."
+        },
+        "language": {
+          "euOfficialLanguageCount": 24,
+          "rule": "FIC Art 15 — a language easily understood by consumers of the marketing Member State; a Member State may require its national language. 24 is a practical upper bound, NOT a legal cap."
+        },
+        "qr": {
+          "headingRequiredWord": "Ingredients",
+          "sameFieldOfVision": true,
+          "basis": "FIC Art 18(1) — a text heading containing 'Ingredients' (localised) is required; a generic 'i' symbol is insufficient."
+        },
+        "eLabelPageRules": {
+          "noTracking": true,
+          "noMarketing": true,
+          "geoForLanguageOnly": true,
+          "dedicatedPage": true,
+          "basis": "Recital of Reg (EU) 2021/2117 + Commission Notice C/2023/1190.",
+          "gs1DigitalLink": {
+            "canonical": "https://id.gs1.org/01/{gtin}",
+            "linkType": "gs1:pip",
+            "languageKey": "ISO 3166-1 alpha-2 country code"
+          }
+        },
+        "dealcoholised": {
+          "deAlcoholisedMaxAbv": 0.5,
+          "partiallyDeAlcoholised": "> 0.5% vol and below the wine-category minimum",
+          "durabilityDate": "Minimum-durability date mandatory for de-alcoholised wines < 10% ABV (ordinary wine >= 10% is exempt).",
+          "note": "EU wine regime has no '<=0.05% alcohol-free' wine category; terms are 'de-alcoholised' (<=0.5%) and 'partially de-alcoholised'. Reg (EU) 2026/471 allows PDO/PGI retention."
+        },
+        "categories": {
+          "wine": {
+            "scope": "mandatory",
+            "basis": "Reg (EU) 2021/2117 overrides the FIC Art 16(4) >1.2% ABV exemption for wine / aromatised-wine products.",
+            "effective": "Wine from the 2024 harvest; wine produced before 2023-12-08 grandfathered until stocks exhausted.",
+            "onLabelMandatory": [
+              "allergens",
+              "energyValue",
+              "category",
+              "abv",
+              "netQuantity",
+              "provenance",
+              "bottler",
+              "lot"
+            ],
+            "eLabelPermitted": [
+              "fullNutritionDeclaration",
+              "fullIngredientList"
+            ],
+            "allergens": {
+              "sulphites": {
+                "thresholdMgPerL": 10,
+                "declaration": "Contains sulphites"
+              }
+            },
+            "x-maturity": "candidate"
+          },
+          "sparkling_wine": {
+            "scope": "mandatory",
+            "basis": "Reg (EU) 2021/2117 overrides the FIC Art 16(4) >1.2% ABV exemption for wine / aromatised-wine products.",
+            "effective": "Wine from the 2024 harvest; wine produced before 2023-12-08 grandfathered until stocks exhausted.",
+            "onLabelMandatory": [
+              "allergens",
+              "energyValue",
+              "category",
+              "abv",
+              "netQuantity",
+              "provenance",
+              "bottler",
+              "lot"
+            ],
+            "eLabelPermitted": [
+              "fullNutritionDeclaration",
+              "fullIngredientList"
+            ],
+            "allergens": {
+              "sulphites": {
+                "thresholdMgPerL": 10,
+                "declaration": "Contains sulphites"
+              }
+            },
+            "x-maturity": "candidate"
+          },
+          "fortified_wine": {
+            "scope": "mandatory",
+            "basis": "Reg (EU) 2021/2117 overrides the FIC Art 16(4) >1.2% ABV exemption for wine / aromatised-wine products.",
+            "effective": "Wine from the 2024 harvest; wine produced before 2023-12-08 grandfathered until stocks exhausted.",
+            "onLabelMandatory": [
+              "allergens",
+              "energyValue",
+              "category",
+              "abv",
+              "netQuantity",
+              "provenance",
+              "bottler",
+              "lot"
+            ],
+            "eLabelPermitted": [
+              "fullNutritionDeclaration",
+              "fullIngredientList"
+            ],
+            "allergens": {
+              "sulphites": {
+                "thresholdMgPerL": 10,
+                "declaration": "Contains sulphites"
+              }
+            },
+            "x-maturity": "candidate"
+          },
+          "vermouth": {
+            "scope": "mandatory",
+            "basis": "Aromatised wine product under Reg (EU) 251/2014; 2021/2117 removed the FIC exemption. Ingredient designation per Delegated Reg (EU) 2024/585.",
+            "effective": "Wine from the 2024 harvest; wine produced before 2023-12-08 grandfathered until stocks exhausted.",
+            "onLabelMandatory": [
+              "allergens",
+              "energyValue",
+              "category",
+              "abv",
+              "netQuantity",
+              "provenance",
+              "bottler",
+              "lot"
+            ],
+            "eLabelPermitted": [
+              "fullNutritionDeclaration",
+              "fullIngredientList"
+            ],
+            "allergens": {
+              "sulphites": {
+                "thresholdMgPerL": 10,
+                "declaration": "Contains sulphites"
+              }
+            },
+            "x-maturity": "candidate"
+          },
+          "flavored_wine": {
+            "scope": "voluntary",
+            "basis": "'Flavoured & fruit wine' (HS 2206) is NOT a grapevine product nor a Reg (EU) 251/2014 aromatised-wine product, so it stays FIC-exempt (>1.2% ABV) → e-label voluntary. The grape-based aromatised-wine regime (mandatory) is the 'vermouth' category. Confirm per-product if a fruit/flavoured product is in fact grape-wine-based.",
+            "mustDeclareOnLabel": [
+              "abv",
+              "allergens"
+            ],
+            "eLabelPermitted": [
+              "fullNutritionDeclaration",
+              "fullIngredientList"
+            ],
+            "nationalRulesNote": "Member States may keep national ingredient-list rules for alcoholic beverages (e.g. Germany mandates an ingredient list on beer) — needs a country-by-country layer.",
+            "x-maturity": "candidate"
+          },
+          "beer": {
+            "scope": "voluntary",
+            "basis": "FIC Art 16(4) exempts beverages >1.2% ABV from the mandatory ingredient list + nutrition declaration; the e-label is voluntary industry practice.",
+            "mustDeclareOnLabel": [
+              "abv",
+              "allergens"
+            ],
+            "eLabelPermitted": [
+              "fullNutritionDeclaration",
+              "fullIngredientList"
+            ],
+            "nationalRulesNote": "Member States may keep national ingredient-list rules for alcoholic beverages (e.g. Germany mandates an ingredient list on beer) — needs a country-by-country layer.",
+            "x-maturity": "candidate",
+            "allergens": {
+              "glutenCereals": [
+                "barley",
+                "wheat"
+              ],
+              "note": "Annex II item 1 exempts cereals used for distillates — NOT beer."
+            }
+          },
+          "spirits": {
+            "scope": "voluntary",
+            "basis": "Reg (EU) 2019/787 added no mandatory ingredient/nutrition declaration; e-label voluntary (spiritsEUROPE 'U-label'). Cereals used for distillates are NOT a declarable allergen.",
+            "mustDeclareOnLabel": [
+              "abv",
+              "allergens"
+            ],
+            "eLabelPermitted": [
+              "fullNutritionDeclaration",
+              "fullIngredientList"
+            ],
+            "nationalRulesNote": "Member States may keep national ingredient-list rules for alcoholic beverages (e.g. Germany mandates an ingredient list on beer) — needs a country-by-country layer.",
+            "x-maturity": "candidate"
+          },
+          "cider_mixed_drinks": {
+            "scope": "voluntary",
+            "basis": "FIC Art 16(4) exempts beverages >1.2% ABV from the mandatory ingredient list + nutrition declaration; the e-label is voluntary industry practice.",
+            "mustDeclareOnLabel": [
+              "abv",
+              "allergens"
+            ],
+            "eLabelPermitted": [
+              "fullNutritionDeclaration",
+              "fullIngredientList"
+            ],
+            "nationalRulesNote": "Member States may keep national ingredient-list rules for alcoholic beverages (e.g. Germany mandates an ingredient list on beer) — needs a country-by-country layer.",
+            "x-maturity": "candidate"
+          },
+          "non_alcoholic": {
+            "scope": "full_food",
+            "basis": "At or below 1.2% ABV the FIC >1.2% exemption falls away — full food labelling applies.",
+            "mustDeclareOnLabel": [
+              "fullIngredientList",
+              "fullNutritionDeclaration",
+              "allergens",
+              "netQuantity",
+              "minimumDurabilityDate"
+            ],
+            "note": "Distinct from de-alcoholised WINE (a grapevine product — see top-level `dealcoholised`).",
+            "x-maturity": "candidate"
+          },
+          "other": {
+            "scope": "voluntary",
+            "basis": "Unspecified category — treated as FIC-exempt/voluntary by default; classify before relying on this.",
+            "mustDeclareOnLabel": [
+              "abv",
+              "allergens"
+            ],
+            "eLabelPermitted": [
+              "fullNutritionDeclaration",
+              "fullIngredientList"
+            ],
+            "nationalRulesNote": "Member States may keep national ingredient-list rules for alcoholic beverages (e.g. Germany mandates an ingredient list on beer) — needs a country-by-country layer.",
+            "x-maturity": "candidate"
+          }
+        }
+      }
+    },
+    {
+      "dataId": "enterprise_types",
+      "canonicalVersion": 2,
+      "jsonData": [
+        "producer",
+        "distributor",
+        "importer"
+      ]
+    },
+    {
+      "dataId": "fic_label_schemas",
+      "canonicalVersion": 2,
+      "jsonData": {
+        "version": "1-1-0",
+        "categories": {
+          "wine": {
+            "fields": [
+              {
+                "key": "energyKj",
+                "label": "Energy (kJ)",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "kJ/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "energyKj"
+              },
+              {
+                "key": "energyKcal",
+                "label": "Energy (kcal)",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "kcal/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "energyKcal"
+              },
+              {
+                "key": "fat",
+                "label": "Fat",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "g/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "fat"
+              },
+              {
+                "key": "saturates",
+                "label": "of which saturates",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "g/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "saturates"
+              },
+              {
+                "key": "carbohydrate",
+                "label": "Carbohydrate",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "g/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "carbohydrate"
+              },
+              {
+                "key": "sugars",
+                "label": "of which sugars",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "g/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "sugars"
+              },
+              {
+                "key": "protein",
+                "label": "Protein",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "g/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "protein"
+              },
+              {
+                "key": "salt",
+                "label": "Salt",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "g/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "salt"
+              },
+              {
+                "key": "containsSulfites",
+                "label": "Contains sulfites",
+                "group": "allergens",
+                "inputType": "boolean",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "containsSulfites"
+              },
+              {
+                "key": "containsEgg",
+                "label": "Contains egg / egg products",
+                "group": "allergens",
+                "inputType": "boolean",
+                "mandatory": true,
+                "source": "entered"
+              },
+              {
+                "key": "containsMilk",
+                "label": "Contains milk / milk products",
+                "group": "allergens",
+                "inputType": "boolean",
+                "mandatory": true,
+                "source": "entered"
+              },
+              {
+                "key": "ingredients",
+                "label": "Ingredients",
+                "group": "ingredients",
+                "inputType": "string[]",
+                "mandatory": true,
+                "source": "entered"
+              },
+              {
+                "key": "additives",
+                "label": "Additives",
+                "group": "additives",
+                "inputType": "string[]",
+                "mandatory": false,
+                "source": "entered"
+              },
+              {
+                "key": "responsibleOperator",
+                "label": "Responsible operator (bottler)",
+                "group": "operator",
+                "inputType": "text",
+                "mandatory": true,
+                "source": "entered"
+              },
+              {
+                "key": "lot",
+                "label": "Lot number",
+                "group": "particulars",
+                "inputType": "text",
+                "mandatory": false,
+                "source": "entered"
+              }
+            ]
+          },
+          "sparkling_wine": {
+            "fields": [
+              {
+                "key": "energyKj",
+                "label": "Energy (kJ)",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "kJ/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "energyKj"
+              },
+              {
+                "key": "energyKcal",
+                "label": "Energy (kcal)",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "kcal/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "energyKcal"
+              },
+              {
+                "key": "fat",
+                "label": "Fat",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "g/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "fat"
+              },
+              {
+                "key": "saturates",
+                "label": "of which saturates",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "g/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "saturates"
+              },
+              {
+                "key": "carbohydrate",
+                "label": "Carbohydrate",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "g/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "carbohydrate"
+              },
+              {
+                "key": "sugars",
+                "label": "of which sugars",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "g/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "sugars"
+              },
+              {
+                "key": "protein",
+                "label": "Protein",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "g/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "protein"
+              },
+              {
+                "key": "salt",
+                "label": "Salt",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "g/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "salt"
+              },
+              {
+                "key": "containsSulfites",
+                "label": "Contains sulfites",
+                "group": "allergens",
+                "inputType": "boolean",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "containsSulfites"
+              },
+              {
+                "key": "containsEgg",
+                "label": "Contains egg / egg products",
+                "group": "allergens",
+                "inputType": "boolean",
+                "mandatory": true,
+                "source": "entered"
+              },
+              {
+                "key": "containsMilk",
+                "label": "Contains milk / milk products",
+                "group": "allergens",
+                "inputType": "boolean",
+                "mandatory": true,
+                "source": "entered"
+              },
+              {
+                "key": "ingredients",
+                "label": "Ingredients",
+                "group": "ingredients",
+                "inputType": "string[]",
+                "mandatory": true,
+                "source": "entered"
+              },
+              {
+                "key": "additives",
+                "label": "Additives",
+                "group": "additives",
+                "inputType": "string[]",
+                "mandatory": false,
+                "source": "entered"
+              },
+              {
+                "key": "responsibleOperator",
+                "label": "Responsible operator (bottler)",
+                "group": "operator",
+                "inputType": "text",
+                "mandatory": true,
+                "source": "entered"
+              },
+              {
+                "key": "lot",
+                "label": "Lot number",
+                "group": "particulars",
+                "inputType": "text",
+                "mandatory": false,
+                "source": "entered"
+              }
+            ]
+          },
+          "fortified_wine": {
+            "fields": [
+              {
+                "key": "energyKj",
+                "label": "Energy (kJ)",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "kJ/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "energyKj"
+              },
+              {
+                "key": "energyKcal",
+                "label": "Energy (kcal)",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "kcal/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "energyKcal"
+              },
+              {
+                "key": "fat",
+                "label": "Fat",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "g/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "fat"
+              },
+              {
+                "key": "saturates",
+                "label": "of which saturates",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "g/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "saturates"
+              },
+              {
+                "key": "carbohydrate",
+                "label": "Carbohydrate",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "g/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "carbohydrate"
+              },
+              {
+                "key": "sugars",
+                "label": "of which sugars",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "g/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "sugars"
+              },
+              {
+                "key": "protein",
+                "label": "Protein",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "g/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "protein"
+              },
+              {
+                "key": "salt",
+                "label": "Salt",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "g/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "salt"
+              },
+              {
+                "key": "containsSulfites",
+                "label": "Contains sulfites",
+                "group": "allergens",
+                "inputType": "boolean",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "containsSulfites"
+              },
+              {
+                "key": "containsEgg",
+                "label": "Contains egg / egg products",
+                "group": "allergens",
+                "inputType": "boolean",
+                "mandatory": true,
+                "source": "entered"
+              },
+              {
+                "key": "containsMilk",
+                "label": "Contains milk / milk products",
+                "group": "allergens",
+                "inputType": "boolean",
+                "mandatory": true,
+                "source": "entered"
+              },
+              {
+                "key": "ingredients",
+                "label": "Ingredients",
+                "group": "ingredients",
+                "inputType": "string[]",
+                "mandatory": true,
+                "source": "entered"
+              },
+              {
+                "key": "additives",
+                "label": "Additives",
+                "group": "additives",
+                "inputType": "string[]",
+                "mandatory": false,
+                "source": "entered"
+              },
+              {
+                "key": "responsibleOperator",
+                "label": "Responsible operator (bottler)",
+                "group": "operator",
+                "inputType": "text",
+                "mandatory": true,
+                "source": "entered"
+              },
+              {
+                "key": "lot",
+                "label": "Lot number",
+                "group": "particulars",
+                "inputType": "text",
+                "mandatory": false,
+                "source": "entered"
+              }
+            ]
+          },
+          "vermouth": {
+            "fields": [
+              {
+                "key": "energyKj",
+                "label": "Energy (kJ)",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "kJ/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "energyKj"
+              },
+              {
+                "key": "energyKcal",
+                "label": "Energy (kcal)",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "kcal/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "energyKcal"
+              },
+              {
+                "key": "fat",
+                "label": "Fat",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "g/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "fat"
+              },
+              {
+                "key": "saturates",
+                "label": "of which saturates",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "g/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "saturates"
+              },
+              {
+                "key": "carbohydrate",
+                "label": "Carbohydrate",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "g/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "carbohydrate"
+              },
+              {
+                "key": "sugars",
+                "label": "of which sugars",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "g/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "sugars"
+              },
+              {
+                "key": "protein",
+                "label": "Protein",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "g/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "protein"
+              },
+              {
+                "key": "salt",
+                "label": "Salt",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "g/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "salt"
+              },
+              {
+                "key": "containsSulfites",
+                "label": "Contains sulfites",
+                "group": "allergens",
+                "inputType": "boolean",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "containsSulfites"
+              },
+              {
+                "key": "containsEgg",
+                "label": "Contains egg / egg products",
+                "group": "allergens",
+                "inputType": "boolean",
+                "mandatory": true,
+                "source": "entered"
+              },
+              {
+                "key": "containsMilk",
+                "label": "Contains milk / milk products",
+                "group": "allergens",
+                "inputType": "boolean",
+                "mandatory": true,
+                "source": "entered"
+              },
+              {
+                "key": "ingredients",
+                "label": "Ingredients",
+                "group": "ingredients",
+                "inputType": "string[]",
+                "mandatory": true,
+                "source": "entered"
+              },
+              {
+                "key": "additives",
+                "label": "Additives",
+                "group": "additives",
+                "inputType": "string[]",
+                "mandatory": false,
+                "source": "entered"
+              },
+              {
+                "key": "responsibleOperator",
+                "label": "Responsible operator (bottler)",
+                "group": "operator",
+                "inputType": "text",
+                "mandatory": true,
+                "source": "entered"
+              },
+              {
+                "key": "lot",
+                "label": "Lot number",
+                "group": "particulars",
+                "inputType": "text",
+                "mandatory": false,
+                "source": "entered"
+              }
+            ]
+          },
+          "beer": {
+            "fields": [
+              {
+                "key": "energyKj",
+                "label": "Energy (kJ)",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "kJ/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "energyKj"
+              },
+              {
+                "key": "energyKcal",
+                "label": "Energy (kcal)",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "kcal/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "energyKcal"
+              },
+              {
+                "key": "fat",
+                "label": "Fat",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "g/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "fat"
+              },
+              {
+                "key": "saturates",
+                "label": "of which saturates",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "g/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "saturates"
+              },
+              {
+                "key": "carbohydrate",
+                "label": "Carbohydrate",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "g/100ml",
+                "mandatory": true,
+                "source": "entered"
+              },
+              {
+                "key": "sugars",
+                "label": "of which sugars",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "g/100ml",
+                "mandatory": true,
+                "source": "entered"
+              },
+              {
+                "key": "protein",
+                "label": "Protein",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "g/100ml",
+                "mandatory": true,
+                "source": "entered"
+              },
+              {
+                "key": "salt",
+                "label": "Salt",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "g/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "salt"
+              },
+              {
+                "key": "containsGluten",
+                "label": "Contains gluten (cereals: barley/wheat)",
+                "group": "allergens",
+                "inputType": "boolean",
+                "mandatory": true,
+                "source": "entered"
+              },
+              {
+                "key": "containsSulfites",
+                "label": "Contains sulfites",
+                "group": "allergens",
+                "inputType": "boolean",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "containsSulfites"
+              },
+              {
+                "key": "ingredients",
+                "label": "Ingredients",
+                "group": "ingredients",
+                "inputType": "string[]",
+                "mandatory": true,
+                "source": "entered"
+              },
+              {
+                "key": "additives",
+                "label": "Additives",
+                "group": "additives",
+                "inputType": "string[]",
+                "mandatory": false,
+                "source": "entered"
+              },
+              {
+                "key": "responsibleOperator",
+                "label": "Responsible operator (bottler/brewer)",
+                "group": "operator",
+                "inputType": "text",
+                "mandatory": true,
+                "source": "entered"
+              },
+              {
+                "key": "lot",
+                "label": "Lot number",
+                "group": "particulars",
+                "inputType": "text",
+                "mandatory": false,
+                "source": "entered"
+              }
+            ]
+          },
+          "non_alcoholic": {
+            "fields": [
+              {
+                "key": "energyKj",
+                "label": "Energy (kJ)",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "kJ/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "energyKj"
+              },
+              {
+                "key": "energyKcal",
+                "label": "Energy (kcal)",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "kcal/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "energyKcal"
+              },
+              {
+                "key": "fat",
+                "label": "Fat",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "g/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "fat"
+              },
+              {
+                "key": "saturates",
+                "label": "of which saturates",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "g/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "saturates"
+              },
+              {
+                "key": "carbohydrate",
+                "label": "Carbohydrate",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "g/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "carbohydrate"
+              },
+              {
+                "key": "sugars",
+                "label": "of which sugars",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "g/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "sugars"
+              },
+              {
+                "key": "protein",
+                "label": "Protein",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "g/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "protein"
+              },
+              {
+                "key": "salt",
+                "label": "Salt",
+                "group": "nutrition",
+                "inputType": "number",
+                "unit": "g/100ml",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "salt"
+              },
+              {
+                "key": "containsSulfites",
+                "label": "Contains sulfites",
+                "group": "allergens",
+                "inputType": "boolean",
+                "mandatory": true,
+                "source": "derived",
+                "derivation": "containsSulfites"
+              },
+              {
+                "key": "containsEgg",
+                "label": "Contains egg / egg products",
+                "group": "allergens",
+                "inputType": "boolean",
+                "mandatory": true,
+                "source": "entered"
+              },
+              {
+                "key": "containsMilk",
+                "label": "Contains milk / milk products",
+                "group": "allergens",
+                "inputType": "boolean",
+                "mandatory": true,
+                "source": "entered"
+              },
+              {
+                "key": "ingredients",
+                "label": "Ingredients",
+                "group": "ingredients",
+                "inputType": "string[]",
+                "mandatory": true,
+                "source": "entered"
+              },
+              {
+                "key": "additives",
+                "label": "Additives",
+                "group": "additives",
+                "inputType": "string[]",
+                "mandatory": false,
+                "source": "entered"
+              },
+              {
+                "key": "responsibleOperator",
+                "label": "Responsible operator (bottler)",
+                "group": "operator",
+                "inputType": "text",
+                "mandatory": true,
+                "source": "entered"
+              },
+              {
+                "key": "lot",
+                "label": "Lot number",
+                "group": "particulars",
+                "inputType": "text",
+                "mandatory": false,
+                "source": "entered"
+              },
+              {
+                "key": "minDurabilityDate",
+                "label": "Best before / Use by date",
+                "group": "particulars",
+                "inputType": "text",
+                "mandatory": true,
+                "source": "entered"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "dataId": "operating_markets",
+      "canonicalVersion": 1,
+      "jsonData": {
+        "description": "Curated operating markets. Gates tenders.target_country, markets.country and organizations.country. Narrower than country_codes by design — this is a commercial policy list, not a geographic one.",
+        "codes": [
+          {
+            "code": "FR",
+            "name": "France"
+          },
+          {
+            "code": "IT",
+            "name": "Italy"
+          },
+          {
+            "code": "ES",
+            "name": "Spain"
+          },
+          {
+            "code": "PT",
+            "name": "Portugal"
+          },
+          {
+            "code": "DE",
+            "name": "Germany"
+          },
+          {
+            "code": "AT",
+            "name": "Austria"
+          },
+          {
+            "code": "GR",
+            "name": "Greece"
+          },
+          {
+            "code": "HU",
+            "name": "Hungary"
+          },
+          {
+            "code": "GB",
+            "name": "United Kingdom"
+          },
+          {
+            "code": "CH",
+            "name": "Switzerland"
+          },
+          {
+            "code": "BE",
+            "name": "Belgium"
+          },
+          {
+            "code": "NL",
+            "name": "Netherlands"
+          },
+          {
+            "code": "DK",
+            "name": "Denmark"
+          },
+          {
+            "code": "SE",
+            "name": "Sweden"
+          },
+          {
+            "code": "NO",
+            "name": "Norway"
+          },
+          {
+            "code": "FI",
+            "name": "Finland"
+          },
+          {
+            "code": "PL",
+            "name": "Poland"
+          },
+          {
+            "code": "CZ",
+            "name": "Czechia"
+          },
+          {
+            "code": "HR",
+            "name": "Croatia"
+          },
+          {
+            "code": "SI",
+            "name": "Slovenia"
+          },
+          {
+            "code": "GE",
+            "name": "Georgia"
+          },
+          {
+            "code": "TR",
+            "name": "Turkey"
+          },
+          {
+            "code": "LB",
+            "name": "Lebanon"
+          },
+          {
+            "code": "ZA",
+            "name": "South Africa"
+          },
+          {
+            "code": "US",
+            "name": "United States"
+          },
+          {
+            "code": "CA",
+            "name": "Canada"
+          },
+          {
+            "code": "MX",
+            "name": "Mexico"
+          },
+          {
+            "code": "AR",
+            "name": "Argentina"
+          },
+          {
+            "code": "CL",
+            "name": "Chile"
+          },
+          {
+            "code": "UY",
+            "name": "Uruguay"
+          },
+          {
+            "code": "BR",
+            "name": "Brazil"
+          },
+          {
+            "code": "AU",
+            "name": "Australia"
+          },
+          {
+            "code": "NZ",
+            "name": "New Zealand"
+          },
+          {
+            "code": "JP",
+            "name": "Japan"
+          },
+          {
+            "code": "CN",
+            "name": "China"
+          },
+          {
+            "code": "KR",
+            "name": "South Korea"
+          },
+          {
+            "code": "IN",
+            "name": "India"
+          },
+          {
+            "code": "TH",
+            "name": "Thailand"
+          },
+          {
+            "code": "SG",
+            "name": "Singapore"
+          },
+          {
+            "code": "AE",
+            "name": "United Arab Emirates"
+          }
+        ]
+      }
+    },
+    {
+      "dataId": "packaging_options",
+      "canonicalVersion": 1,
+      "jsonData": [
+        "PET",
+        "BiB (Bag-in-Box)",
+        "Glass",
+        "Aluminum",
+        "Light-weight glass bottle"
+      ]
+    },
+    {
+      "dataId": "price_recommendation_config",
+      "canonicalVersion": 3,
+      "jsonData": {
+        "version": 1,
+        "description": "Producer offer price as a fraction of retail price. minMultiplier (0.88) leaves headroom; maxMultiplier (1.0) keeps offers competitive while preserving importer margin.",
+        "minMultiplier": 0.88,
+        "maxMultiplier": 1
+      }
+    },
+    {
+      "dataId": "price_types",
+      "canonicalVersion": 3,
+      "jsonData": {
+        "items": [
+          {
+            "id": "exw",
+            "code": "EXW",
+            "label": "Ex Works",
+            "description": "Buyer takes title at the seller's premises and bears all subsequent freight, insurance, customs, and delivery costs.",
+            "group": "incoterm_2020",
+            "sortOrder": 10
+          },
+          {
+            "id": "fca",
+            "code": "FCA",
+            "label": "Free Carrier",
+            "description": "Seller delivers goods cleared for export to a named carrier or place. Buyer takes responsibility from that point onward.",
+            "group": "incoterm_2020",
+            "sortOrder": 20
+          },
+          {
+            "id": "cpt",
+            "code": "CPT",
+            "label": "Carriage Paid To",
+            "description": "Seller pays for carriage to the named destination. Risk transfers to the buyer once goods are handed to the first carrier. Any mode of transport.",
+            "group": "incoterm_2020",
+            "sortOrder": 30
+          },
+          {
+            "id": "cip",
+            "code": "CIP",
+            "label": "Carriage and Insurance Paid To",
+            "description": "As CPT, but seller also pays for insurance covering the buyer's risk during carriage. Insurance must be at the higher (all-risks) ICC A level. Any mode of transport.",
+            "group": "incoterm_2020",
+            "sortOrder": 40
+          },
+          {
+            "id": "dap",
+            "code": "DAP",
+            "label": "Delivered at Place",
+            "description": "Seller pays to deliver goods to the named destination. Buyer handles import clearance, duties, and taxes unless otherwise agreed.",
+            "group": "incoterm_2020",
+            "sortOrder": 50
+          },
+          {
+            "id": "dpu",
+            "code": "DPU",
+            "label": "Delivered at Place Unloaded",
+            "description": "Seller delivers and unloads goods at the named destination. Buyer handles import clearance and duties/taxes.",
+            "group": "incoterm_2020",
+            "sortOrder": 60
+          },
+          {
+            "id": "ddp",
+            "code": "DDP",
+            "label": "Delivered Duty Paid",
+            "description": "Seller bears nearly all costs and risks, including import duties and taxes, until goods are delivered to the buyer.",
+            "group": "incoterm_2020",
+            "sortOrder": 70
+          },
+          {
+            "id": "fas",
+            "code": "FAS",
+            "label": "Free Alongside Ship",
+            "description": "Seller delivers when goods are placed alongside the named vessel at the port of shipment. Risk transfers at that point. Sea/inland-waterway only.",
+            "group": "incoterm_2020",
+            "sortOrder": 80
+          },
+          {
+            "id": "fob",
+            "code": "FOB",
+            "label": "Free On Board",
+            "description": "Seller delivers goods loaded onto the named vessel at the port of shipment; risk transfers once on board. Sea/inland-waterway only.",
+            "group": "incoterm_2020",
+            "sortOrder": 90
+          },
+          {
+            "id": "cfr",
+            "code": "CFR",
+            "label": "Cost and Freight",
+            "description": "Seller pays transport to the destination port. Risk transfers to the buyer once goods are loaded at origin. Sea/inland-waterway only.",
+            "group": "incoterm_2020",
+            "sortOrder": 100
+          },
+          {
+            "id": "cif",
+            "code": "CIF",
+            "label": "Cost, Insurance and Freight",
+            "description": "As CFR, but seller also pays marine insurance to the destination port. Risk still transfers at shipment. Sea/inland-waterway only.",
+            "group": "incoterm_2020",
+            "sortOrder": 110
+          },
+          {
+            "id": "landed",
+            "code": "Landed",
+            "label": "Landed Price",
+            "description": "Informal commercial term: product cost including freight, duties, and related import costs up to arrival in market. Scope should always be clarified between parties.",
+            "group": "informal",
+            "sortOrder": 120
+          },
+          {
+            "id": "warehouse",
+            "code": "Warehouse",
+            "label": "Warehouse Price",
+            "description": "Price for goods delivered into a specified warehouse. Common in commercial discussions; not a formal Incoterm.",
+            "group": "informal",
+            "sortOrder": 130
+          },
+          {
+            "id": "net_net",
+            "code": "Net/net",
+            "label": "Net/net Price",
+            "description": "Final price after discounts, rebates, or commissions. Common in distributor and importer negotiations.",
+            "group": "informal",
+            "sortOrder": 140
+          },
+          {
+            "id": "gross",
+            "code": "Gross",
+            "label": "Gross Price",
+            "description": "List price before discounts, rebates, promotional support, or other deductions.",
+            "group": "informal",
+            "sortOrder": 150
+          }
+        ]
+      }
+    },
+    {
+      "dataId": "procurement_channels",
+      "canonicalVersion": 2,
+      "jsonData": {
+        "version": 2,
+        "description": "Who sourced the tender — determines routing, subscription gating, and recommended-price applicability",
+        "options": [
+          {
+            "id": "monopoly",
+            "name": "State Monopoly",
+            "description": "Government-controlled retail (Systembolaget, Vinmonopolet, LCBO, SAQ)",
+            "defaultAccessModel": "directed",
+            "isMonopoly": true
+          },
+          {
+            "id": "importer",
+            "name": "Importer",
+            "description": "Direct importer request for specific beverages",
+            "defaultAccessModel": "directed",
+            "isMonopoly": false
+          },
+          {
+            "id": "direct",
+            "name": "Direct",
+            "description": "Open market request from restaurants, retailers, or other buyers",
+            "defaultAccessModel": "open",
+            "isMonopoly": false
+          }
+        ]
+      }
+    },
+    {
+      "dataId": "subtype_aliases",
+      "canonicalVersion": 1,
+      "jsonData": {
+        "version": 1,
+        "description": "Partial-credit subtype-alias pairs for the matching ranker. Each pair grants `weight` (0..1) fraction of full subtype points when one side appears as variant subtype and the other as opportunity subtype. IDs must exist as subtypes inside beverage_classifications.",
+        "pairs": [
+          {
+            "pair": [
+              "ipa",
+              "ale"
+            ],
+            "weight": 0.6
+          },
+          {
+            "pair": [
+              "stout",
+              "porter"
+            ],
+            "weight": 0.6
+          },
+          {
+            "pair": [
+              "lager",
+              "pilsner"
+            ],
+            "weight": 0.7
+          },
+          {
+            "pair": [
+              "ale",
+              "wheat_beer"
+            ],
+            "weight": 0.5
+          },
+          {
+            "pair": [
+              "red",
+              "rose"
+            ],
+            "weight": 0.5
+          },
+          {
+            "pair": [
+              "white",
+              "rose"
+            ],
+            "weight": 0.5
+          },
+          {
+            "pair": [
+              "brandy",
+              "grappa"
+            ],
+            "weight": 0.5
+          },
+          {
+            "pair": [
+              "dry_cider",
+              "sweet_cider"
+            ],
+            "weight": 0.7
+          },
+          {
+            "pair": [
+              "perry",
+              "dry_cider"
+            ],
+            "weight": 0.5
+          }
+        ]
+      }
+    }
+  ]
+}

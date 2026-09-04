@@ -46,6 +46,15 @@ export interface AccessModelRegistryEntry {
  * but consumers rendering before the query resolves (SSR, offline, brand
  * new client with no React-Query cache) get a usable list immediately —
  * the static floor mirrors the canonical 2 rows verbatim.
+ *
+ * Hand-typed literal (CEL-1604 review fixup, P0-1) rather than derived from
+ * the vendored canonical JSON at module load — see `./canonical/index.ts`.
+ * A prior draft derived this via `getCanonicalAccessModels()`, but no
+ * bundler can prove that derivation pure, so it pulled the 157 KB vendored
+ * JSON into every consumer of this module. `__tests__/canonical-parity.test.ts`
+ * pins this literal (and the `ACCESS_MODELS` tuple above, which stays
+ * hand-typed for the same reason — deriving it would also widen
+ * `AccessModel` to `string`) against that same vendored row instead.
  */
 export const STATIC_ACCESS_MODEL_REGISTRY: readonly AccessModelRegistryEntry[] =
   Object.freeze([

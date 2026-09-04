@@ -8,6 +8,7 @@
     "declarationMap": true,
     "sourceMap": true,
     "verbatimModuleSyntax": true,
+    "resolveJsonModule": true,
     "skipLibCheck": true,
     "jsx": "react-jsx",
     "outDir": "dist",

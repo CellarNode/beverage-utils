@@ -47,6 +47,15 @@ export function formatBeverageSubtype(
  * Canonical lowercase enterprise type IDs that match the
  * `enterprise_types` reference-data rows and the Drizzle
  * `enterpriseType` pgEnum in cellarnode-backend-v2.
+ *
+ * Hand-typed literal (CEL-1604 review fixup, P0-1) rather than derived from
+ * the vendored canonical JSON at module load — deriving it pulled the 157 KB
+ * `src/canonical/reference-data.json` into every consumer of this module's
+ * exports (`formatEnterpriseTypeLabel`, `buildEnterpriseTypeLabelMap`),
+ * since no bundler can prove the derivation pure and drop the unused JSON.
+ * `__tests__/canonical-parity.test.ts` pins this literal (and the
+ * `EnterpriseType` union in `./types.ts`) against that same vendored row
+ * instead, so drift still fails loudly without paying the runtime cost.
  */
 const ENTERPRISE_TYPE_LABELS: LabelMap = {
   producer: "Producer",

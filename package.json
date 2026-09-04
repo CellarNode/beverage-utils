@@ -32,7 +32,8 @@
   "types": "./dist/index.d.ts",
   "sideEffects": false,
   "files": [
-    "dist"
+    "dist",
+    "!dist/canonical"
   ],
   "keywords": [
     "cellarnode",
@@ -46,9 +47,12 @@
   "scripts": {
     "build": "tsc",
     "generate:country-codes": "node scripts/generate-country-codes.mjs",
+    "generate:classifications": "node scripts/generate-classifications.mjs",
+    "check-classifications-fresh": "node scripts/generate-classifications.mjs && git diff --exit-code src/classifications.generated.ts",
+    "sync-canonical": "node scripts/sync-canonical.mjs",
     "prepublishOnly": "npm run build",
     "check-exports": "npx publint && npx @arethetypeswrong/cli --pack .",
-    "test": "vitest run",
+    "test": "npm run check-classifications-fresh && vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit"
   },

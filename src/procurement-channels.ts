@@ -68,6 +68,15 @@ export interface ProcurementChannelRegistryEntry {
  * but consumers rendering before the query resolves (SSR, offline, brand
  * new client with no React-Query cache) get a usable list immediately —
  * the static floor mirrors the canonical 3 rows verbatim.
+ *
+ * Hand-typed literal (CEL-1604 review fixup, P0-1) rather than derived from
+ * the vendored canonical JSON at module load — see `./canonical/index.ts`.
+ * A prior draft derived this via `getCanonicalProcurementChannels()`, but no
+ * bundler can prove that derivation pure, so it pulled the 157 KB vendored
+ * JSON into every consumer of this module. `__tests__/canonical-parity.test.ts`
+ * pins this literal (and the `PROCUREMENT_CHANNELS` tuple above, which stays
+ * hand-typed for the same reason — deriving it would also widen
+ * `ProcurementChannel` to `string`) against that same vendored row instead.
  */
 export const STATIC_PROCUREMENT_CHANNEL_REGISTRY: readonly ProcurementChannelRegistryEntry[] =
   Object.freeze([

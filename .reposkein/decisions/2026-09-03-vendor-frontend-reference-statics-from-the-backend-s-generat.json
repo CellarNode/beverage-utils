@@ -1,0 +1,30 @@
+{
+  "id": "adr:2026-09-03-vendor-frontend-reference-statics-from-the-backend-s-generat",
+  "alternatives": "- **Runtime-fetch the canonical rows instead of vendoring** — rejected: the package's stated design is zero-network statics with a TanStack Query hook layered on top for live data; vendoring keeps the SSR/offline/no-cache fallback working exactly as today. - **Derive statics from the vendored JSON at module load** (rather than hand-typing + pinning) — tried and reverted (P0-1): no bundler can prove the derivation pure, so it pulled the 157 KB JSON into every consumer's bundle. The parity test gives the same safety guarantee at zero runtime cost.",
+  "anchors": [],
+  "body_hash": "v2:c8e15df450c3fb66e61e3b2a18bc8049dd07ecc7beb2afa8403eaf3897d0bd45",
+  "consequences": "A backend canonical-row change that isn't followed by `pnpm sync-canonical` + a matching static update now fails this package's test suite immediately, instead of silently drifting until a bug report. This package carries one more manual step (re-sync + `pnpm generate:classifications`, wired into sync-canonical) whenever the backend changes a governed row; the failure mode if someone forgets is a loud test/CI failure (`check-classifications-fresh`), not a silent one. `src/canonical/reference-data.json` and `src/canonical/index.ts` are not part of the package's public API and are excluded from the published tarball — consumers should keep using the existing per-domain statics/formatters and `getCanonicalClassifications()`, not read the vendored JSON directly.",
+  "context": "`@cellarnode/beverage-utils` ships hand-typed statics (`ACCESS_MODELS`, `PACKAGING_OPTIONS`, `CLOSURE_OPTIONS`, `ACTIVE_CURRENCIES`, `PROCUREMENT_CHANNELS`, `EnterpriseType`, `COUNTRY_CODES` + `STATIC_COUNTRY_LABEL_MAP`) that are each supposed to mirror one row of `cellarnode-backend-v2`'s canonical `reference_data` table. Before CEL-1604 nothing enforced that mirror: a backend row could change (a new packaging option, a renamed currency) and every frontend static would silently keep serving the stale list until a human noticed — this package's existing 10-file test suite covered each static's own formatting/normalization behavior, but had no test comparing any static against the backend row it claims to mirror. CEL-1604 (spec `docs/specs/2026-09-02-matching-canonical-deepening.md`, D13 + D27) pairs this with a backend change (PR #608) that commits a generated, deterministic dump of the canonical rows — `apps/cellarnode/src/db/canonical/reference-data.json` — behind a CI staleness check. The frontend half needs a way to consume that dump and prove its own statics are still correct against it.",
+  "decided_at": "2026-09-03",
+  "decided_by": "agent",
+  "decision": "Vendor a deterministic copy of the backend's generated `reference-data.json` into this package at `src/canonical/reference-data.json` (sorted by `dataId`, re-serialized — not byte-for-byte), refreshed by `pnpm sync-canonical` (`scripts/sync-canonical.mjs` — pure filesystem copy, never network or DB). Add a typed accessor module (`src/canonical/index.ts`) over that vendored JSON and a new test suite (`__tests__/canonical-parity.test.ts`, vitest) that deep-equals every shipped static against the accessor for its corresponding row. Every shipped static stays **hand-typed** — the literal-union tuples (`AccessModel`, `Packaging`, `Closure`, `Currency`, `ProcurementChannel`, `CountryCode`) for the usual reason (deriving them would widen the type to plain `string`), and also the richer registries (`STATIC_ACCESS_MODEL_REGISTRY`, `STATIC_PROCUREMENT_CHANNEL_REGISTRY`, the enterprise-type label map) that an earlier draft derived from the vendored JSON at module load — reverted because no bundler can prove that derivation pure, so it pulled the 157 KB vendored JSON into every consumer's bundle (review fixup, P0-1). The parity suite pins all of them instead. The one deliberately public accessor, `getCanonicalClassifications()` (`src/classifications.ts`), reads a generated TypeScript literal (`src/classifications.generated.ts`, from `scripts/generate-classifications.mjs`) rather than the runtime JSON, so it stays cheap for every caller. `src/canonical/reference-data.json` and `src/canonical/index.ts` are test-only — nothing shipped imports either.",
+  "paths": [
+    "scripts/sync-canonical.mjs",
+    "scripts/generate-classifications.mjs",
+    "src/classifications.ts",
+    "src/classifications.generated.ts",
+    "src/canonical/index.ts",
+    "src/canonical/reference-data.json",
+    "__tests__/canonical-parity.test.ts",
+    "src/access-models.ts",
+    "src/procurement-channels.ts",
+    "src/format.ts",
+    "src/index.ts"
+  ],
+  "status": "accepted",
+  "supersedes": [],
+  "title": "Vendor frontend reference statics from the backend's generated canonical JSON, pinned by a parity test",
+  "trigger": {
+    "kind": "manual"
+  }
+}
