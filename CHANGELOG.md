@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.12.0 — 2026-09-04
 
 **Breaking:** removed the React adapter's `useBeverageLabelMap` /
 `beverageLabelMapOptions` (`src/react/use-beverage-label-map.ts`), folded
