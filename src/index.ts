@@ -121,4 +121,20 @@ export type {
 // currently hand-copies this taxonomy in
 // `ui/src/opportunities/wizard/classification-options.ts` and should read
 // it from here instead once it takes this package's release.
-export { getCanonicalClassifications } from "./classifications.js";
+//
+// CEL-1607 adds the five-function-per-domain shape the other canonical
+// vocabularies above already have: `is` / `normalizeAndCheck` / `getEntry`,
+// scoped per-category for subtypes since subtype ids repeat across
+// categories (`red` under both `wine` and `sparkling_wine`). `format` and
+// `build` already shipped as `formatBeverageLabel` / `formatBeverageSubtype`
+// / `formatBeverageType` (`./format.js`) and `buildLabelMap` (`./label-map.js`)
+// above.
+export {
+  getCanonicalClassifications,
+  getBeverageCategoryEntry,
+  getBeverageSubtypeEntry,
+  isBeverageCategoryId,
+  isBeverageSubtypeId,
+  normalizeAndCheckBeverageCategoryId,
+  normalizeAndCheckBeverageSubtypeId,
+} from "./classifications.js";

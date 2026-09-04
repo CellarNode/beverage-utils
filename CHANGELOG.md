@@ -2,6 +2,53 @@
 
 ## Unreleased
 
+One parameterised `useReferenceData(row, { transport })` hook (CEL-1607,
+spec `docs/specs/2026-09-02-matching-canonical-deepening.md` §2 card 09
+"Dashboard client", D13). Stacks on the CEL-1604 vendoring change above —
+`transport` (base URL + fetch implementation) is now the only thing that
+varies between a same-origin admin caller and a cross-origin public caller;
+`row` owns the path, response parsing, and static fallback for one
+canonical reference-data row. This PR ships the hook + the classification
+row it consolidates; the three duplicated fetchers it replaces
+(`use-classification-options.ts` in admin-dashboard-v2, `useClassifications.ts`
+in producer-dashboard, and this package's own `useBeverageLabelMap`) migrate
+in a follow-up PR once this release is out — see the PR description for the
+per-consumer migration plan.
+
+- **New `src/react/use-reference-data.ts`** — `useReferenceData(row, { transport })`
+  + `referenceDataOptions()` (the underlying `queryOptions()` builder, for
+  prefetch/SSR loaders) + the `ReferenceDataRow<T>` / `ReferenceDataTransport`
+  / `UseReferenceDataOptions` / `UseReferenceDataResult<T>` types. `data` is
+  always a usable value — the row's `fallback` while loading, on a network
+  error, on a non-2xx response, or when `row.parse` returns `null` for a
+  malformed body — so consumers never branch on `isLoading` just to avoid
+  rendering `undefined`.
+- **New `src/react/classification-reference-row.ts`** — `CLASSIFICATION_REFERENCE_ROW`
+  (the `beverage_classifications` row: admin path
+  `/admin/reference-data/beverage_classifications`, public path
+  `/api/v1/classifications/beverage-types` — the two surfaces name this row
+  differently, which is exactly the divergence `useReferenceData`'s `paths`
+  field exists to hide), `parseBeverageClassificationEnvelope()`, and the
+  `useBeverageClassifications(options)` convenience wrapper. Falls back to
+  `getCanonicalClassifications()` (the generated literal), never the vendored
+  `src/canonical/reference-data.json` — importing this module does not reach
+  the 157 KB vendored JSON (CEL-1604 review fixup, P0-1; see the PR body's
+  bundle-size proof).
+- **Classification joins the five-function-per-domain shape** the other
+  canonical vocabularies already have (CEL-1607). Format (`formatBeverageLabel`
+  / `formatBeverageSubtype` / `formatBeverageType`) and build (`buildLabelMap`)
+  already shipped; this adds **is** (`isBeverageCategoryId`,
+  `isBeverageSubtypeId`), **normalizeAndCheck** (`normalizeAndCheckBeverageCategoryId`,
+  `normalizeAndCheckBeverageSubtypeId`), and **getEntry**
+  (`getBeverageCategoryEntry`, `getBeverageSubtypeEntry`) to `src/classifications.ts`,
+  all root-exported. Subtype lookups are always category-scoped (subtype ids
+  repeat across categories — `red` under both `wine` and `sparkling_wine`),
+  and `getBeverageSubtypeEntry` returns `null` for the orphan shape (a valid
+  subtype id under the *wrong* category), which is the detection primitive
+  CEL-1607 D12's repair-banner work needs.
+- Packaging, closure, country, and currency hooks/statics are unchanged —
+  out of scope for this ticket.
+
 Vendor the backend canonical reference-data JSON, pinned by a parity test
 suite (CEL-1604 D13/D27). Backend half is `cellarnode-backend-v2` PR #608,
 which commits a generated `apps/cellarnode/src/db/canonical/reference-data.json`
