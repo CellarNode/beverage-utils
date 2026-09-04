@@ -183,4 +183,31 @@ describe("useReferenceData — same-origin admin vs cross-origin public transpor
     // queryKey namespaces admin vs public rather than colliding.
     expect(fetchFn).toHaveBeenCalledTimes(2);
   });
+
+  it("uses distinct cache keys per base URL for the same transport kind (CEL-1607 review fixup)", async () => {
+    const fetchFn = vi.fn(async () => new Response(JSON.stringify({ id: "x" }), { status: 200 }));
+    const Wrapper = wrapper();
+
+    const a = renderHook(
+      () =>
+        useReferenceData(ROW, {
+          transport: { kind: "public", baseUrl: "https://a.example.com", fetchFn },
+        }),
+      { wrapper: Wrapper },
+    );
+    const b = renderHook(
+      () =>
+        useReferenceData(ROW, {
+          transport: { kind: "public", baseUrl: "https://b.example.com", fetchFn },
+        }),
+      { wrapper: Wrapper },
+    );
+
+    await waitFor(() => expect(a.result.current.isLoading).toBe(false));
+    await waitFor(() => expect(b.result.current.isLoading).toBe(false));
+
+    // Two public transports on different origins must not share a cache
+    // entry — before this fix the default key omitted baseUrl entirely.
+    expect(fetchFn).toHaveBeenCalledTimes(2);
+  });
 });

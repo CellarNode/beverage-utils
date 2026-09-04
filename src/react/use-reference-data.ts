@@ -66,8 +66,11 @@ export interface UseReferenceDataOptions {
   transport: ReferenceDataTransport;
   /**
    * Override the React Query cache key. Defaults to
-   * `["reference-data", transport.kind, row.dataId]` so same-kind callers
-   * across a dashboard share one cache entry without per-call overrides.
+   * `["reference-data", transport.kind, row.dataId, transport.baseUrl ?? ""]`
+   * so same-kind callers on the same origin across a dashboard share one
+   * cache entry without per-call overrides, while two same-kind callers
+   * pointed at different origins (SSR, multi-tenant) don't collide
+   * (CEL-1607 review fixup).
    */
   queryKey?: readonly unknown[];
   /**
@@ -111,7 +114,7 @@ export function referenceDataOptions<T>(row: ReferenceDataRow<T>, options: UseRe
   const baseUrl = transport.baseUrl ?? "";
 
   return queryOptions({
-    queryKey: queryKey ?? ["reference-data", transport.kind, row.dataId],
+    queryKey: queryKey ?? ["reference-data", transport.kind, row.dataId, baseUrl],
     queryFn: async (): Promise<T> => {
       const res = await fetchImpl(`${baseUrl}${path}`, transport.requestInit);
       if (!res.ok) {
