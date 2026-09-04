@@ -31,6 +31,23 @@ describe("parseBeverageClassificationEnvelope", () => {
     ).toBeNull();
   });
 
+  it("returns null when a category entry has an id and nothing else (CEL-1607 review fixup)", () => {
+    // Regression for the id-only predicate: {id:"wine"} used to pass this
+    // check, then throw downstream in buildLabelMap/getBeverageSubtypeEntry
+    // because `name` and `subtypes` were assumed present, not verified.
+    expect(
+      parseBeverageClassificationEnvelope({ jsonData: { categories: [{ id: "wine" }] } }),
+    ).toBeNull();
+  });
+
+  it("returns null when a subtype entry is missing a string name", () => {
+    expect(
+      parseBeverageClassificationEnvelope({
+        jsonData: { categories: [{ id: "wine", name: "Still Wine", subtypes: [{ id: "red" }] }] },
+      }),
+    ).toBeNull();
+  });
+
   it("returns null for non-object input", () => {
     expect(parseBeverageClassificationEnvelope(null)).toBeNull();
     expect(parseBeverageClassificationEnvelope("nope")).toBeNull();

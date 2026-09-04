@@ -1,25 +1,44 @@
-import type { BeverageCategory, BeverageClassification } from "../types.js";
+import type { BeverageCategory, BeverageClassification, BeverageSubtype } from "../types.js";
 import { getCanonicalClassifications } from "../classifications.js";
 import type { ReferenceDataRow, UseReferenceDataOptions, UseReferenceDataResult } from "./use-reference-data.js";
 import { useReferenceData } from "./use-reference-data.js";
 
 /**
- * Best-effort structural check that a parsed `categories` array is at
- * least shaped like `BeverageCategory[]` (each entry an object with a
- * non-empty string `id`). Mirrors the duck-typing the three fetchers this
- * hook replaces already did — the payload doesn't carry a runtime schema,
- * so this is deliberately permissive on `subtypes` / `hsHeading` shape and
- * strict only on the field every caller keys off of (`id`).
+ * Structural check that a parsed `subtypes` entry is shaped like
+ * `BeverageSubtype` — non-empty string `id` and `name`. `oivType` is
+ * optional per the type, so left unchecked.
+ */
+function looksLikeSubtype(value: unknown): value is BeverageSubtype {
+  if (value === null || typeof value !== "object") return false;
+  const candidate = value as { id?: unknown; name?: unknown };
+  return (
+    typeof candidate.id === "string" &&
+    candidate.id.length > 0 &&
+    typeof candidate.name === "string" &&
+    candidate.name.length > 0
+  );
+}
+
+/**
+ * Structural check that a parsed `categories` array is shaped like
+ * `BeverageCategory[]`: every entry needs a non-empty string `id`, a
+ * non-empty string `name`, and a `subtypes` array whose entries each pass
+ * `looksLikeSubtype`. `hsHeading` is optional per the type, so left
+ * unchecked — CEL-1607 review fixup: a category with only an `id` used to
+ * pass this check and then throw downstream in `buildLabelMap`,
+ * `getBeverageSubtypeEntry`, and `isBeverageSubtypeId`, all of which
+ * dereference `name` / iterate `subtypes` unconditionally.
  */
 function looksLikeCategories(value: unknown): value is BeverageCategory[] {
   if (!Array.isArray(value)) return false;
-  return value.every(
-    (entry) =>
-      entry !== null &&
-      typeof entry === "object" &&
-      typeof (entry as { id?: unknown }).id === "string" &&
-      (entry as { id: string }).id.length > 0,
-  );
+  return value.every((entry) => {
+    if (entry === null || typeof entry !== "object") return false;
+    const candidate = entry as { id?: unknown; name?: unknown; subtypes?: unknown };
+    if (typeof candidate.id !== "string" || candidate.id.length === 0) return false;
+    if (typeof candidate.name !== "string" || candidate.name.length === 0) return false;
+    if (!Array.isArray(candidate.subtypes)) return false;
+    return candidate.subtypes.every(looksLikeSubtype);
+  });
 }
 
 /**
