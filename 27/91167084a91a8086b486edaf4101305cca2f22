@@ -1,0 +1,44 @@
+src/aroma-descriptors.ts
+  s_37e0333a0d860b::t_bce019061d8cf9 1-88
+package.json
+  s_37e0333a0d860b::t_7cbfbc023c2691 52-53,57
+  s_37e0333a0d860b::t_497210e31d8a6a 3
+scripts/generate-aroma-descriptors.mjs
+  s_37e0333a0d860b::t_9359006b6aee2f 1-105
+src/canonical/index.ts
+  s_37e0333a0d860b::t_e04b5c032b6c6e 230-258
+__tests__/aroma-descriptors.test.ts
+  s_37e0333a0d860b::t_43df838bf885c6 1-80
+src/types.ts
+  s_37e0333a0d860b::t_a087ff0adffbe1 24-48
+scripts/sync-canonical.mjs
+  s_37e0333a0d860b::t_7afc89323483c6 212-216
+CHANGELOG.md
+  s_37e0333a0d860b::t_607d3682518733 3-31
+src/index.ts
+  s_37e0333a0d860b::t_ed5fbb8f95744f 7-18
+__tests__/canonical-parity.test.ts
+  s_37e0333a0d860b::t_a8595b899cc512 214-226
+  s_37e0333a0d860b::t_a49461938aae06 53-59
+  s_37e0333a0d860b::t_33d2ab1749648c 15,18
+package-lock.json
+  s_37e0333a0d860b::t_3cdface51c9323 3,9
+src/aroma-descriptors.generated.ts
+  s_37e0333a0d860b::t_78c0b585d05d75 1-801
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "2791167084a91a8086b486edaf4101305cca2f22",
+  "prompts": {},
+  "sessions": {
+    "s_37e0333a0d860b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "44207faf-061f-4885-be2f-2c1f64f0af32",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "mjnong <marcusnagy@icloud.com>"
+    }
+  }
+}
