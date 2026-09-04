@@ -59,7 +59,7 @@ describe("vendored canonical JSON — $meta", () => {
     expect(CANONICAL_META.entryCount).toBe(listCanonicalRows().length);
   });
 
-  it("ships all 17 rows the backend generator produced at vendor time", () => {
+  it("ships all 18 rows the backend generator produced at vendor time", () => {
     // Not every row backs a static in this package (see file header) — this
     // just pins the vendored file's shape so a partial/truncated re-sync is
     // caught immediately rather than surfacing as missing-row errors later.
@@ -69,6 +69,7 @@ describe("vendored canonical JSON — $meta", () => {
     expect(ids).toEqual(
       [
         "access_models",
+        "aroma_descriptors",
         "active_currencies",
         "beverage_classifications",
         "beverage_type_schemas",

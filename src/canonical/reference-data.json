@@ -3,7 +3,7 @@
     "generator": "apps/cellarnode/src/db/canonical/generate-reference-data-json.ts",
     "sourceFile": "apps/cellarnode/src/db/canonical/reference-data.ts",
     "schemaVersion": 1,
-    "entryCount": 17
+    "entryCount": 18
   },
   "data": [
     {
@@ -44,6 +44,807 @@
           "AUD",
           "JPY"
         ]
+      }
+    },
+    {
+      "dataId": "aroma_descriptors",
+      "canonicalVersion": 1,
+      "jsonData": {
+        "version": 1,
+        "description": "Canonical aroma/sensory descriptor lexicon, grouped by beverage family (wine, spirits, beer). Descriptors are stored as slugs in the existing string[] tasting-note fields. Lenient: unknown text is stored as-is and rendered as 'custom' by clients — this row never gates a write.",
+        "families": {
+          "wine": {
+            "label": "Wine",
+            "standardRef": "WSET-L3-SAT",
+            "terms": [
+              {
+                "slug": "almond",
+                "label": "Almond",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "apple",
+                "label": "Apple",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "apricot",
+                "label": "Apricot",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "asparagus",
+                "label": "Asparagus",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "banana",
+                "label": "Banana",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "biscuit",
+                "label": "Biscuit",
+                "x-standard": "WSET-L3-SAT",
+                "aliases": [
+                  "bready"
+                ]
+              },
+              {
+                "slug": "black-cherry",
+                "label": "Black Cherry",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "black-pepper",
+                "label": "Black Pepper",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "blackberry",
+                "label": "Blackberry",
+                "x-standard": "WSET-L3-SAT",
+                "aliases": [
+                  "bramble"
+                ]
+              },
+              {
+                "slug": "blackcurrant",
+                "label": "Blackcurrant",
+                "x-standard": "WSET-L3-SAT",
+                "aliases": [
+                  "cassis",
+                  "black currant"
+                ]
+              },
+              {
+                "slug": "blossom",
+                "label": "Blossom",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "bread",
+                "label": "Bread",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "butter",
+                "label": "Butter",
+                "x-standard": "WSET-L3-SAT",
+                "aliases": [
+                  "buttery"
+                ]
+              },
+              {
+                "slug": "butterscotch",
+                "label": "Butterscotch",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "caramel",
+                "label": "Caramel",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "cedar",
+                "label": "Cedar",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "cheese",
+                "label": "Cheese",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "chocolate",
+                "label": "Chocolate",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "cinnamon",
+                "label": "Cinnamon",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "cloves",
+                "label": "Cloves",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "coconut",
+                "label": "Coconut",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "coffee",
+                "label": "Coffee",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "cranberry",
+                "label": "Cranberry",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "cream",
+                "label": "Cream",
+                "x-standard": "WSET-L3-SAT",
+                "aliases": [
+                  "creamy"
+                ]
+              },
+              {
+                "slug": "dill",
+                "label": "Dill",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "dried-flowers",
+                "label": "Dried Flowers",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "elderflower",
+                "label": "Elderflower",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "eucalyptus",
+                "label": "Eucalyptus",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "fig",
+                "label": "Fig",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "forest-floor",
+                "label": "Forest Floor",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "game",
+                "label": "Game",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "gooseberry",
+                "label": "Gooseberry",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "grapefruit",
+                "label": "Grapefruit",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "grass",
+                "label": "Grass",
+                "x-standard": "WSET-L3-SAT",
+                "aliases": [
+                  "grassy"
+                ]
+              },
+              {
+                "slug": "green-bell-pepper",
+                "label": "Green Bell Pepper",
+                "x-standard": "WSET-L3-SAT",
+                "aliases": [
+                  "green pepper",
+                  "bell pepper"
+                ]
+              },
+              {
+                "slug": "hazelnut",
+                "label": "Hazelnut",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "honey",
+                "label": "Honey",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "honeysuckle",
+                "label": "Honeysuckle",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "leather",
+                "label": "Leather",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "lemon",
+                "label": "Lemon",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "licorice",
+                "label": "Licorice",
+                "x-standard": "WSET-L3-SAT",
+                "aliases": [
+                  "liquorice"
+                ]
+              },
+              {
+                "slug": "lime",
+                "label": "Lime",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "lychee",
+                "label": "Lychee",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "mango",
+                "label": "Mango",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "mineral",
+                "label": "Mineral",
+                "x-standard": "WSET-L3-SAT",
+                "aliases": [
+                  "minerality"
+                ]
+              },
+              {
+                "slug": "mint",
+                "label": "Mint",
+                "x-standard": "WSET-L3-SAT",
+                "aliases": [
+                  "minty"
+                ]
+              },
+              {
+                "slug": "mushroom",
+                "label": "Mushroom",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "nectarine",
+                "label": "Nectarine",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "nutmeg",
+                "label": "Nutmeg",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "nutty",
+                "label": "Nutty",
+                "x-standard": "WSET-L3-SAT",
+                "aliases": [
+                  "nutlike"
+                ]
+              },
+              {
+                "slug": "oak",
+                "label": "Oak",
+                "x-standard": "WSET-L3-SAT",
+                "aliases": [
+                  "oaky",
+                  "oaked"
+                ]
+              },
+              {
+                "slug": "orange-peel",
+                "label": "Orange Peel",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "passion-fruit",
+                "label": "Passion Fruit",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "peach",
+                "label": "Peach",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "pear",
+                "label": "Pear",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "petrol",
+                "label": "Petrol",
+                "x-standard": "WSET-L3-SAT",
+                "aliases": [
+                  "kerosene"
+                ]
+              },
+              {
+                "slug": "pineapple",
+                "label": "Pineapple",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "prune",
+                "label": "Prune",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "quince",
+                "label": "Quince",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "raisin",
+                "label": "Raisin",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "raspberry",
+                "label": "Raspberry",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "red-cherry",
+                "label": "Red Cherry",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "redcurrant",
+                "label": "Redcurrant",
+                "x-standard": "WSET-L3-SAT",
+                "aliases": [
+                  "red currant"
+                ]
+              },
+              {
+                "slug": "rose",
+                "label": "Rose",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "smoke",
+                "label": "Smoke",
+                "x-standard": "WSET-L3-SAT",
+                "aliases": [
+                  "smoky"
+                ]
+              },
+              {
+                "slug": "strawberry",
+                "label": "Strawberry",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "sultana",
+                "label": "Sultana",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "toast",
+                "label": "Toast",
+                "x-standard": "WSET-L3-SAT",
+                "aliases": [
+                  "toasty"
+                ]
+              },
+              {
+                "slug": "tobacco",
+                "label": "Tobacco",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "tomato-leaf",
+                "label": "Tomato Leaf",
+                "x-standard": "WSET-L3-SAT"
+              },
+              {
+                "slug": "vanilla",
+                "label": "Vanilla",
+                "x-standard": "WSET-L3-SAT",
+                "aliases": [
+                  "vanillin"
+                ]
+              },
+              {
+                "slug": "violet",
+                "label": "Violet",
+                "x-standard": "WSET-L3-SAT"
+              }
+            ]
+          },
+          "spirits": {
+            "label": "Spirits",
+            "standardRef": "WSET-L3-Spirits",
+            "terms": [
+              {
+                "slug": "biscuit",
+                "label": "Biscuit",
+                "x-standard": "WSET-L3-Spirits"
+              },
+              {
+                "slug": "black-fruit",
+                "label": "Black Fruit",
+                "x-standard": "WSET-L3-Spirits"
+              },
+              {
+                "slug": "black-pepper",
+                "label": "Black Pepper",
+                "x-standard": "WSET-L3-Spirits"
+              },
+              {
+                "slug": "butterscotch",
+                "label": "Butterscotch",
+                "x-standard": "WSET-L3-Spirits"
+              },
+              {
+                "slug": "caramel",
+                "label": "Caramel",
+                "x-standard": "WSET-L3-Spirits"
+              },
+              {
+                "slug": "cereal",
+                "label": "Cereal",
+                "x-standard": "WSET-L3-Spirits",
+                "aliases": [
+                  "grainy"
+                ]
+              },
+              {
+                "slug": "cinnamon",
+                "label": "Cinnamon",
+                "x-standard": "WSET-L3-Spirits"
+              },
+              {
+                "slug": "citrus-zest",
+                "label": "Citrus Zest",
+                "x-standard": "WSET-L3-Spirits",
+                "aliases": [
+                  "citrus"
+                ]
+              },
+              {
+                "slug": "clove",
+                "label": "Clove",
+                "x-standard": "WSET-L3-Spirits"
+              },
+              {
+                "slug": "coconut",
+                "label": "Coconut",
+                "x-standard": "WSET-L3-Spirits"
+              },
+              {
+                "slug": "dried-fruit",
+                "label": "Dried Fruit",
+                "x-standard": "WSET-L3-Spirits"
+              },
+              {
+                "slug": "floral",
+                "label": "Floral",
+                "x-standard": "WSET-L3-Spirits"
+              },
+              {
+                "slug": "ginger",
+                "label": "Ginger",
+                "x-standard": "WSET-L3-Spirits"
+              },
+              {
+                "slug": "grassy",
+                "label": "Grassy",
+                "x-standard": "WSET-L3-Spirits",
+                "aliases": [
+                  "grass"
+                ]
+              },
+              {
+                "slug": "herbal",
+                "label": "Herbal",
+                "x-standard": "WSET-L3-Spirits"
+              },
+              {
+                "slug": "honey",
+                "label": "Honey",
+                "x-standard": "WSET-L3-Spirits"
+              },
+              {
+                "slug": "leather",
+                "label": "Leather",
+                "x-standard": "WSET-L3-Spirits"
+              },
+              {
+                "slug": "licorice",
+                "label": "Licorice",
+                "x-standard": "WSET-L3-Spirits",
+                "aliases": [
+                  "liquorice"
+                ]
+              },
+              {
+                "slug": "malt",
+                "label": "Malt",
+                "x-standard": "WSET-L3-Spirits",
+                "aliases": [
+                  "malty"
+                ]
+              },
+              {
+                "slug": "medicinal",
+                "label": "Medicinal",
+                "x-standard": "WSET-L3-Spirits"
+              },
+              {
+                "slug": "mineral",
+                "label": "Mineral",
+                "x-standard": "WSET-L3-Spirits"
+              },
+              {
+                "slug": "nutty",
+                "label": "Nutty",
+                "x-standard": "WSET-L3-Spirits"
+              },
+              {
+                "slug": "oak",
+                "label": "Oak",
+                "x-standard": "WSET-L3-Spirits",
+                "aliases": [
+                  "oaky"
+                ]
+              },
+              {
+                "slug": "red-fruit",
+                "label": "Red Fruit",
+                "x-standard": "WSET-L3-Spirits"
+              },
+              {
+                "slug": "smoke",
+                "label": "Smoke",
+                "x-standard": "WSET-L3-Spirits",
+                "aliases": [
+                  "smoky"
+                ]
+              },
+              {
+                "slug": "stone-fruit",
+                "label": "Stone Fruit",
+                "x-standard": "WSET-L3-Spirits"
+              },
+              {
+                "slug": "tar",
+                "label": "Tar",
+                "x-standard": "WSET-L3-Spirits"
+              },
+              {
+                "slug": "toast",
+                "label": "Toast",
+                "x-standard": "WSET-L3-Spirits",
+                "aliases": [
+                  "toasty"
+                ]
+              },
+              {
+                "slug": "tobacco",
+                "label": "Tobacco",
+                "x-standard": "WSET-L3-Spirits"
+              },
+              {
+                "slug": "tropical-fruit",
+                "label": "Tropical Fruit",
+                "x-standard": "WSET-L3-Spirits"
+              },
+              {
+                "slug": "vanilla",
+                "label": "Vanilla",
+                "x-standard": "WSET-L3-Spirits",
+                "aliases": [
+                  "vanillin"
+                ]
+              },
+              {
+                "slug": "vegetal",
+                "label": "Vegetal",
+                "x-standard": "WSET-L3-Spirits"
+              }
+            ]
+          },
+          "beer": {
+            "label": "Beer",
+            "standardRef": "BJCP-2021",
+            "terms": [
+              {
+                "slug": "apple",
+                "label": "Apple",
+                "x-standard": "BJCP-2021"
+              },
+              {
+                "slug": "banana",
+                "label": "Banana",
+                "x-standard": "BJCP-2021"
+              },
+              {
+                "slug": "biscuit",
+                "label": "Biscuit",
+                "x-standard": "BJCP-2021"
+              },
+              {
+                "slug": "bread",
+                "label": "Bread",
+                "x-standard": "BJCP-2021",
+                "aliases": [
+                  "bready"
+                ]
+              },
+              {
+                "slug": "bubblegum",
+                "label": "Bubblegum",
+                "x-standard": "BJCP-2021"
+              },
+              {
+                "slug": "caramel",
+                "label": "Caramel",
+                "x-standard": "BJCP-2021"
+              },
+              {
+                "slug": "chocolate",
+                "label": "Chocolate",
+                "x-standard": "BJCP-2021"
+              },
+              {
+                "slug": "citrus-hop",
+                "label": "Citrus Hop",
+                "x-standard": "BJCP-2021",
+                "aliases": [
+                  "citrus",
+                  "citrusy"
+                ]
+              },
+              {
+                "slug": "clove",
+                "label": "Clove",
+                "x-standard": "BJCP-2021"
+              },
+              {
+                "slug": "coffee",
+                "label": "Coffee",
+                "x-standard": "BJCP-2021"
+              },
+              {
+                "slug": "diacetyl-butter",
+                "label": "Diacetyl / Butter",
+                "x-standard": "BJCP-2021",
+                "aliases": [
+                  "buttery",
+                  "butterscotch"
+                ]
+              },
+              {
+                "slug": "floral-hop",
+                "label": "Floral Hop",
+                "x-standard": "BJCP-2021"
+              },
+              {
+                "slug": "fruity-ester",
+                "label": "Fruity Ester",
+                "x-standard": "BJCP-2021",
+                "aliases": [
+                  "ester",
+                  "estery"
+                ]
+              },
+              {
+                "slug": "grainy",
+                "label": "Grainy",
+                "x-standard": "BJCP-2021"
+              },
+              {
+                "slug": "herbal-hop",
+                "label": "Herbal Hop",
+                "x-standard": "BJCP-2021"
+              },
+              {
+                "slug": "oak",
+                "label": "Oak",
+                "x-standard": "BJCP-2021",
+                "aliases": [
+                  "oaky"
+                ]
+              },
+              {
+                "slug": "pear",
+                "label": "Pear",
+                "x-standard": "BJCP-2021"
+              },
+              {
+                "slug": "phenolic",
+                "label": "Phenolic",
+                "x-standard": "BJCP-2021"
+              },
+              {
+                "slug": "pine-hop",
+                "label": "Pine Hop",
+                "x-standard": "BJCP-2021",
+                "aliases": [
+                  "piney",
+                  "resinous"
+                ]
+              },
+              {
+                "slug": "roast",
+                "label": "Roast",
+                "x-standard": "BJCP-2021",
+                "aliases": [
+                  "roasty"
+                ]
+              },
+              {
+                "slug": "smoke",
+                "label": "Smoke",
+                "x-standard": "BJCP-2021",
+                "aliases": [
+                  "smoky"
+                ]
+              },
+              {
+                "slug": "spicy-hop",
+                "label": "Spicy Hop",
+                "x-standard": "BJCP-2021"
+              },
+              {
+                "slug": "sulfur",
+                "label": "Sulfur",
+                "x-standard": "BJCP-2021",
+                "aliases": [
+                  "sulphur"
+                ]
+              },
+              {
+                "slug": "toast",
+                "label": "Toast",
+                "x-standard": "BJCP-2021",
+                "aliases": [
+                  "toasty"
+                ]
+              },
+              {
+                "slug": "toffee",
+                "label": "Toffee",
+                "x-standard": "BJCP-2021"
+              },
+              {
+                "slug": "tropical-fruit",
+                "label": "Tropical Fruit",
+                "x-standard": "BJCP-2021"
+              },
+              {
+                "slug": "vanilla",
+                "label": "Vanilla",
+                "x-standard": "BJCP-2021",
+                "aliases": [
+                  "vanillin"
+                ]
+              }
+            ]
+          }
+        }
       }
     },
     {
