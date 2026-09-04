@@ -155,6 +155,16 @@ export function referenceDataOptions<T>(row: ReferenceDataRow<T>, options: UseRe
  * recognise — so consumers can render without branching on `isLoading`
  * first, the same contract as `usePackagingOptions` / `useActiveCurrencies`
  * in `@cellarnode/ui`.
+ *
+ * Requires a `QueryClientProvider` ancestor (this is a `useQuery` wrapper);
+ * a consumer that omits one gets TanStack Query's own runtime throw, since
+ * `@tanstack/react-query` is only an optional peer dependency here.
+ *
+ * Until a follow-up folds it in, `useBeverageLabelMap` (`use-beverage-label-map.ts`)
+ * still reads this same `beverage_classifications` row independently, under
+ * its own cache key (`["beverage-classifications"]`) and its own stale time
+ * (`Infinity`, vs this hook's 5-minute default) — an app importing both pays
+ * two requests for one row and can observe two different snapshots of it.
  */
 export function useReferenceData<T>(
   row: ReferenceDataRow<T>,
