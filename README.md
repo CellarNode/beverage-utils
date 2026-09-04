@@ -86,7 +86,7 @@ formatBeverageSubtype("wine", null);                 // ""
 
 ## Framework Adapters
 
-All adapters use [TanStack Query](https://tanstack.com/query) to fetch and cache classification data from the CellarNode API. The data is cached with `staleTime: Infinity` (classifications rarely change).
+All adapters use [TanStack Query](https://tanstack.com/query) to fetch and cache classification data from the CellarNode API. Cache lifetime differs by adapter — see each section below.
 
 ### React
 
@@ -95,26 +95,46 @@ npm install @cellarnode/beverage-utils react @tanstack/react-query
 ```
 
 ```tsx
-import { useBeverageLabelMap } from "@cellarnode/beverage-utils/react";
-import { formatBeverageType } from "@cellarnode/beverage-utils";
+import { useBeverageClassifications } from "@cellarnode/beverage-utils/react";
+import { buildLabelMap, formatBeverageType } from "@cellarnode/beverage-utils";
 
 function BeverageDisplay({ category, subtype }: Props) {
-  const { data: labelMap } = useBeverageLabelMap("https://api.cellarnode.com");
+  const { data } = useBeverageClassifications({
+    transport: { kind: "public", baseUrl: "https://api.cellarnode.com" },
+  });
+  const labelMap = buildLabelMap(data);
 
   return <span>{formatBeverageType(category, subtype, labelMap)}</span>;
 }
 ```
 
+`data` is always a usable value (the shipped canonical statics while loading, on
+error, or on a malformed response), and defaults to a 5-minute `staleTime`
+(override via `staleTimeMs`) — pass `transport: { kind: "admin", ... }` for a
+same-origin admin caller instead of the cross-origin `public` shape above. See
+`useReferenceData`'s own JSDoc for the full transport/row contract; it's the
+one hook every dashboard uses for any canonical reference-data row, not just
+classifications.
+
 **Prefetching** with the raw query options:
 
 ```typescript
-import { beverageLabelMapOptions } from "@cellarnode/beverage-utils/react";
+import {
+  referenceDataOptions,
+  CLASSIFICATION_REFERENCE_ROW,
+} from "@cellarnode/beverage-utils/react";
 
 // In a loader or server component
-await queryClient.prefetchQuery(beverageLabelMapOptions("https://api.cellarnode.com"));
+await queryClient.prefetchQuery(
+  referenceDataOptions(CLASSIFICATION_REFERENCE_ROW, {
+    transport: { kind: "public", baseUrl: "https://api.cellarnode.com" },
+  }),
+);
 ```
 
 ### Vue
+
+Cached with `staleTime: Infinity` (classifications rarely change).
 
 ```bash
 npm install @cellarnode/beverage-utils vue @tanstack/vue-query
@@ -142,6 +162,8 @@ await queryClient.prefetchQuery(beverageLabelMapOptions("https://api.cellarnode.
 ```
 
 ### Angular
+
+Cached with `staleTime: Infinity` (classifications rarely change).
 
 ```bash
 npm install @cellarnode/beverage-utils @angular/core @tanstack/angular-query-experimental

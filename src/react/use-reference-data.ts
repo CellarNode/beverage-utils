@@ -137,11 +137,11 @@ export function referenceDataOptions<T>(row: ReferenceDataRow<T>, options: UseRe
 
 /**
  * `useReferenceData(row, { transport })` — one hook every dashboard uses
- * to read a canonical reference-data row (CEL-1607). Replaces three
+ * to read a canonical reference-data row (CEL-1607). Replaced three
  * hand-rolled fetchers that each re-implemented loading / error / fallback
  * behaviour slightly differently: this package's own classification hook
- * (`useBeverageLabelMap`, left as-is for its existing consumers — see the
- * CEL-1607 PR description for the migration plan), admin's
+ * (`useBeverageLabelMap`, folded onto this hook and removed in CEL-1660 —
+ * see that ticket for the per-consumer migration), admin's
  * `use-classification-options` (built on a same-origin `/admin/reference-data`
  * fetch), and producer's `useClassifications` (built on the cross-origin
  * public `/api/v1/classifications/beverage-types` endpoint).
@@ -159,12 +159,6 @@ export function referenceDataOptions<T>(row: ReferenceDataRow<T>, options: UseRe
  * Requires a `QueryClientProvider` ancestor (this is a `useQuery` wrapper);
  * a consumer that omits one gets TanStack Query's own runtime throw, since
  * `@tanstack/react-query` is only an optional peer dependency here.
- *
- * Until a follow-up folds it in, `useBeverageLabelMap` (`use-beverage-label-map.ts`)
- * still reads this same `beverage_classifications` row independently, under
- * its own cache key (`["beverage-classifications"]`) and its own stale time
- * (`Infinity`, vs this hook's 5-minute default) — an app importing both pays
- * two requests for one row and can observe two different snapshots of it.
  */
 export function useReferenceData<T>(
   row: ReferenceDataRow<T>,

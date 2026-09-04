@@ -45,9 +45,11 @@ function looksLikeCategories(value: unknown): value is BeverageCategory[] {
  * Parses the `{ jsonData: { categories: [...] }, version }` envelope every
  * one of the three replaced fetchers already assumed — admin's
  * `GET /admin/reference-data/beverage_classifications`, the public
- * `GET /api/v1/classifications/beverage-types`, and this package's own
- * `beverageLabelMapOptions`. Returns `null` on any unrecognised shape so
- * the hook falls back to the shipped statics.
+ * `GET /api/v1/classifications/beverage-types`, and this React adapter's own
+ * `beverageLabelMapOptions` (removed in CEL-1660; the Vue and Angular
+ * adapters still ship their own copy of that hook independently). Returns
+ * `null` on any unrecognised shape so the hook falls back to the shipped
+ * statics.
  */
 export function parseBeverageClassificationEnvelope(json: unknown): BeverageClassification | null {
   if (json === null || typeof json !== "object") return null;

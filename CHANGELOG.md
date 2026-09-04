@@ -1,5 +1,30 @@
 # Changelog
 
+## Unreleased
+
+**Breaking:** removed the React adapter's `useBeverageLabelMap` /
+`beverageLabelMapOptions` (`src/react/use-beverage-label-map.ts`), folded
+onto `useBeverageClassifications` / `useReferenceData` (CEL-1607) now that
+every React consumer has migrated onto it (CEL-1660 — producer-dashboard,
+cellarnode-importer-dashboard, cellarnode-elabel-frontend). The old hook
+cached under its own key (`["beverage-classifications"]`) with
+`staleTime: Infinity`, independently of `useReferenceData`'s shared
+`["reference-data", ...]` key and 5-minute default — an app importing both
+paid for two requests for one row and could observe two different
+snapshots of it. That's now resolved: one hook, one cache entry.
+
+Scoped to the React adapter only. The Vue and Angular adapters (`src/vue/`,
+`src/angular/`) keep their own `useBeverageLabelMap` /
+`beverageLabelMapOptions` / `injectBeverageLabelMap` unchanged — neither
+has a `useReferenceData` equivalent to fold onto, so removing them would be
+a capability deletion with no replacement, not a fold, and no CellarNode
+app consumes either adapter today regardless.
+
+React consumers on `^0.11.0` (or earlier) must bump past the next minor
+before removing their own `@cellarnode/beverage-utils/react`
+`useBeverageLabelMap` imports — a caret range does not cross a minor
+below 1.0, so this is a coordinated bump, not a drive-by.
+
 ## 0.11.0 — 2026-09-04
 
 `getAromaDescriptorFamilies()` / `getAromaDescriptorFamily()` /
