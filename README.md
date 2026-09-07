@@ -271,7 +271,10 @@ npm run check-exports   # runs publint + attw
 1. Make your changes and update `CHANGELOG.md`
 2. Bump `version` in `package.json`
 3. Push to `main`
-4. GitHub Actions automatically publishes to npm (with provenance)
+4. GitHub Actions publishes to npm via **Trusted Publishing (OIDC)** — no npm token involved.
+   Provenance is generated automatically (public repo + public package). The workflow only
+   proceeds when `package.json`'s version differs from the previous commit on `main`, so
+   non-release pushes are a no-op.
 
 ## License
 

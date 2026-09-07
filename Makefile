@@ -34,41 +34,41 @@ check-exports:  ## Manual-only: dist-orphan guard + publint + arethetypeswrong r
 build: typecheck test compile verify-dist  ## Full build: typecheck + test + compile (clean-first) + dist-orphan gate
 
 ## Publishing
-
-# CEL-1660 — mirrors @cellarnode/ui's release-install/release-* shape.
-# This repo has NO auth path configured for the agent session that wrote
-# this Makefile — `npm publish` here returns ENEEDAUTH. Publishing remains
-# a human action (Marcus); these targets exist so that action is a single
-# command instead of a hand-run sequence, not so an agent can run them.
+#
+# CEL-1733 — publishing happens in CI on merge to main via npm trusted
+# publishing (OIDC), see `.github/workflows/publish.yml`. The release
+# targets below only bump the version, build, commit, and tag; they do NOT
+# publish. Push the branch and open a PR — merging to main is what
+# triggers the actual `npm publish` (gated on the version having changed).
 release-install:  ## Refresh node_modules from the lockfile (release pre-gate)
 	npm ci --legacy-peer-deps
 
-publish: build  ## Build (clean + typecheck + test + compile + dist-orphan gate) and publish current version to npm
+# Explicit fallback only — normal path is CI (see above). Needs a local
+# `npm login` with publish rights on @cellarnode/beverage-utils; not
+# expected to work from an agent session.
+publish: build  ## Manual fallback ONLY — build and publish current version to npm (needs npm login; not the normal path)
 	npm publish
 
-release-patch:  ## Bump patch version, publish, and git tag
+release-patch:  ## Bump patch version, commit, and git tag (CI publishes on merge to main)
 	$(MAKE) release-install && \
 	$(MAKE) build && \
 	npm version patch --no-git-tag-version && \
-	npm publish && \
 	git add package.json && \
 	git commit -m "release(beverage-utils): $$(node -p "require('./package.json').version")" && \
 	git tag "v$$(node -p "require('./package.json').version")"
 
-release-minor:  ## Bump minor version, publish, and git tag
+release-minor:  ## Bump minor version, commit, and git tag (CI publishes on merge to main)
 	$(MAKE) release-install && \
 	$(MAKE) build && \
 	npm version minor --no-git-tag-version && \
-	npm publish && \
 	git add package.json && \
 	git commit -m "release(beverage-utils): $$(node -p "require('./package.json').version")" && \
 	git tag "v$$(node -p "require('./package.json').version")"
 
-release-major:  ## Bump major version, publish, and git tag
+release-major:  ## Bump major version, commit, and git tag (CI publishes on merge to main)
 	$(MAKE) release-install && \
 	$(MAKE) build && \
 	npm version major --no-git-tag-version && \
-	npm publish && \
 	git add package.json && \
 	git commit -m "release(beverage-utils): $$(node -p "require('./package.json').version")" && \
 	git tag "v$$(node -p "require('./package.json').version")"
