@@ -1,0 +1,24 @@
+.github/workflows/publish.yml
+  s_f471a1e6423e55::t_fb4b8740b91f95 9-13
+  s_f471a1e6423e55::t_2b266b97b613f2 27-31,34
+  s_f471a1e6423e55::t_88b70069a54f58 73-78,81
+  s_f471a1e6423e55::t_ff033a7130f131 40-49,54-62
+README.md
+  s_f471a1e6423e55::t_3e424722fd1219 273,276-277
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "e37bfd62b61b36f94b31749e9e8873c0bf8ca64c",
+  "prompts": {},
+  "sessions": {
+    "s_f471a1e6423e55": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "dfcd5467-84ec-4eaa-ae53-88ff24a30cf8",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "mjnong <marcusnagy@icloud.com>"
+    }
+  }
+}
