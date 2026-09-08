@@ -155,5 +155,6 @@ export type { CertificationLabelKey, CertificationType } from "./certifications.
 export {
   CERTIFICATION_TYPES,
   certificationLabelKey,
-  isCertificationType,
+  isCertification,
+  normalizeAndCheckCertification,
 } from "./certifications.js";
