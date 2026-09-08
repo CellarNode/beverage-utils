@@ -1,0 +1,18 @@
+{
+  "id": "adr:2026-09-08-one-certification-i18n-key-contract-for-every-dashboard",
+  "alternatives": "- **Ship the translated strings from `@cellarnode/i18n` as a shared namespace** — deferred: it fixes translation drift too, but both dashboards would have to load an extra namespace and the i18n pipeline tokens are currently broken; the key contract here is the prerequisite either way. - **Keep the two key paths and only align the English** — rejected: it is exactly the state that let the locales drift. - **Interpolate the raw id into the key unchanged** — rejected in review: `eu.organic` nests through `keySeparator` and `ns:organic` is read as a namespace.",
+  "anchors": [],
+  "body_hash": "v2:185100e5ae0f6675ee8c3adf625e912fb990a252b3068eb63d5f310f8442a650",
+  "consequences": "Adding a certification is one edit here plus one English string per consumer; renaming a key path in either dashboard without changing this module is a contract break and should fail that repo's i18n wiring test. The guarantee is key-path parity and one English source string, not translation parity: the seven machine-translated strings still live in each consumer's locale JSON until a shared namespace ships in `@cellarnode/i18n`, so wording can still differ between surfaces in non-English locales.",
+  "context": "The producer dashboard rendered the Organic / Fairtrade / Sustainable chips through `offers:form.certification.<id>` and the importer dashboard through `opportunities:certifications.<id>`. The English source strings were identical, but each repo's polyglot-i18n run translated its own copy, so the seven non-English locales could drift between surfaces (found in the CEL-1699 review). Certifications are not a backend canonical `reference_data` row (no `certifications` dataId in `src/canonical/reference-data.json`), so the id list has no parity test to anchor to; the contract has to live in this package.",
+  "decided_at": "2026-09-08",
+  "decided_by": "human",
+  "decision": "`src/certifications.ts` is the single owner of the certification id vocabulary and of the i18n key shape both dashboards bind to. The canonical ids are the frozen tuple `CERTIFICATION_TYPES` (`organic`, `fairtrade`, `sustainable`). `certificationLabelKey(id)` returns `{ key: \"certification.<id>\", fallback }` where a canonical id is matched after trim and lower-case and always yields the canonical segment plus the shared English fallback, and an unknown id yields `certification.<id>` with `.` and `:` replaced by `-` (i18next key and namespace separators) and the trimmed raw id echoed as the fallback so a new certification renders readably before its copy exists. The key carries no namespace: each consumer resolves it in its own default namespace (`offers` for producer, `opportunities` for importer) and owns the `certification.*` block in its English locale file. The guard is `isCertification(value: unknown)` and the boundary normaliser is `normalizeAndCheckCertification`, matching the sibling vocabularies (`isCurrency`, `isPackaging`, `isClosure`, `normalizeAndCheckPackaging`).",
+  "paths": [],
+  "status": "proposed",
+  "supersedes": [],
+  "title": "One certification i18n key contract for every dashboard",
+  "trigger": {
+    "kind": "manual"
+  }
+}
