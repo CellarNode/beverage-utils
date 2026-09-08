@@ -9,7 +9,7 @@
   "decided_by": "human",
   "decision": "`src/certifications.ts` is the single owner of the certification id vocabulary and of the i18n key shape both dashboards bind to. The canonical ids are the frozen tuple `CERTIFICATION_TYPES` (`organic`, `fairtrade`, `sustainable`). `certificationLabelKey(id)` returns `{ key: \"certification.<id>\", fallback }` where a canonical id is matched after trim and lower-case and always yields the canonical segment plus the shared English fallback, and an unknown id yields `certification.<id>` with `.` and `:` replaced by `-` (i18next key and namespace separators) and the trimmed raw id echoed as the fallback so a new certification renders readably before its copy exists. The key carries no namespace: each consumer resolves it in its own default namespace (`offers` for producer, `opportunities` for importer) and owns the `certification.*` block in its English locale file. The guard is `isCertification(value: unknown)` and the boundary normaliser is `normalizeAndCheckCertification`, matching the sibling vocabularies (`isCurrency`, `isPackaging`, `isClosure`, `normalizeAndCheckPackaging`).",
   "paths": [],
-  "status": "proposed",
+  "status": "accepted",
   "supersedes": [],
   "title": "One certification i18n key contract for every dashboard",
   "trigger": {
