@@ -1,0 +1,23 @@
+__tests__/certifications.test.ts
+  s_a6af55519d5aa4::t_2b9ca8544eae14 5-6,25-35,41,44-64,67,69-73
+src/certifications.ts
+  s_a6af55519d5aa4::t_a9c5e8424af9cd 6-16,19-23,28,34,38-48,50-67,72-76,79-84
+src/index.ts
+  s_a6af55519d5aa4::t_097a4521e5805d 158-159
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "1ca2ac8b2ac62eace54e019a225e16060d0a3b41",
+  "prompts": {},
+  "sessions": {
+    "s_a6af55519d5aa4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "717faee6-cba0-48a0-9abd-d9aeeb304b85",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "mjnong <marcusnagy@icloud.com>"
+    }
+  }
+}
