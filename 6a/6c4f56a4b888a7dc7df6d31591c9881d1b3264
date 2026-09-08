@@ -1,0 +1,19 @@
+.reposkein/decisions/2026-09-08-one-certification-i18n-key-contract-for-every-dashboard.json
+  s_e6fe49bf3652a8::t_a32971f92c7337 12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "6a6c4f56a4b888a7dc7df6d31591c9881d1b3264",
+  "prompts": {},
+  "sessions": {
+    "s_e6fe49bf3652a8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "79a68c52-3969-4264-9bb4-63c87cc95463",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "mjnong <marcusnagy@icloud.com>"
+    }
+  }
+}
