@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.13.0 — 2026-09-08
+
+New `src/certifications.ts` (CEL-1702): one certification vocabulary and one
+i18n key contract for every dashboard. `CERTIFICATION_TYPES` (frozen:
+`organic`, `fairtrade`, `sustainable`), `isCertification(value: unknown)`,
+`normalizeAndCheckCertification(value)` (trim + lower-case, canonical id or
+`null`), and `certificationLabelKey(id)` returning
+`{ key: "certification.<id>", fallback }`. Canonical ids always yield the
+canonical key segment and the shared English fallback; unknown ids keep a
+stable key with `.` and `:` replaced by `-` (i18next separators) and echo
+the trimmed raw id as fallback. The key carries no namespace: producer
+resolves it in `offers`, importer in `opportunities`, each owning the
+`certification.*` block in its English locale file. Guarantee is key-path
+parity and one English source string, not translation parity (ADR
+`2026-09-08-one-certification-i18n-key-contract-for-every-dashboard`).
+
+Additive; no breaking change. Consumers: producer-dashboard replaces its
+local `certificationLabelKey` in `src/lib/offer-form-i18n-labels.ts`,
+importer-dashboard replaces the inline `certifications.*` keys in
+`opportunity-detail.tsx`.
+
 ## 0.12.0 — 2026-09-04
 
 **Breaking:** removed the React adapter's `useBeverageLabelMap` /
