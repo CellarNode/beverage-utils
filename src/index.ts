@@ -150,3 +150,10 @@ export {
   normalizeAndCheckBeverageCategoryId,
   normalizeAndCheckBeverageSubtypeId,
 } from "./classifications.js";
+
+export type { CertificationLabelKey, CertificationType } from "./certifications.js";
+export {
+  CERTIFICATION_TYPES,
+  certificationLabelKey,
+  isCertificationType,
+} from "./certifications.js";
