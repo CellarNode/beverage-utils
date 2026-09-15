@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.13.1 — 2026-09-15
+
+License metadata corrected to UNLICENSED; public access (CEL-1981). No code
+change — this release exists to republish corrected `package.json` metadata
+to the npm registry, which otherwise continues to serve the stale `MIT`
+license from the last published version (0.13.0) until a new version is
+published.
+
 ## 0.13.0 — 2026-09-08
 
 New `src/certifications.ts` (CEL-1702): one certification vocabulary and one
