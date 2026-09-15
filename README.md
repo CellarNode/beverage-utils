@@ -278,4 +278,6 @@ npm run check-exports   # runs publint + attw
 
 ## License
 
-MIT
+UNLICENSED — Copyright (c) CellarNode. All rights reserved. This package is
+published for CellarNode's own applications; no license is granted for
+other use.
