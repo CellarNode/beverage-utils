@@ -1,0 +1,25 @@
+package.json
+  s_223a9775c02d1c::t_6acf47db2e110e 5
+LICENSE
+  s_223a9775c02d1c::t_0dd8ab94309413 1,3-4
+README.md
+  s_223a9775c02d1c::t_fdafd43d72d24a 281-283
+.github/workflows/publish.yml
+  s_223a9775c02d1c::t_6dd82214689c6c 114-118,121
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "01b9d81b6bb1a0b01b2a88d66c577660e753405b",
+  "prompts": {},
+  "sessions": {
+    "s_223a9775c02d1c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "5d0907a4-81a5-4792-85b4-0650b99d4d53",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "mjnong <marcusnagy@icloud.com>"
+    }
+  }
+}
