@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.14.0 — 2026-09-23
+
+CEL-2072 adds four packaging IDs after the existing five, preserving their
+spelling and order: `Cardboard packaging`, `Cardboard bottle`, `Pouch`, and
+`Returnable glass bottle`. The static fallback and `Packaging` union now
+include all nine choices, matching the backend `packaging_options` v2 row.
+
+New root exports are `PACKAGING_ATTRIBUTES`, the `PackagingAttributes` type,
+and `normalizeTenderPackagingTerm()`. Attributes distinguish stated material,
+form, and returnability without treating unspecified properties as negative
+requirements. The tender-term helper maps only unambiguous June 2027 PDF
+terms, including bottle-format cardboard and `Return glass`; unknown terms and
+compound alternatives return `null` so callers can retain their raw evidence.
+Existing formatter, strict guard, and canonical normalizer behavior is
+preserved. Substitution direction, deposit-system eligibility, and matching
+remain the responsibility of tender requirement consumers.
+
+The vendored reference snapshot was refreshed from backend CEL-2072 PR #844
+and now includes two other existing backend rows. Merge and deploy the backend
+row before enabling consumers of the new IDs. Consumers using `^0.12` or
+`^0.13` must explicitly update to `0.14.0`: pre-1.0 caret ranges do not cross
+minor versions.
+
 ## 0.13.1 — 2026-09-15
 
 License metadata corrected to UNLICENSED; public access (CEL-1981). No code
