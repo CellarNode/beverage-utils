@@ -1,0 +1,19 @@
+CHANGELOG.md
+  s_eea230572e47fe::t_0d958a3ff108af 3-25
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "da41840bf51963cfa79067049c6e6359dbe0c36f",
+  "prompts": {},
+  "sessions": {
+    "s_eea230572e47fe": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0cdee-767b-7342-8275-c3d19e68ff85",
+        "model": "gpt-6-sol"
+      },
+      "human_author": "mjnong <marcusnagy@icloud.com>"
+    }
+  }
+}
