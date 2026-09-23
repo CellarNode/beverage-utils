@@ -66,6 +66,7 @@ export type { CountryCode, CountryRegistryEntry } from "./country.js";
 // Packaging (CEL-340).
 export {
   PACKAGING_OPTIONS,
+  PACKAGING_ATTRIBUTES,
   STATIC_PACKAGING_FALLBACK,
   STATIC_PACKAGING_REGISTRY,
   STATIC_PACKAGING_LABEL_MAP,
@@ -73,8 +74,9 @@ export {
   buildPackagingLabelMap,
   isPackaging,
   normalizeAndCheckPackaging,
+  normalizeTenderPackagingTerm,
 } from "./packaging.js";
-export type { Packaging, PackagingRegistryEntry } from "./packaging.js";
+export type { Packaging, PackagingAttributes, PackagingRegistryEntry } from "./packaging.js";
 
 // Closure (CEL-340).
 export {

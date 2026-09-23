@@ -68,7 +68,7 @@ describe("vendored canonical JSON — $meta", () => {
     expect(CANONICAL_META.entryCount).toBe(listCanonicalRows().length);
   });
 
-  it("ships all 18 rows the backend generator produced at vendor time", () => {
+  it("ships all 20 rows the backend generator produced at vendor time", () => {
     // Not every row backs a static in this package (see file header) — this
     // just pins the vendored file's shape so a partial/truncated re-sync is
     // caught immediately rather than surfacing as missing-row errors later.
@@ -82,6 +82,7 @@ describe("vendored canonical JSON — $meta", () => {
         "active_currencies",
         "beverage_classifications",
         "beverage_type_schemas",
+        "certification_schemes",
         "chemical_analysis_schemas",
         "closure_options",
         "country_codes",
@@ -89,6 +90,7 @@ describe("vendored canonical JSON — $meta", () => {
         "elabel_compliance_requirements",
         "enterprise_types",
         "fic_label_schemas",
+        "matching_policy",
         "operating_markets",
         "packaging_options",
         "price_recommendation_config",
@@ -299,4 +301,3 @@ describe("beverage_classifications — getCanonicalClassifications()", () => {
     expect(getCanonicalClassifications()).toBe(getCanonicalClassifications());
   });
 });
-

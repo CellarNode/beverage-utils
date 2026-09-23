@@ -3,7 +3,7 @@
     "generator": "apps/cellarnode/src/db/canonical/generate-reference-data-json.ts",
     "sourceFile": "apps/cellarnode/src/db/canonical/reference-data.ts",
     "schemaVersion": 1,
-    "entryCount": 18
+    "entryCount": 20
   },
   "data": [
     {
@@ -2542,6 +2542,167 @@
             }
           }
         }
+      }
+    },
+    {
+      "dataId": "certification_schemes",
+      "canonicalVersion": 1,
+      "jsonData": {
+        "version": 1,
+        "description": "Open registry of named third-party certification/sustainability schemes stated by tenders in free text, distinct from the generic organic/fairtrade/sustainable booleans. See CERTIFICATION_SCHEMES_SEED for provenance.",
+        "items": [
+          {
+            "id": "equalitas",
+            "displayName": "Equalitas",
+            "aliases": [
+              "Equalitas Sustainable Wine",
+              "Equalitas Certification"
+            ],
+            "country": "IT"
+          },
+          {
+            "id": "viva",
+            "displayName": "VIVA",
+            "aliases": [
+              "VIVA Sustainable Wine",
+              "Valutazione dell'Impatto della Viticoltura sull'Ambiente"
+            ],
+            "country": "IT"
+          },
+          {
+            "id": "fairtrade_international",
+            "displayName": "Fairtrade",
+            "aliases": [
+              "Fairtrade International",
+              "FLO",
+              "Fairtrade Certified"
+            ],
+            "country": null
+          },
+          {
+            "id": "fair_for_life",
+            "displayName": "Fair for Life",
+            "aliases": [
+              "IMO-Fair for Life",
+              "Fair for Life / IMO-Fair for Life",
+              "FFL"
+            ],
+            "country": null
+          },
+          {
+            "id": "vignerons_engages",
+            "displayName": "Vignerons Engagés",
+            "aliases": [
+              "Les Vignerons Engagés",
+              "Vignerons Engages"
+            ],
+            "country": "FR"
+          },
+          {
+            "id": "terra_vitis",
+            "displayName": "Terra Vitis",
+            "aliases": [],
+            "country": "FR"
+          },
+          {
+            "id": "sostain",
+            "displayName": "SOSTAIN Sicilia",
+            "aliases": [
+              "SOSTAIN"
+            ],
+            "country": "IT"
+          },
+          {
+            "id": "fairn_green",
+            "displayName": "Fair'n Green",
+            "aliases": [
+              "Fair and Green",
+              "Fair'n Green e.V."
+            ],
+            "country": "DE"
+          },
+          {
+            "id": "wineries_for_climate_protection",
+            "displayName": "Wineries for Climate Protection",
+            "aliases": [
+              "WfCP"
+            ],
+            "country": "ES"
+          },
+          {
+            "id": "ccsw",
+            "displayName": "Certified California Sustainable Winegrowing",
+            "aliases": [
+              "CCSW",
+              "California Sustainable Winegrowing",
+              "California Certified Sustainable Winegrowing"
+            ],
+            "country": "US"
+          },
+          {
+            "id": "swa",
+            "displayName": "Sustainable Winegrowing Australia",
+            "aliases": [
+              "SWA"
+            ],
+            "country": "AU"
+          },
+          {
+            "id": "sustainable_wine_chile",
+            "displayName": "Certified Sustainable Wine of Chile",
+            "aliases": [
+              "Sustainable Wine of Chile",
+              "Código de Sustentabilidad",
+              "Codigo de Sustentabilidad"
+            ],
+            "country": "CL"
+          },
+          {
+            "id": "swnz",
+            "displayName": "Sustainable Winegrowing New Zealand",
+            "aliases": [
+              "SWNZ"
+            ],
+            "country": "NZ"
+          },
+          {
+            "id": "ipw",
+            "displayName": "Integrated Production of Wine",
+            "aliases": [
+              "IPW"
+            ],
+            "country": "ZA"
+          },
+          {
+            "id": "wieta",
+            "displayName": "WIETA",
+            "aliases": [
+              "Wieta A",
+              "Wine Industry Ethical Trade Association",
+              "Wine and Agricultural Ethical Trade Association"
+            ],
+            "country": "ZA"
+          },
+          {
+            "id": "smeta_4_pillar",
+            "displayName": "SMETA 4-Pillar",
+            "aliases": [
+              "SMETA",
+              "Sedex Members Ethical Trade Audit",
+              "SMETA 4 Pillar"
+            ],
+            "country": null
+          },
+          {
+            "id": "portugal_wine_sustainability",
+            "displayName": "National Sustainability Certification Reference for the Wine Sector",
+            "aliases": [
+              "Referencial Nacional de Sustentabilidade do Sector dos Vinhos",
+              "Wines of Portugal Sustainability"
+            ],
+            "country": "PT"
+          }
+        ]
       }
     },
     {
@@ -5281,6 +5442,18 @@
       }
     },
     {
+      "dataId": "matching_policy",
+      "canonicalVersion": 1,
+      "jsonData": {
+        "version": 1,
+        "description": "MatchVisibility policy. goodScoreMin (0-5 llmScore scale) is the threshold for a match to count as good — gates the free-tier teaser count/facets, the paid digest/notification queue, and the 'Good' label. digestMaxCards caps cards in the paid daily-digest email. teaserFacetsMax caps anonymised facets (category, target country) in the free-tier teaser. inlineDebounceSeconds is the per-entity debounce window before an edit triggers match analysis.",
+        "goodScoreMin": 3,
+        "digestMaxCards": 3,
+        "teaserFacetsMax": 3,
+        "inlineDebounceSeconds": 60
+      }
+    },
+    {
       "dataId": "operating_markets",
       "canonicalVersion": 1,
       "jsonData": {
@@ -5451,13 +5624,17 @@
     },
     {
       "dataId": "packaging_options",
-      "canonicalVersion": 1,
+      "canonicalVersion": 2,
       "jsonData": [
         "PET",
         "BiB (Bag-in-Box)",
         "Glass",
         "Aluminum",
-        "Light-weight glass bottle"
+        "Light-weight glass bottle",
+        "Cardboard packaging",
+        "Cardboard bottle",
+        "Pouch",
+        "Returnable glass bottle"
       ]
     },
     {
