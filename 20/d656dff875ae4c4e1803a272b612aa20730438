@@ -1,0 +1,35 @@
+src/index.ts
+  s_eea230572e47fe::t_f5d5ec2e49f362 69,77,79
+__tests__/canonical-parity.test.ts
+  s_eea230572e47fe::t_626897327ba3a3 71,85,93
+src/packaging.ts
+  s_eea230572e47fe::t_f774565ac9c60f 4,239-241
+  s_eea230572e47fe::t_f5d5ec2e49f362 5,27-30,41-69,74,218-238,242
+__tests__/packaging.test.ts
+  s_eea230572e47fe::t_bce1010a66cb7d 4,12,16,20,27-30,39-65,102-104,183-184,211,232-245,247-248
+  s_eea230572e47fe::t_f774565ac9c60f 246
+package-lock.json
+  s_eea230572e47fe::t_cbef7c9f156d24 3,9
+package.json
+  s_eea230572e47fe::t_b129dc7058bc77 3
+src/canonical/SYNC.md
+  s_eea230572e47fe::t_3a85637c7e8138 7,9,13-14
+src/canonical/reference-data.json
+  s_eea230572e47fe::t_9057b25e59965e 6,2547-2707,5444-5455,5627,5633-5637
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "20d656dff875ae4c4e1803a272b612aa20730438",
+  "prompts": {},
+  "sessions": {
+    "s_eea230572e47fe": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0cdee-767b-7342-8275-c3d19e68ff85",
+        "model": "gpt-6-sol"
+      },
+      "human_author": "mjnong <marcusnagy@icloud.com>"
+    }
+  }
+}
