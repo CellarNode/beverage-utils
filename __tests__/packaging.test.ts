@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import {
   PACKAGING_OPTIONS,
+  PACKAGING_ATTRIBUTES,
   STATIC_PACKAGING_FALLBACK,
   STATIC_PACKAGING_LABEL_MAP,
   STATIC_PACKAGING_REGISTRY,
@@ -8,25 +9,57 @@ import {
   formatPackagingLabel,
   isPackaging,
   normalizeAndCheckPackaging,
+  normalizeTenderPackagingTerm,
 } from "../src/packaging";
 
 describe("PACKAGING_OPTIONS tuple", () => {
-  it("matches the 5 canonical backend rows", () => {
+  it("matches the nine canonical backend options while preserving the first five IDs", () => {
     // Mirrors `cellarnode-backend-v2/src/db/canonical/reference-data.ts`
     // `dataId: "packaging_options"`. Adjust both in lockstep when the
     // backend canonical row grows.
-    expect(PACKAGING_OPTIONS.length).toBe(5);
+    expect(PACKAGING_OPTIONS.length).toBe(9);
     expect([...PACKAGING_OPTIONS]).toEqual([
       "PET",
       "BiB (Bag-in-Box)",
       "Glass",
       "Aluminum",
       "Light-weight glass bottle",
+      "Cardboard packaging",
+      "Cardboard bottle",
+      "Pouch",
+      "Returnable glass bottle",
     ]);
   });
 
   it("has unique entries", () => {
     expect(new Set(PACKAGING_OPTIONS).size).toBe(PACKAGING_OPTIONS.length);
+  });
+});
+
+describe("PACKAGING_ATTRIBUTES", () => {
+  it("covers every canonical option without assuming unstated form or returnability", () => {
+    expect(Object.keys(PACKAGING_ATTRIBUTES)).toEqual([...PACKAGING_OPTIONS]);
+    expect(PACKAGING_ATTRIBUTES["Cardboard packaging"]).toEqual({
+      material: "cardboard",
+      form: null,
+      returnability: "unspecified",
+    });
+    expect(PACKAGING_ATTRIBUTES["Cardboard bottle"].form).toBe("bottle");
+    expect(PACKAGING_ATTRIBUTES.Glass.returnability).toBe("unspecified");
+    expect(PACKAGING_ATTRIBUTES["Returnable glass bottle"]).toEqual({
+      material: "glass",
+      form: "bottle",
+      returnability: "returnable",
+    });
+    expect(PACKAGING_ATTRIBUTES.Pouch.material).toBeNull();
+    expect(PACKAGING_ATTRIBUTES.Aluminum.form).toBeNull();
+  });
+
+  it("is frozen so consumers cannot mutate the shared vocabulary", () => {
+    expect(Object.isFrozen(PACKAGING_ATTRIBUTES)).toBe(true);
+    for (const attributes of Object.values(PACKAGING_ATTRIBUTES)) {
+      expect(Object.isFrozen(attributes)).toBe(true);
+    }
   });
 });
 
@@ -65,6 +98,9 @@ describe("formatPackagingLabel", () => {
     expect(formatPackagingLabel("BiB (Bag-in-Box)")).toBe("BiB (Bag-in-Box)");
     expect(formatPackagingLabel("Light-weight glass bottle")).toBe(
       "Light-weight glass bottle",
+    );
+    expect(formatPackagingLabel("Returnable glass bottle")).toBe(
+      "Returnable glass bottle",
     );
   });
 
@@ -144,6 +180,8 @@ describe("isPackaging", () => {
     expect(isPackaging("PET")).toBe(true);
     expect(isPackaging("BiB (Bag-in-Box)")).toBe(true);
     expect(isPackaging("Light-weight glass bottle")).toBe(true);
+    expect(isPackaging("Cardboard bottle")).toBe(true);
+    expect(isPackaging("Pouch")).toBe(true);
   });
 
   it("returns false for non-canonical-case input (no normalization)", () => {
@@ -170,6 +208,7 @@ describe("normalizeAndCheckPackaging", () => {
   it("returns the canonical value for exact input", () => {
     expect(normalizeAndCheckPackaging("PET")).toBe("PET");
     expect(normalizeAndCheckPackaging("Glass")).toBe("Glass");
+    expect(normalizeAndCheckPackaging("Cardboard packaging")).toBe("Cardboard packaging");
   });
 
   it("normalises case + whitespace and returns the canonical value", () => {
@@ -188,5 +227,24 @@ describe("normalizeAndCheckPackaging", () => {
     expect(normalizeAndCheckPackaging("Tetra Pak")).toBeNull();
     expect(normalizeAndCheckPackaging("")).toBeNull();
     expect(normalizeAndCheckPackaging("   ")).toBeNull();
+  });
+});
+
+describe("normalizeTenderPackagingTerm", () => {
+  // Source: user-provided `tenders-June-2027-English-Readable.pdf`,
+  // Systembolaget June 2027 launch tender, pp 2, 19, 38, and 51.
+  it("maps single package terms from the June 2027 launch tender PDF", () => {
+    expect(normalizeTenderPackagingTerm("cardboard packaging in bottle format")).toBe("Cardboard bottle"); // p2
+    expect(normalizeTenderPackagingTerm("Cardboard packaging")).toBe("Cardboard packaging"); // p19
+    expect(normalizeTenderPackagingTerm("Pouch")).toBe("Pouch"); // p38
+    expect(normalizeTenderPackagingTerm("Return glass")).toBe("Returnable glass bottle"); // p51 heading
+  });
+
+  it("does not collapse ambiguous material or alternative clauses to one option", () => {
+    expect(normalizeTenderPackagingTerm("Cardboard")).toBeNull();
+    expect(normalizeTenderPackagingTerm("Lightweight bottle max 420 g or PET bottle")).toBeNull(); // p18
+    expect(normalizeTenderPackagingTerm("Glass bottle or PET bottle")).toBeNull();
+    expect(normalizeTenderPackagingTerm("Returnable pouch")).toBeNull();
+    expect(normalizeTenderPackagingTerm("__proto__")).toBeNull();
   });
 });

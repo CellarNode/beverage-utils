@@ -1,8 +1,8 @@
 /**
  * Canonical packaging options (CEL-340 / CEL-336).
  *
- * Mirrors `cellarnode-backend-v2/src/db/canonical/reference-data.ts` row
- * with `dataId: "packaging_options"`. The 5 strings here are the source of
+ * Mirrors `cellarnode-backend-v2/apps/cellarnode/src/db/canonical/reference-data.ts` row
+ * with `dataId: "packaging_options"`. The strings here are the source of
  * truth for the runtime list AND the `Packaging` union — keep this tuple
  * in lockstep with the backend canonical row.
  *
@@ -24,6 +24,10 @@ export const PACKAGING_OPTIONS = [
   "Glass",
   "Aluminum",
   "Light-weight glass bottle",
+  "Cardboard packaging",
+  "Cardboard bottle",
+  "Pouch",
+  "Returnable glass bottle",
 ] as const;
 
 /**
@@ -35,10 +39,39 @@ export const PACKAGING_OPTIONS = [
 export type Packaging = (typeof PACKAGING_OPTIONS)[number];
 
 /**
+ * Descriptive properties only. A missing form or returnability is unknown,
+ * never evidence that the package is not a bottle or is not returnable.
+ * Deposit-system eligibility and allowed substitutions are tender rules,
+ * not intrinsic properties of these packaging identities.
+ */
+export interface PackagingAttributes {
+  material: "pet" | "glass" | "aluminum" | "cardboard" | null;
+  form: "bottle" | "bag-in-box" | "pouch" | null;
+  returnability: "returnable" | "unspecified";
+}
+
+/**
+ * CEL-2072: keep general cardboard distinct from bottle-format cardboard,
+ * and returnable glass distinct from glass with no stated return obligation.
+ * `null` means the canonical label does not establish that property.
+ */
+export const PACKAGING_ATTRIBUTES: Readonly<Record<Packaging, Readonly<PackagingAttributes>>> = Object.freeze({
+  PET: Object.freeze({ material: "pet", form: null, returnability: "unspecified" }),
+  "BiB (Bag-in-Box)": Object.freeze({ material: null, form: "bag-in-box", returnability: "unspecified" }),
+  Glass: Object.freeze({ material: "glass", form: null, returnability: "unspecified" }),
+  Aluminum: Object.freeze({ material: "aluminum", form: null, returnability: "unspecified" }),
+  "Light-weight glass bottle": Object.freeze({ material: "glass", form: "bottle", returnability: "unspecified" }),
+  "Cardboard packaging": Object.freeze({ material: "cardboard", form: null, returnability: "unspecified" }),
+  "Cardboard bottle": Object.freeze({ material: "cardboard", form: "bottle", returnability: "unspecified" }),
+  Pouch: Object.freeze({ material: null, form: "pouch", returnability: "unspecified" }),
+  "Returnable glass bottle": Object.freeze({ material: "glass", form: "bottle", returnability: "returnable" }),
+});
+
+/**
  * Static fallback. The hook hydrates the runtime list from the backend,
  * but consumers rendering before the query resolves (SSR, offline, brand
  * new client with no React-Query cache) get a usable list immediately —
- * the static floor mirrors the canonical 5 rows verbatim.
+ * the static floor mirrors the canonical row verbatim.
  */
 export const STATIC_PACKAGING_FALLBACK: readonly Packaging[] = Object.freeze([
   ...PACKAGING_OPTIONS,
@@ -181,4 +214,30 @@ export function normalizeAndCheckPackaging(
     if (canonical.toLowerCase() === lower) return canonical;
   }
   return null;
+}
+
+/**
+ * Exact terms from the user-provided `tenders-June-2027-English-Readable.pdf`
+ * (Systembolaget June 2027 launch tender, pp 2 and 51). These aliases
+ * identify a single package; this function deliberately does not parse
+ * alternatives, conditions, or substitutions from a full clause.
+ */
+const TENDER_PACKAGING_ALIASES: Readonly<Record<string, Packaging>> = Object.freeze({
+  "cardboard packaging in bottle format": "Cardboard bottle", // PDF p2
+  "return glass": "Returnable glass bottle", // PDF p51, confirmed by heading
+});
+
+/**
+ * Resolve one unambiguous package term to a canonical identity. Returns
+ * `null` for broad terms such as "cardboard", compound clauses, and unknown
+ * packages so callers can keep the raw tender evidence for review.
+ */
+export function normalizeTenderPackagingTerm(value: string): Packaging | null {
+  const canonical = normalizeAndCheckPackaging(value);
+  if (canonical) return canonical;
+  if (typeof value !== "string") return null;
+  const key = value.trim().toLowerCase().replace(/\s+/g, " ");
+  return Object.prototype.hasOwnProperty.call(TENDER_PACKAGING_ALIASES, key)
+    ? TENDER_PACKAGING_ALIASES[key]
+    : null;
 }
