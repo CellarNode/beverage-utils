@@ -231,7 +231,9 @@ describe("normalizeAndCheckPackaging", () => {
 });
 
 describe("normalizeTenderPackagingTerm", () => {
-  it("maps single package terms from the June 2027 tender PDF", () => {
+  // Source: user-provided `tenders-June-2027-English-Readable.pdf`,
+  // Systembolaget June 2027 launch tender, pp 2, 19, 38, and 51.
+  it("maps single package terms from the June 2027 launch tender PDF", () => {
     expect(normalizeTenderPackagingTerm("cardboard packaging in bottle format")).toBe("Cardboard bottle"); // p2
     expect(normalizeTenderPackagingTerm("Cardboard packaging")).toBe("Cardboard packaging"); // p19
     expect(normalizeTenderPackagingTerm("Pouch")).toBe("Pouch"); // p38

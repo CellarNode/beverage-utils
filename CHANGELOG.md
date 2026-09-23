@@ -10,9 +10,11 @@ include all nine choices, matching the backend `packaging_options` v2 row.
 New root exports are `PACKAGING_ATTRIBUTES`, the `PackagingAttributes` type,
 and `normalizeTenderPackagingTerm()`. Attributes distinguish stated material,
 form, and returnability without treating unspecified properties as negative
-requirements. The tender-term helper maps only unambiguous June 2027 PDF
-terms, including bottle-format cardboard and `Return glass`; unknown terms and
-compound alternatives return `null` so callers can retain their raw evidence.
+requirements. The tender-term helper maps only unambiguous terms from the
+user-provided `tenders-June-2027-English-Readable.pdf` (Systembolaget June
+2027 launch tender, pp 2, 19, 38, 51), including bottle-format cardboard and
+`Return glass`. Unknown terms and compound alternatives return `null` so
+callers can retain their raw evidence.
 Existing formatter, strict guard, and canonical normalizer behavior is
 preserved. Substitution direction, deposit-system eligibility, and matching
 remain the responsibility of tender requirement consumers.

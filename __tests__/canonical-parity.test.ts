@@ -39,10 +39,10 @@ import type { EnterpriseType } from "../src/types";
  * way to change the vendored JSON without this suite noticing.
  *
  * Rows this package does NOT ship a static for (`beverage_type_schemas`,
- * `chemical_analysis_schemas`, `dedup_config`, `elabel_compliance_requirements`,
- * `fic_label_schemas`, `price_recommendation_config`, `price_types`,
- * `subtype_aliases`) are out of scope — they belong to the backend / elabel
- * domain, not this package's public surface.
+ * `certification_schemes`, `chemical_analysis_schemas`, `dedup_config`,
+ * `elabel_compliance_requirements`, `fic_label_schemas`, `matching_policy`,
+ * `price_recommendation_config`, `price_types`, `subtype_aliases`) are vendored
+ * for provenance but outside this package's public static surface.
  *
  * `getCanonicalClassifications()` (`../src/classifications`) is checked
  * separately below, against pinned literal expectations rather than the

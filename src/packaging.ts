@@ -217,9 +217,10 @@ export function normalizeAndCheckPackaging(
 }
 
 /**
- * Exact tender terminology from the June 2027 Systembolaget request. These
- * aliases identify a single package; this function deliberately does not
- * parse alternatives, conditions, or substitutions from a full clause.
+ * Exact terms from the user-provided `tenders-June-2027-English-Readable.pdf`
+ * (Systembolaget June 2027 launch tender, pp 2 and 51). These aliases
+ * identify a single package; this function deliberately does not parse
+ * alternatives, conditions, or substitutions from a full clause.
  */
 const TENDER_PACKAGING_ALIASES: Readonly<Record<string, Packaging>> = Object.freeze({
   "cardboard packaging in bottle format": "Cardboard bottle", // PDF p2
