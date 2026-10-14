@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+CEL-2537 dependency sweep. The optional `@angular/core` peer range is widened
+to `^17 || ^18 || ^19 || ^20 || ^21 || ^22`: the Angular adapter now builds
+and its tests run against Angular 22 (dev dependency). Dev tooling moved to
+vitest 5, jsdom 30 and TypeScript 6; `vite` is now an explicit devDependency
+(required peer of vitest 5). No runtime API change; the only runtime
+dependency, `i18n-iso-countries`, is unchanged.
+
 ## 0.14.0 — 2026-09-23
 
 CEL-2072 adds four packaging IDs after the existing five, preserving their
