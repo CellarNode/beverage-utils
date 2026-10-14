@@ -1,8 +1,9 @@
 # Changelog
 
-## Unreleased
+## 0.15.0 — 2026-10-14
 
-CEL-2537 dependency sweep. The optional `@angular/core` peer range is widened
+CEL-2537 dependency sweep release. Consumers on Angular 22 can now install
+without peer-dependency overrides. The optional `@angular/core` peer range is widened
 to `^17 || ^18 || ^19 || ^20 || ^21 || ^22`: the Angular adapter now builds
 and its tests run against Angular 22 (dev dependency). Dev tooling moved to
 vitest 5, jsdom 30 and TypeScript 6; `vite` is now an explicit devDependency
