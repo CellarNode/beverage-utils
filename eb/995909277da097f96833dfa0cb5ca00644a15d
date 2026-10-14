@@ -1,0 +1,23 @@
+CHANGELOG.md
+  s_4fb4393eff17a7::t_3bbd715a5b56e0 3,5-6
+package-lock.json
+  s_4fb4393eff17a7::t_3332e5fedb7d72 3,9
+package.json
+  s_4fb4393eff17a7::t_092f2a0a252009 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "eb995909277da097f96833dfa0cb5ca00644a15d",
+  "prompts": {},
+  "sessions": {
+    "s_4fb4393eff17a7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f4d34e26-752c-4de0-b0eb-3b816dce2681",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "mjnong <marcusnagy@icloud.com>"
+    }
+  }
+}
